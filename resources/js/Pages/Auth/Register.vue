@@ -7,7 +7,8 @@ import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
 const form = useForm({
-    name: '',
+    firstname: '',
+    surname: '',
     email: '',
     password: '',
     password_confirmation: '',
@@ -27,19 +28,48 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="firstname" value="firstname" />
 
                 <TextInput
-                    id="name"
+                    id="firstname"
                     type="text"
                     class="mt-1 block w-full"
-                    v-model="form.name"
-                    required
+                    v-model="form.firstname"
                     autofocus
-                    autocomplete="name"
+                    autocomplete="firstname"
                 />
 
-                <InputError class="mt-2" :message="form.errors.name" />
+                <InputError class="mt-2" :message="form.errors.firstname" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="surname" value="surname" />
+
+                <TextInput
+                    id="surname"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.surname"
+                    autofocus
+                    autocomplete="surname"
+                />
+
+                <InputError class="mt-2" :message="form.errors.surname" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="birthday" value="birthday" />
+
+                <TextInput
+                    id="birthday"
+                    type="date"
+                    class="mt-1 block w-full"
+                    v-model="form.birthday"
+                    autofocus
+                    autocomplete="birthday"
+                />
+
+                <InputError class="mt-2" :message="form.errors.birthday" />
             </div>
 
             <div class="mt-4">
