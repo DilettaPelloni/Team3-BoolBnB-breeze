@@ -6,6 +6,13 @@ use App\Models\Apartment;
 use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
 
+//Inertia
+use Inertia\Inertia;
+use Inertia\Response;
+
+//Helpers
+use Illuminate\Support\Str;
+
 class ApartmentController extends Controller
 {
     /**
@@ -15,7 +22,11 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        //
+        $apartments = Apartment::all();
+        return Inertia::render('Management/Index', [
+            'apartments' => $apartments,
+        ]);
+        // return view('admin.apartments.index', compact('apartments'));
     }
 
     /**
@@ -25,7 +36,7 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Management/Create');
     }
 
     /**
@@ -36,7 +47,22 @@ class ApartmentController extends Controller
      */
     public function store(StoreApartmentRequest $request)
     {
-        //
+        $data = $request->all();
+
+        $title_slug = Str::slug($data['title'], '-');
+
+        $newApartment = Apartment::create([
+            'title' => $data['title'],
+            'slug' => $title_slug,
+            'description' => $data['description'],
+            'rooms' => $data['rooms'],
+            'beds' => $data['beds'],
+            'bathrooms' => $data['bathrooms'],
+            'size' => $data['size'],
+            'address' => $data['address'],
+        ]);
+
+        return redirect()->route('admin.apartments.index');
     }
 
     /**
