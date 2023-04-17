@@ -47,7 +47,9 @@ export default {
     >
         <!-- ----------------------TITLE---------------------- -->
         <div class="mb-3">
-            <label for="title" class="block text-gray-700 font-bold mb-2"
+            <label
+                for="title"
+                class="block text-gray-700 font-bold mb-2 text-lg"
                 >Nome Appartamento</label
             >
             <input
@@ -70,7 +72,9 @@ export default {
         </div>
         <!-- ----------------------DESCRIPTION---------------------- -->
         <div class="mb-3">
-            <label for="description" class="block text-gray-700 font-bold mb-2"
+            <label
+                for="description"
+                class="block text-gray-700 font-bold mb-2 text-lg"
                 >Descrizione</label
             >
             <textarea
@@ -91,9 +95,11 @@ export default {
             </div>
         </div>
         <!-- ----------------------ADDRESS---------------------- -->
-        <h4 class="font-bold text-lg mb-4">Indirizzo</h4>
+        <h4 class="font-bold mb-4 text-2xl pt-[45px]">Indirizzo</h4>
         <div class="flex flex-col mb-4">
-            <label for="cap" class="mb-2 font-bold text-gray-700">CAP</label>
+            <label for="cap" class="mb-2 font-bold text-gray-700 text-lg"
+                >CAP</label
+            >
             <input
                 v-model="newApartment.cap"
                 type="text"
@@ -110,7 +116,9 @@ export default {
             </div>
         </div>
         <div class="flex flex-col mb-4">
-            <label for="city" class="mb-2 font-bold text-gray-700">Città</label>
+            <label for="city" class="mb-2 font-bold text-gray-700 text-lg"
+                >Città</label
+            >
             <input
                 v-model="newApartment.city"
                 type="text"
@@ -126,7 +134,9 @@ export default {
             </div>
         </div>
         <div class="flex flex-col mb-4">
-            <label for="street" class="mb-2 font-bold text-gray-700">Via</label>
+            <label for="street" class="mb-2 font-bold text-gray-700 text-lg"
+                >Via</label
+            >
             <input
                 v-model="newApartment.street"
                 type="text"
@@ -142,7 +152,9 @@ export default {
             </div>
         </div>
         <div class="flex flex-col mb-4">
-            <label for="civic_number" class="mb-2 font-bold text-gray-700"
+            <label
+                for="civic_number"
+                class="mb-2 font-bold text-gray-700 text-lg"
                 >Numero civico</label
             >
             <input
@@ -163,9 +175,9 @@ export default {
             </div>
         </div>
         <!-- ----------------------ROOMS---------------------- -->
-        <div class="mb-3">
-            <label for="rooms" class="block font-medium text-gray-700"
-                >N. di stanze</label
+        <div class="mb-3 pt-[45px]">
+            <label for="rooms" class="block font-medium text-gray-700 text-lg"
+                >Numero di stanze</label
             >
             <input
                 v-model="newApartment.rooms"
@@ -187,8 +199,8 @@ export default {
         </div>
         <!-- ----------------------BEDS---------------------- -->
         <div class="mb-3">
-            <label for="beds" class="block font-medium text-gray-700"
-                >N. di letti</label
+            <label for="beds" class="block font-medium text-gray-700 text-lg"
+                >Numero di letti</label
             >
             <input
                 v-model="newApartment.beds"
@@ -210,7 +222,9 @@ export default {
         </div>
         <!-- ----------------------BATHROOMS---------------------- -->
         <div class="mb-4">
-            <label for="bathrooms" class="block font-medium text-gray-700"
+            <label
+                for="bathrooms"
+                class="block font-medium text-gray-700 text-lg"
                 >Numero di bagni</label
             >
             <input
@@ -233,7 +247,7 @@ export default {
         </div>
         <!-- ----------------------SIZE---------------------- -->
         <div class="mb-4">
-            <label for="size" class="block font-medium text-gray-700"
+            <label for="size" class="block font-medium text-gray-700 text-lg"
                 >Metri quadrati</label
             >
             <input
@@ -256,8 +270,10 @@ export default {
         </div>
 
         <!-- ----------------------COVER IMG---------------------- -->
-        <div class="mb-3">
-            <label for="cover_img" class="block mb-2 font-bold"
+        <div class="mb-3 pt-[45px]">
+            <label
+                for="cover_img"
+                class="block pb-2 font-medium text-gray-700 text-lg"
                 >Immagine di copertina</label
             >
             <input
@@ -281,8 +297,8 @@ export default {
             </div>
         </div>
         <!-- ----------------------VISIBLE---------------------- -->
-        <div class="mb-3 flex items-center">
-            <p class="me-2 font-bold">
+        <div class="mb-3 flex items-center pt-[45px]">
+            <p class="block font-medium text-gray-700 text-lg pr-5">
                 Vuoi rendere già visibile l'appartamento?
             </p>
             <div>
@@ -315,8 +331,10 @@ export default {
             </div>
         </div>
         <!-- ----------------------SERVICES---------------------- -->
-        <div class="mb-3">
-            <p class="me-2 font-bold">Servizi offerti</p>
+        <div class="mb-3 pt-[45px]">
+            <p class="block pb-2 font-medium text-gray-700 text-lg">
+                Servizi offerti
+            </p>
             <div class="flex flex-wrap">
                 <template v-for="service in services">
                     <label :for="service.id" class="mr-2">
