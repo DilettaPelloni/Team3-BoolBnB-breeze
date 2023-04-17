@@ -12,9 +12,11 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faCircleUser, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser, faBars, faLocationDot, faMaximize } from '@fortawesome/free-solid-svg-icons';
 import { faCopyright } from '@fortawesome/free-regular-svg-icons';
-library.add(faCircleUser, faBars, faCopyright)
+library.add(faCircleUser, faBars, faCopyright, faLocationDot, faMaximize);
+
+
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 

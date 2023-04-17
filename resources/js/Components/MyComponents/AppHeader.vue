@@ -34,7 +34,7 @@ export default {
       <div class="container-login ml-5 relative">
         <font-awesome-icon :icon="['fas', 'circle-user']" size="2xl" @click="toggleVisibilty"/>
         <!-- <font-awesome-icon :icon="['fas', 'bars']" /> -->
-        <div class="absolute right-0 bottom-100% text-right w-fit p-3 border bg-white mt-3" v-if="menuVisibility" id="loginMenu">
+        <div class="absolute z-50 rounded-md shadow-lg w-48 origin-top-right right-0 text-right p-3 bg-white mt-3" v-if="menuVisibility" id="loginMenu">
           <!-- menu login -->
           <div v-if="canLogin">
             <Link

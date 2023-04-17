@@ -100,7 +100,10 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        //
+        // $apartment = Apartment::with('services')->find($apartment->id);
+        return Inertia::render('Management/Show', [
+            'apartment' => $apartment,
+        ]);
     }
 
     /**
