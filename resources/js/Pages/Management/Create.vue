@@ -188,7 +188,7 @@ export default {
                 placeholder="Da 1 a 10"
                 name="rooms"
                 required
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
             />
             <div
                 v-if="newApartment.errors.rooms"
@@ -211,7 +211,7 @@ export default {
                 id="beds"
                 name="beds"
                 required
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
             />
             <div
                 v-if="newApartment.errors.beds"
@@ -235,7 +235,7 @@ export default {
                 id="bathrooms"
                 name="bathrooms"
                 placeholder="Da 1 a 4"
-                class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                 required
             />
             <div
@@ -258,7 +258,7 @@ export default {
                 id="size"
                 name="size"
                 placeholder="Da 12 a 300"
-                class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                 required
             />
             <div
@@ -373,5 +373,34 @@ export default {
 <style scoped>
 .pink {
     background-color: #fe5b5f;
+}
+
+[type="radio"]:checked {
+    color: #fe5b5f;
+}
+
+[type="checkbox"]:checked {
+    color: #fe5b5f;
+}
+
+[type="number"]:focus {
+    border-color: #fe5b5f;
+    --tw-ring-color: #fe5b5f;
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
+        calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+}
+
+[type="text"]:focus {
+    --tw-ring-color: #fe5b5f;
+    border-color: #fe5b5f;
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
+        calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+}
+
+text-area:focus {
+    --tw-ring-color: #fe5b5f;
+    border-color: #fe5b5f;
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
+        calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
 }
 </style>
