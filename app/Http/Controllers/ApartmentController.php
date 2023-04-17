@@ -61,7 +61,7 @@ class ApartmentController extends Controller
         //faccio lo slug del titolo
         $title_slug = Str::slug($data['title'], '-');
         //compongo l'indirizzo completo e lo slugifico
-        $address = $data['cap'].' '.$data['city'].' '.$data['street'].' n. '.$data['civic_number'];
+        $address = $data['cap'] . ' ' . $data['city'] . ' ' . $data['street'] . ' n. ' . $data['civic_number'];
         $address_slug = Str::slug($address, '-');
         //salvo l'immagine
         $imgPath = Storage::put('apartments', $data['cover_img']);
@@ -69,7 +69,7 @@ class ApartmentController extends Controller
         $user_id = Auth::user()->id;
 
         $newApartment = Apartment::create([
-            'user_id'=> $user_id,
+            'user_id' => $user_id,
             'title' => $data['title'],
             'title_slug' => $title_slug,
             'description' => $data['description'],
@@ -78,12 +78,12 @@ class ApartmentController extends Controller
             'bathrooms' => $data['bathrooms'],
             'size' => $data['size'],
             'address' => $address,
-            'address_slug'=> $address_slug,
-            'cover_img'=> $imgPath,
-            'visible'=> $data['visible'],
+            'address_slug' => $address_slug,
+            'cover_img' => $imgPath,
+            'visible' => $data['visible'],
         ]);
 
-        if(array_key_exists('activeServices', $data)) {
+        if (array_key_exists('activeServices', $data)) {
             foreach ($data['activeServices'] as $serviceId) {
                 $newApartment->services()->sync($data['activeServices']);
             }
@@ -100,10 +100,16 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        // $apartment = Apartment::with('services')->find($apartment->id);
-        return Inertia::render('Management/Show', [
-            'apartment' => $apartment,
-        ]);
+        $apartments = Apartment::all();
+
+        //cicla tutti gli apartment
+        foreach ($apartments as $apartment) {
+
+            return Inertia::render('Management/Show', [
+                'apartment' => $apartment,
+                'services' => $apartment->services,
+            ]);
+        }
     }
 
     /**
