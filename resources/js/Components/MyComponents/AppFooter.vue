@@ -5,9 +5,9 @@ export default {
 </script>
 
 <template>
-  <div class="container-footer flex items-center h-[40px] position">
+  <div class="container-footer flex items-center h-[40px] w-full absolute bottom-0">
     <div class="container-links-footer">
-      <ul class="flex">
+      <ul class="flex list-none">
         <li><a href="http://"><font-awesome-icon :icon="['far', 'copyright']" /> 2023 BoolBnB, Inc.</a></li>
         <li><a href="http://">Privacy</a></li>
         <li><a href="http://">Termini</a></li>
@@ -20,23 +20,8 @@ export default {
 </template>
 
 <style scoped lang="scss">
-.container-footer {
-  height: 40px;
-  background-color: lightcoral;
-  position: relative;
-
-  .container-links-footer {
-
-    ul {
-      list-style: none;
-      margin: 0px;
-
-      a {
-        color: #222222;
-        text-decoration: none;
-        padding-right: 10px;
-      }
-    }
-  }
+a {
+  color: #222222;
+  padding-right: 10px;
 }
 </style>
