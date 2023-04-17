@@ -1,5 +1,4 @@
 <script>
-import { Link } from '@inertiajs/vue3';
 import AppHeader from '../Components/MyComponents/AppHeader.vue';
 import AppFooter from '../Components/MyComponents/AppFooter.vue';
 
@@ -8,7 +7,6 @@ export default {
   components: {
     AppHeader,
     AppFooter,
-    Link,
   },
   props: {
     canLogin: Boolean,
@@ -18,7 +16,7 @@ export default {
 </script>
 
 <template>
-  <AppHeader />
+  <AppHeader :canLogin="canLogin" :canRegister="canRegister"/>
   <div class="container-page-index container-fluid">
     <div class="container-cards flex justify-between flex-wrap h-full overflow-y-scroll">
       <div class="card h-[400px] w-[300px] ">
@@ -39,21 +37,6 @@ export default {
           <div>Host Privato</div>
           <div><b>Tanti $</b> notte</div>
         </div>
-      </div>
-      <div v-if="canLogin" class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
-        <Link v-if="$page.props.auth.user" :href="route('dashboard')"
-          class="font-semibold text-black  focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
-        Dashboard</Link>
-
-        <template v-else>
-          <Link :href="route('login')"
-            class="font-semibold text-black  focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
-          Log in</Link>
-
-          <Link v-if="canRegister" :href="route('register')"
-            class="ml-4 font-semibold text-black  focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
-          Register</Link>
-        </template>
       </div>
     </div>
   </div>

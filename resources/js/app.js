@@ -1,6 +1,6 @@
 import './bootstrap';
 import '../css/app.css';
-import '~resources/scss/app.css';
+import '~resources/scss/app.scss';
 
 import.meta.glob([
 	'../img/**'
@@ -31,4 +31,5 @@ createInertiaApp({
     progress: {
         color: '#4B5563',
     },
+    
 });
