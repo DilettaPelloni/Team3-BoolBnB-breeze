@@ -36,7 +36,7 @@ class StoreApartmentRequest extends FormRequest
             'civic_number' => 'nullable|string|max:6',
             'cover_img'=> 'required|max:2048|image',
             'visible' => 'boolean|required',
-            'services' => 'nullable|array|exists:services,id'
+            'activeServices' => 'nullable|array|exists:services,id'
         ];
     }
 }

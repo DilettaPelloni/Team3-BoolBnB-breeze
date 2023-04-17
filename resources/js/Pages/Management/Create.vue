@@ -1,4 +1,5 @@
 <script>
+import { useForm } from '@inertiajs/vue3';
 	export default {
 		name:'Create',
 		props: {
@@ -6,37 +7,43 @@
 		},
 		data() {
 			return {
-				newApartment: {
-					title: '',
-					description: '',
-					cap: '',
-					city: '',
-					street: '',
-					civic_number: '',
-					rooms: 1,
-					beds: 1,
-					bathrooms: 1,
-					size: 12,
-					visible: 0,
+				newApartment: useForm({
+					title: null,
+					description: null,
+					cap: null,
+					city: null,
+					street: null,
+					civic_number: null,
+					rooms: null,
+					beds: null,
+					bathrooms: null,
+					size: null,
+					cover_img: null,
+					visible: null,
 					activeServices: [],
-				}
+				}),
 			}
 		},
 		methods: {
 			pushService(serviceId) {
-				if(this.activeServices.includes(serviceId)) {
-					this.activeServices.splice(this.activeServices.indexOf(serviceId), 1)
+				let servicesArray = this.newApartment.activeServices;
+				if(servicesArray.includes(serviceId)) {
+					servicesArray.splice(servicesArray.indexOf(serviceId), 1)
 				}
 				else {
-					this.activeServices.push(serviceId)
+					servicesArray.push(serviceId)
 				}
-			}
-		}
+			},//pushService
+			submit() {
+				this.newApartment.post(route('gestione-appartamenti.store'));
+			},//submit
+		},
 	}
 </script>
 
 <template>
     <form @submit.prevent="submit">
+		<!-- ----------------------TITLE---------------------- -->
 		<div class="mb-3">
 			<label for="title">Nome Appartamento</label>
 			<input
@@ -44,13 +51,13 @@
 				id="title"
 				name="title"
 				v-model="newApartment.title"
-				value=""
 				placeholder="Inserisci il nome..."
 				required
 				autofocus
 				maxlength="255">
+			<div v-if="newApartment.errors.title">{{ newApartment.errors.title }}</div>
 		</div>
-
+	<!-- ----------------------DESCRIPTION---------------------- -->
 		<div class="mb-3">
 			<label for="description">Descrizione</label>
 			<textarea
@@ -61,8 +68,9 @@
 				placeholder="Inserisci una descrizione per la tua abitazione..."
 				required
 				maxlength="3000"></textarea>
+			<div v-if="newApartment.errors.description">{{ newApartment.errors.description }}</div>
 		</div>
-		
+	<!-- ----------------------ADDRESS---------------------- -->
 		<h4>Indirizzo</h4>
 		<div class="mb-3">
 			<label for="cap">CAP</label>
@@ -71,11 +79,11 @@
 				type="text"
 				id="cap"
 				name="cap"
-				value=""
 				placeholder="41012"
 				pattern="[0-9]{5}"
 				required
 				maxlength="5">
+			<div v-if="newApartment.errors.cap">{{ newApartment.errors.cap }}</div>
 		</div>
 		<div class="mb-3">
 			<label for="city">Città</label>
@@ -84,10 +92,10 @@
 				type="text"
 				id="city"
 				name="city"
-				value=""
 				placeholder="Inserisci una città"
 				required
 				maxlength="255">
+			<div v-if="newApartment.errors.city">{{ newApartment.errors.city }}</div>
 		</div>
 		<div class="mb-3">
 			<label for="street">Via</label>
@@ -96,10 +104,10 @@
 				type="text"
 				id="street"
 				name="street"
-				value=""
 				placeholder="Inserisci la via"
 				required
 				maxlength="255">
+			<div v-if="newApartment.errors.street">{{ newApartment.errors.street }}</div>
 		</div>
 		<div class="mb-3">
 			<label for="civic_number">Numero civico</label>
@@ -108,12 +116,12 @@
 				type="text"
 				id="civic_number"
 				name="civic_number"
-				value=""
 				placeholder="Inserisci il numero civico"
 				required
 				maxlength="255">
+			<div v-if="newApartment.errors.civic_number">{{ newApartment.errors.civic_number }}</div>
 		</div>
-
+	<!-- ----------------------ROOMS---------------------- -->
 		<div class="mb-3">
 			<label for="rooms">N. di stanze</label>
 			<input
@@ -124,10 +132,10 @@
 				id="rooms"
 				placeholder="Da 1 a 10"
 				name="rooms"
-				value=""
 				required>
+			<div v-if="newApartment.errors.rooms">{{ newApartment.errors.rooms }}</div>
 		</div>
-
+	<!-- ----------------------BEDS---------------------- -->
 		<div class="mb-3">
 			<label for="beds">N. di letti</label>
 			<input
@@ -138,10 +146,10 @@
 				placeholder="Da 1 a 10"
 				id="beds"
 				name="beds"
-				value=""
 				required>
+			<div v-if="newApartment.errors.beds">{{ newApartment.errors.beds }}</div>
 		</div>
-
+	<!-- ----------------------BATHROOMS---------------------- -->
 		<div class="mb-3">
 			<label for="bathrooms">N. di bagni</label>
 			<input
@@ -152,10 +160,11 @@
 				placeholder="Da 1 a 4"
 				id="bathrooms"
 				name="bathrooms"
-				value=""
 				required>
-		</div>
+			<div v-if="newApartment.errors.bathrooms">{{ newApartment.errors.bathrooms }}</div>
 
+		</div>
+	<!-- ----------------------SIZE---------------------- -->
 		<div class="mb-3">
 			<label for="size">Metri quadrati</label>
 			<input
@@ -166,22 +175,30 @@
 				placeholder="Da 12 a 300"
 				id="size"
 				name="size"
-				value=""
 				required>
-		</div>
+			<div v-if="newApartment.errors.size">{{ newApartment.errors.size }}</div>
 
+		</div>
+	<!-- ----------------------COVER IMG---------------------- -->
 		<div class="mb-3">
 			<label for="cover_img">Immagine di copertina</label>
 			<input
-				@change="'??'"
+				@input="newApartment.cover_img = $event.target.files[0]"
 				required
 				type="file"
 				name="cover_img" 
 				id="cover_img" 
 				accept="image/*"
 				placeholder="Inserisci l'immagine dell'appartamento">
-		</div>
+				
+				<!-- PER VEDERE PROGRESSO DI CARICAMENTO DEL FILE (E' TROPPO VELOCE PER VEDERE QUALCOSA) -->
+				<!-- <progress v-if="newApartment.progress" :value="newApartment.progress.percentage" max="100">
+					{{ newApartment.progress.percentage }}%
+				</progress> -->
 
+			<div v-if="newApartment.errors.cover_img">{{ newApartment.errors.cover_img }}</div>
+		</div>
+	<!-- ----------------------VISIBLE---------------------- -->
 		<div class="mb-3 flex">
 			<p class="me-2">Vuoi rendere già visibile l'appartamento?</p>
 			<div>
@@ -205,8 +222,10 @@
 					id="visibile" 
 					name="visibile" 
 					value="1">
+				<div v-if="newApartment.errors.visible">{{ newApartment.errors.visible }}</div>
 			</div>
 		</div>
+	<!-- ----------------------SERVICES---------------------- -->
 		<div class="mb-3 flex">
 			<p class="me-2">Servizi offerti</p>
 			<div v-for="service in services">
@@ -215,17 +234,18 @@
 					{{ service.icon }}
 				</label>
 				<input
-					v-model="newApartment.services"
+					@click="pushService(service.id)"
 					type="checkbox" 
 					:id="service.id" 
 					:name="service.id"  
 					:value="service.id">
 			</div>
+			<div v-if="newApartment.errors.activeServices">{{ newApartment.errors.activeServices }}</div>
 		</div>
 
 		<div>
-			<button type="submit" class="btn btn-success">
-				Salva nuovo progetto
+			<button type="submit" :disabled="newApartment.processing">
+				Salva nuovo appartamento
 			</button>
 		</div>
             

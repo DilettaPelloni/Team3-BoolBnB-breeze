@@ -83,13 +83,13 @@ class ApartmentController extends Controller
             'visible'=> $data['visible'],
         ]);
 
-        if(array_key_exists('services', $data)) {
-            foreach ($data['services'] as $serviceId) {
-                $newApartment->services()->sync($data['services']);
+        if(array_key_exists('activeServices', $data)) {
+            foreach ($data['activeServices'] as $serviceId) {
+                $newApartment->services()->sync($data['activeServices']);
             }
         }
 
-        return Redirect::route('/gestione-appartamenti');
+        return Redirect::route('gestione-appartamenti.index')->with('success', 'Appartamento creato con successo');;
     }
 
     /**
