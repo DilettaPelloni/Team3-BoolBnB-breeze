@@ -44,7 +44,6 @@
 				id="title"
 				name="title"
 				v-model="newApartment.title"
-				value=""
 				placeholder="Inserisci il nome..."
 				required
 				autofocus
@@ -71,7 +70,6 @@
 				type="text"
 				id="cap"
 				name="cap"
-				value=""
 				placeholder="41012"
 				pattern="[0-9]{5}"
 				required
@@ -84,7 +82,6 @@
 				type="text"
 				id="city"
 				name="city"
-				value=""
 				placeholder="Inserisci una città"
 				required
 				maxlength="255">
@@ -96,7 +93,6 @@
 				type="text"
 				id="street"
 				name="street"
-				value=""
 				placeholder="Inserisci la via"
 				required
 				maxlength="255">
@@ -108,7 +104,6 @@
 				type="text"
 				id="civic_number"
 				name="civic_number"
-				value=""
 				placeholder="Inserisci il numero civico"
 				required
 				maxlength="255">
@@ -124,7 +119,6 @@
 				id="rooms"
 				placeholder="Da 1 a 10"
 				name="rooms"
-				value=""
 				required>
 		</div>
 
@@ -138,7 +132,6 @@
 				placeholder="Da 1 a 10"
 				id="beds"
 				name="beds"
-				value=""
 				required>
 		</div>
 
@@ -152,7 +145,6 @@
 				placeholder="Da 1 a 4"
 				id="bathrooms"
 				name="bathrooms"
-				value=""
 				required>
 		</div>
 
@@ -166,7 +158,6 @@
 				placeholder="Da 12 a 300"
 				id="size"
 				name="size"
-				value=""
 				required>
 		</div>
 
