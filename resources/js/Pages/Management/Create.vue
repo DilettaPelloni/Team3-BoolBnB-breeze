@@ -403,4 +403,9 @@ text-area:focus {
     --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
         calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
 }
+
+.focus\:ring-2:focus {
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
+        calc(2px + var(--tw-ring-offset-width)) rgb(254 91 95);
+}
 </style>
