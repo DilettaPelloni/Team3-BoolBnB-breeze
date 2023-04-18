@@ -99,18 +99,13 @@ class ApartmentController extends Controller
      * @param  \App\Models\Apartment  $apartment
      * @return \Illuminate\Http\Response
      */
-    public function show(Apartment $apartment)
+    public function show($apartment_id)
     {
-        $apartments = Apartment::all();
+        $apartment = Apartment::where('id', $apartment_id)->with('services')->first();
 
-        //cicla tutti gli apartment
-        foreach ($apartments as $apartment) {
-
-            return Inertia::render('Management/Show', [
-                'apartment' => $apartment,
-                'services' => $apartment->services,
-            ]);
-        }
+        return Inertia::render('Management/Show', [
+            'apartment' => $apartment,
+        ]);
     }
 
     /**

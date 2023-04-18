@@ -43,6 +43,11 @@
                   {{ apartment.size }} m<sup>2</sup>
                 </div>
               </div><!-- CHIUSURA CARD INFO -->
+              <div class="button-box px-4 pb-4 text-center">
+                <Link :href="route('gestione-appartamenti.create')" class="mt-8 px-4 py-2 rounded-full button text-white">
+                  Modifica
+                </Link>
+              </div><!-- CHIUSURA NUTTON BOX -->
             </Link>
           </div><!-- CHIUSURA CARD -->
         </div><!-- CHIUSURA CONTAINER CARDS -->
@@ -69,5 +74,4 @@
           object-fit: cover;
         }
     }
-
 </style>
