@@ -25,8 +25,8 @@ return new class extends Migration
             $table->unsignedSmallInteger('size');
             $table->string('address');
             $table->string('address_slug');
-            // $table->float('latitude', 7, 5);
-            // $table->float('longitude', 8, 5);
+            $table->float('latitude', 8, 6);
+            $table->float('longitude', 9, 6);
             $table->string('cover_img');
             $table->boolean('visible');
             $table->timestamps();

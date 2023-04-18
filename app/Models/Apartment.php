@@ -20,8 +20,8 @@ class Apartment extends Model
         'size',
         'address',
         'address_slug',
-        // 'latitude',
-        // 'longitude',
+        'latitude',
+        'longitude',
         'cover_img',
         'visible',
     ];

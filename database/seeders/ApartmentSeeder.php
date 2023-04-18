@@ -81,19 +81,30 @@ class ApartmentSeeder extends Seeder
             //descrizione: genera da 2 a 4 paragrafi
             $apartment->description = $faker->paragraphs(rand(2, 4), true);
 
-            //numero di stanze, letti e bagni e m2
+            //numero di stanze
             $apartment->rooms = $faker->numberBetween(1, 10);
-            $apartment->beds = $faker->numberBetween(1, 10);
-            $apartment->bathrooms = $faker->numberBetween(1, 4);
-            $apartment->size = $faker->numberBetween(12, 300);
+            //numero di letti
+            do {
+                $apartment->beds = $faker->numberBetween(1, 10);
+            } while($apartment->beds>$apartment->rooms + 1);
+            //numero di bagni
+            do {
+                $apartment->bathrooms = $faker->numberBetween(1, 4);
+            } while($apartment->bathrooms > ($apartment->rooms - $apartment->beds) + 2);
+            //m2
+            $apartment->size = ($apartment->rooms * 14) + rand(5,100);
 
             //indirizzo
             $address = $faker->address();
             $apartment->address = $address;
             $apartment->address_slug = Str::slug($address);
 
+            //latitudine e longitudine
+            $apartment->latitude = $faker->latitude($min = 35, $max = 47);
+            $apartment->longitude = $faker->longitude($min = 6, $max = 19);
+
             //immagine
-            $cover_imgs = scandir(resource_path('img'));
+            $cover_imgs = scandir(resource_path('seederImg'));
             $cover_imgs = array_diff($cover_imgs, ['.', '..']);
             $cover_img = $cover_imgs[array_rand($cover_imgs)];
             $apartment->cover_img = $cover_img;
