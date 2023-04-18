@@ -28,11 +28,12 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::all();
+        $user_id = Auth::user()->id;
+
+        $apartments = Apartment::where('user_id', $user_id)->get();
         return Inertia::render('Management/Index', [
             'apartments' => $apartments,
         ]);
-        // return view('admin.apartments.index', compact('apartments'));
     }
 
     /**
