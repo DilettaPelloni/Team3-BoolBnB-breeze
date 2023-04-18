@@ -44,7 +44,7 @@
                 </div>
               </div><!-- CHIUSURA CARD INFO -->
               <div class="button-box px-4 pb-4 text-center">
-                <Link :href="route('gestione-appartamenti.create')" class="mt-8 px-4 py-2 rounded-full button text-white">
+                <Link :href="route('gestione-appartamenti.edit', apartment.id)" class="mt-8 px-4 py-2 rounded-full button text-white">
                   Modifica
                 </Link>
               </div><!-- CHIUSURA NUTTON BOX -->

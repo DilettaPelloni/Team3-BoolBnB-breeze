@@ -114,9 +114,14 @@ class ApartmentController extends Controller
      * @param  \App\Models\Apartment  $apartment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Apartment $apartment)
+    public function edit($apartment_id)
     {
-        //
+        $services = Service::all();
+        $apartment = Apartment::where('id', $apartment_id)->with('services')->first();
+        return Inertia::render('Management/Edit', [
+            'services' => $services,
+            'apartment' => $apartment,
+        ]);
     }
 
     /**
