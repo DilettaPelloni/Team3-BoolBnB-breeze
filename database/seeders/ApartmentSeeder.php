@@ -59,7 +59,6 @@ class ApartmentSeeder extends Seeder
         ];
 
         //array per generare le foto
-        // $cover_imgs = ;
 
         for ($i = 0; $i < 10; $i++) {
             //creo una nuova istanza di Apartment
@@ -94,7 +93,6 @@ class ApartmentSeeder extends Seeder
             $apartment->address_slug = Str::slug($address);
 
             //immagine
-            // $apartment->cover_img = 'https://pixabay.com/get/g2dd46f4f314d945d4f60efbd81c11adf5b9bec8ec56fdd3884b489d5488a189c18327417fbf028fc36fdf7d32219e23a2cfb51944a13f442e11b831b3ac6d5f8_1280.jpg';
             $cover_imgs = scandir(resource_path('img'));
             $cover_imgs = array_diff($cover_imgs, ['.', '..']);
             $cover_img = $cover_imgs[array_rand($cover_imgs)];
