@@ -22,20 +22,10 @@ export default {
                 bathrooms: this.apartment.bathrooms,
                 size: this.apartment.size,
                 cover_img: null,
-                visible: null,
+                visible: this.apartment.visible,
                 activeServices: [],
             }),
         };
-    },
-    computed: {
-        activeServicesIds(){
-            let activeServices = [];
-
-            this.apartment.services.forEach(service => {
-                activeServices.push(service.id);
-            });
-            return activeServices;
-        }
     },
     methods: {
         pushService(serviceId) {
@@ -47,9 +37,18 @@ export default {
             }
         }, //pushService
         submit() {
-            this.newApartment.post(route("gestione-appartamenti.update"));
+            this.newApartment.put(route("gestione-appartamenti.update", this.apartment.id));
         }, //submit
     },
+    mounted() {
+        //dentro a this.apartment.services ci sono tanti oggetti quanti sono i servizi collegati all'appartamento
+        //ciclo questi oggetti, ne prendo la chiave "id" e la pusho nell'array this.newApartment.activeServices (che è dentro al form)
+        if(this.apartment.services) {
+            this.apartment.services.forEach(service => {
+                this.newApartment.activeServices.push(service.id);
+            });
+        }
+	}//mounted
 };
 </script>
 
@@ -97,7 +96,6 @@ export default {
                         id="description"
                         name="description"
                         placeholder="Inserisci una descrizione per la tua abitazione..."
-                        required
                         maxlength="3000"
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     ></textarea>
@@ -235,7 +233,6 @@ export default {
                     </div>
                     <input
                         @input="newApartment.cover_img = $event.target.files[0]"
-                        required
                         type="file"
                         name="cover_img"
                         id="cover_img"
@@ -269,7 +266,7 @@ export default {
                             name="visibile"
                             value="0"
                             class="mx-2"
-                            :checked="apartment.visible"
+                            :checked="!apartment.visible"
                         />
 
                         <label for="visibile" class="inline-block font-bold">
@@ -309,7 +306,7 @@ export default {
                                 :name="service.id"
                                 :value="service.id"
                                 class="mx-2"
-                                :checked="activeServicesIds.includes(service.id)"
+                                :checked="newApartment.activeServices.includes(service.id)"
                             />
                             
                         </template>

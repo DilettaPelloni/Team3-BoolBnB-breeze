@@ -89,7 +89,6 @@ export default {
                     id="description"
                     name="description"
                     placeholder="Inserisci una descrizione per la tua abitazione..."
-                    required
                     maxlength="3000"
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 ></textarea>

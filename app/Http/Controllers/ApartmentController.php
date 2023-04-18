@@ -90,7 +90,7 @@ class ApartmentController extends Controller
             }
         }
 
-        return Redirect::route('gestione-appartamenti.index')->with('success', 'Appartamento creato con successo');;
+        return Redirect::route('gestione-appartamenti.index');
     }
 
     /**
@@ -131,9 +131,51 @@ class ApartmentController extends Controller
      * @param  \App\Models\Apartment  $apartment
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateApartmentRequest $request, Apartment $apartment)
+    public function update(UpdateApartmentRequest $request, $apartment_id)
     {
-        //
+        $data = $request->validated();
+
+        $apartment = Apartment::where('id', $apartment_id)->first();
+
+        //se una nuova immagine è stata passata sostituisco quella vecchia
+        if($data['cover_img'] != null) {
+            $imgPath = Storage::put('apartments', $data['cover_img']);
+            $data['cover_img'] = $imgPath;
+
+            if($apartment->cover_img) {
+                Storage::delete($apartment->cover_img);
+                $apartment->cover_img = $imgPath;
+            }
+        }
+
+        //faccio lo slug del titolo
+        $title_slug = Str::slug($data['title'], '-');
+        //faccio lo slug dell'indirizzo
+        $address_slug = Str::slug($data['address'], '-');
+        //prendo l'id dello user
+        $user_id = Auth::user()->id;
+
+        //aggiorno l'appartamento
+        $apartment->user_id = $user_id;
+        $apartment->title = $data['title'];
+        $apartment->title_slug = $title_slug;
+        $apartment->description = $data['description'];
+        $apartment->rooms = $data['rooms'];
+        $apartment->beds = $data['beds'];
+        $apartment->bathrooms = $data['bathrooms'];
+        $apartment->size = $data['size'];
+        $apartment->address = $data['address'];
+        $apartment->address_slug = $address_slug;
+        $apartment->visible = $data['visible'];
+        $apartment->save();
+
+        if (array_key_exists('activeServices', $data)) {
+            foreach ($data['activeServices'] as $serviceId) {
+                $apartment->services()->sync($data['activeServices']);
+            }
+        }
+
+        return Redirect::route('gestione-appartamenti.show', $apartment->id);
     }
 
     /**
