@@ -107,7 +107,7 @@ class ApartmentSeeder extends Seeder
             $cover_imgs = scandir(resource_path('seederImg'));
             $cover_imgs = array_diff($cover_imgs, ['.', '..']);
             $cover_img = $cover_imgs[array_rand($cover_imgs)];
-            $apartment->cover_img = $cover_img;
+            $apartment->cover_img = 'apartments/'.$cover_img;
 
             //visibile
             $apartment->visible = $faker->numberBetween(0, 1);

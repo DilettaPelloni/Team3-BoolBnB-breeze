@@ -24,7 +24,7 @@ export default {
     <div class="container-cards grid grid-cols-5 gap-10">
 
       <div class="card">
-        <img :src="(`/storage/apartments/` + apartment.cover_img)">
+        <img :src="apartment.full_cover_img_path">
         <div class="card-info p-4 grow flex flex-col justify-center">
           <span><b>{{ apartment.title }}</b></span>
           <div class="mt-2 grow flex items-center ">

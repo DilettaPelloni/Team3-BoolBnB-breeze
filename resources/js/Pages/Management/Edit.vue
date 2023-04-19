@@ -1,4 +1,5 @@
 <script>
+import { Head } from '@inertiajs/vue3';
 import { useForm } from "@inertiajs/vue3";
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
@@ -6,6 +7,7 @@ export default {
     name: "Edit",
     components: {
         AuthenticatedLayout,
+        Head,
     },
     props: {
         services: Array,
@@ -14,6 +16,7 @@ export default {
     data() {
         return {
             newApartment: useForm({
+                _method: 'put',
                 title: this.apartment.title,
                 description: this.apartment.description,
                 address: this.apartment.address,
@@ -37,7 +40,7 @@ export default {
             }
         }, //pushService
         submit() {
-            this.newApartment.put(route("gestione-appartamenti.update", this.apartment.id));
+            this.newApartment.post(route("gestione-appartamenti.update", this.apartment.id));
         }, //submit
     },
     mounted() {
@@ -53,6 +56,7 @@ export default {
 </script>
 
 <template>
+    <Head :title="apartment.title" />
     <AuthenticatedLayout>
         <div class="small-container">
             <form
@@ -227,10 +231,9 @@ export default {
                         class="block pb-2 font-medium text-gray-700 text-lg"
                         >Immagine di copertina</label
                     >
-                    {{ apartment.full_cover_img_path }}
                     <!-- se l'appartamento ha un'immagine, la mostro in anteprima -->
                     <div v-if="apartment.cover_img != null">
-                        <img :src="apartment.full_cover_img_path" alt="anteprima immagine">
+                        <img :src="apartment.full_cover_img_path" alt="anteprima immagine" class="prev-img">
                     </div>
                     <input
                         @input="newApartment.cover_img = $event.target.files[0]"
@@ -369,5 +372,10 @@ text-area:focus {
 .focus\:ring-2:focus {
     --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
         calc(2px + var(--tw-ring-offset-width)) rgb(254 91 95);
+}
+
+.prev-img{
+    width: 400px;
+    margin-bottom: 1rem;
 }
 </style>
