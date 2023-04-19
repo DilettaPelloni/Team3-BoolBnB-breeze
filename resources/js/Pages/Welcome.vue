@@ -25,7 +25,7 @@ export default {
           <img :src="apartment.full_cover_img_path" alt="immagine casa"
             class="w-full h-full object-cover rounded-t-2xl">
         </div>
-        <div class="card-info w-full px-4 flex flex-col justify-center">
+        <div class="card-info h-[130px] px-4 flex flex-col justify-evenly">
           <div>
             <span>
               <b>{{ apartment.title }}</b>
