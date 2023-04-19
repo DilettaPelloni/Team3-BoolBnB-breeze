@@ -1,6 +1,7 @@
 <script>
 import { Head } from '@inertiajs/vue3';
 import { useForm } from "@inertiajs/vue3";
+import axios from 'axios';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
 export default {
@@ -42,6 +43,19 @@ export default {
         submit() {
             this.newApartment.post(route("gestione-appartamenti.update", this.apartment.id));
         }, //submit
+        getHint() {
+            axios.get('https://api.tomtom.com/search/2/autocomplete/', {
+                params: {
+                    query: this.newApartment.address,
+                    ext: 'json',
+                    key: 'waiWTZRECqzNGHIbW83D94YfzNv1Uc1e',
+                    language: 'it-IT'
+                }
+            }).then((response) => {
+                console.log(response)
+                        
+            });//richiesta
+        }
     },
     mounted() {
         //dentro a this.apartment.services ci sono tanti oggetti quanti sono i servizi collegati all'appartamento
@@ -123,6 +137,7 @@ export default {
                         placeholder="Inserisci un indirizzo"
                         required
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                        @keyup="getHint"
                     />
                     <div v-if="newApartment.errors.address" class="text-red-500 mt-2">
                         {{ newApartment.errors.address }}

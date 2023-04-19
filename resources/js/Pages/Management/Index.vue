@@ -153,8 +153,8 @@ export default {
     }
 }
 
-// .card:hover {
-//     @apply hover:shadow-lg;
-//     @apply hover:shadow-lg hover:scale-105;
-// }
+.card:hover {
+    @apply hover:shadow-lg;
+    @apply hover:shadow-lg hover:scale-105;
+}
 </style>
