@@ -1,6 +1,6 @@
 <script>
 import { useForm } from "@inertiajs/vue3";
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 
 export default {
     name: "Create",
@@ -152,7 +152,10 @@ export default {
                     maxlength="255"
                     class="border rounded-lg px-3 py-2 w-full"
                 />
-                <div v-if="newApartment.errors.street" class="text-red-500 mt-2">
+                <div
+                    v-if="newApartment.errors.street"
+                    class="text-red-500 mt-2"
+                >
                     {{ newApartment.errors.street }}
                 </div>
             </div>
@@ -181,7 +184,9 @@ export default {
             </div>
             <!-- ----------------------ROOMS---------------------- -->
             <div class="mb-3 pt-[45px]">
-                <label for="rooms" class="block font-medium text-gray-700 text-lg"
+                <label
+                    for="rooms"
+                    class="block font-medium text-gray-700 text-lg"
                     >Numero di stanze</label
                 >
                 <input
@@ -204,7 +209,9 @@ export default {
             </div>
             <!-- ----------------------BEDS---------------------- -->
             <div class="mb-3">
-                <label for="beds" class="block font-medium text-gray-700 text-lg"
+                <label
+                    for="beds"
+                    class="block font-medium text-gray-700 text-lg"
                     >Numero di letti</label
                 >
                 <input
@@ -252,7 +259,9 @@ export default {
             </div>
             <!-- ----------------------SIZE---------------------- -->
             <div class="mb-4">
-                <label for="size" class="block font-medium text-gray-700 text-lg"
+                <label
+                    for="size"
+                    class="block font-medium text-gray-700 text-lg"
                     >Metri quadrati</label
                 >
                 <input
@@ -330,7 +339,10 @@ export default {
                         value="1"
                         class="mx-2"
                     />
-                    <div v-if="newApartment.errors.visible" class="text-red-600">
+                    <div
+                        v-if="newApartment.errors.visible"
+                        class="text-red-600"
+                    >
                         {{ newApartment.errors.visible }}
                     </div>
                 </div>
@@ -358,7 +370,10 @@ export default {
                         />
                     </template>
                 </div>
-                <div v-if="newApartment.errors.activeServices" class="text-red-600">
+                <div
+                    v-if="newApartment.errors.activeServices"
+                    class="text-red-600"
+                >
                     {{ newApartment.errors.activeServices }}
                 </div>
             </div>
@@ -381,33 +396,35 @@ export default {
     background-color: #fe5b5f;
 }
 
+[type="checkbox"]:focus,
+[type="radio"]:focus,
+[type="text"]:focus,
+[type="email"]:focus,
+[type="url"]:focus,
+[type="password"]:focus,
+[type="number"]:focus,
+[type="date"]:focus,
+[type="datetime-local"]:focus,
+[type="month"]:focus,
+[type="search"]:focus,
+[type="tel"]:focus,
+[type="time"]:focus,
+[type="week"]:focus,
+[multiple]:focus,
+textarea:focus,
+select:focus {
+    border-color: #fe5b5f;
+    --tw-ring-color: #fe5b5f;
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
+        calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+}
+
 [type="radio"]:checked {
     color: #fe5b5f;
 }
 
 [type="checkbox"]:checked {
     color: #fe5b5f;
-}
-
-[type="number"]:focus {
-    border-color: #fe5b5f;
-    --tw-ring-color: #fe5b5f;
-    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
-        calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-}
-
-[type="text"]:focus {
-    --tw-ring-color: #fe5b5f;
-    border-color: #fe5b5f;
-    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
-        calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-}
-
-text-area:focus {
-    --tw-ring-color: #fe5b5f;
-    border-color: #fe5b5f;
-    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
-        calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
 }
 
 .focus\:ring-2:focus {

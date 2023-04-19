@@ -100,11 +100,11 @@ export default {
       </div><!-- CHIUSURA CONTAINER -->
       
     </AuthenticatedLayout>
-  </template>
+</template>
 
-<style scoped lang="scss"> 
-  @import '../../../scss/app.scss';
-  .button {
+<style scoped lang="scss">
+@import "../../../scss/app.scss";
+.button {
     background-color: $main-color;
   }
   .inverted-button {
@@ -139,16 +139,22 @@ export default {
   }
   .container-cards {
     padding-top: 50px;
-  }
-    .card {
-      background-color: white;
-      border-radius: 15px;
-      overflow: hidden;
+}
+.card {
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
 
-      img {
-          aspect-ratio: 1/1;
-          width: 100%;
-          object-fit: cover;
-        }
+    img {
+        aspect-ratio: 1/1;
+        width: 100%;
+        object-fit: cover;
     }
+}
+
+// .card:hover {
+//     @apply hover:shadow-lg;
+//     @apply hover:shadow-lg hover:scale-105;
+// }
 </style>
