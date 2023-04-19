@@ -30,6 +30,7 @@ export default {
                 activeServices: [],
             }),
             addresses: [],
+            showAddresses: false,
         };
     },
     methods: {
@@ -65,8 +66,13 @@ export default {
                 )
                 .then((resp) => {
                     this.addresses = resp.data.results;
+                    this.showAddresses = true; 
                 })
-        }//getAutocompleteSearch
+        },//getAutocompleteSearch
+        selectAddress(address) {
+            this.newApartment.address = address;
+            this.showAddresses = false;
+        }
     },
     watch: {
         addressInput() {
@@ -164,12 +170,12 @@ export default {
                         {{ newApartment.errors.address }}
                     </div>
 
-                    <div v-if="addresses.length > 0" class="absolute z-10 bg-white w-full rounded-b-lg shadow-lg">
+                    <div v-if="(addresses.length > 0)&&(showAddresses) " class="absolute z-10 bg-white w-full rounded-b-lg shadow-lg">
                         <ul>
                             <li v-for="address in addresses" :key="address.id" class="border-b border-gray-200">
-                                <a href="#" class="block hover:bg-gray-100 p-3">
+                                <p class="hover:bg-gray-100 p-3" @click="selectAddress(address.address.freeformAddress)">
                                     {{ address.address.freeformAddress }}
-                                </a>
+                                </p>
                             </li>
                         </ul>
                     </div>
