@@ -29,6 +29,8 @@ export default {
                 visible: this.apartment.visible,
                 activeServices: [],
             }),
+            addresses: [],
+            addressInput: "",
         };
     },
     methods: {
@@ -43,20 +45,38 @@ export default {
         submit() {
             this.newApartment.post(route("gestione-appartamenti.update", this.apartment.id));
         }, //submit
-        getHint() {
-            axios.get('https://api.tomtom.com/search/2/autocomplete/', {
-                params: {
-                    query: this.newApartment.address,
-                    ext: 'json',
-                    key: 'waiWTZRECqzNGHIbW83D94YfzNv1Uc1e',
-                    language: 'it-IT'
-                }
-            }).then((response) => {
-                console.log(response)
-                        
-            });//richiesta
-        }
+        // getHint() {
+        //     axios.get('https://api.tomtom.com/search/2/autocomplete/', {
+        //         params: {
+        //             query: this.newApartment.address,
+        //             ext: 'json',
+        //             key: 'waiWTZRECqzNGHIbW83D94YfzNv1Uc1e',
+        //             language: 'it-IT'
+        //         }
+        //     }).then((response) => {
+        //         console.log(response)  
+        //     });//richiesta
+        // }
+        getAutocompleteSearch(addressInput) {
+            //questa funzione fa una chiamata axios per ottenere i risultati dell'autocomplete
+            //in base all'input dell'indirizzo
+            axios
+                .get(
+                    `https://api.tomtom.com/search/2/geocode/${encodeURIComponent(addressInput)}.json?key=DbiOfdWsIVqot1ZmNT2KUNMPv2Ydr0mG&language=it-IT&countrySet=IT&limit=5`
+                )
+                .then((resp) => {
+                    this.addresses = resp.data.results;
+                })
+        }//getAutocompleteSearch
     },
+    watch: {
+        addressInput() {
+            this.getAutocompleteSearch(this.newApartment.address);
+        },
+        //watch è un metodo che permette di eseguire una funzione quando una variabile cambia
+        //in questo caso, quando cambia l'input dell'indirizzo, viene eseguita la funzione getAutocompleteSearch
+        //che fa una chiamata axios per ottenere i risultati dell'autocomplete
+    },//watch
     mounted() {
         //dentro a this.apartment.services ci sono tanti oggetti quanti sono i servizi collegati all'appartamento
         //ciclo questi oggetti, ne prendo la chiave "id" e la pusho nell'array this.newApartment.activeServices (che è dentro al form)
@@ -136,11 +156,23 @@ export default {
                         name="address"
                         placeholder="Inserisci un indirizzo"
                         required
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
-                        @keyup="getHint"
+                        autofocus
+                        maxlength="255"
+                        @input="getAutocompleteSearch(addressInput)"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
-                    <div v-if="newApartment.errors.address" class="text-red-500 mt-2">
+                    <div v-if="newApartment.errors.address" class="text-red-500 mt-2 text-xs italic">
                         {{ newApartment.errors.address }}
+                    </div>
+
+                    <div v-if="addresses.length > 0" class="absolute z-10 bg-white w-full rounded-b-lg shadow-lg">
+                        <ul>
+                            <li v-for="address in addresses" :key="address.id" class="border-b border-gray-200">
+                                <a href="#" class="block hover:bg-gray-100 p-3">
+                                    {{ address.address.freeformAddress }}
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <!-- ----------------------ROOMS---------------------- -->
