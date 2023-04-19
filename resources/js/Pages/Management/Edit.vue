@@ -30,7 +30,6 @@ export default {
                 activeServices: [],
             }),
             addresses: [],
-            addressInput: "",
         };
     },
     methods: {
@@ -57,12 +56,12 @@ export default {
         //         console.log(response)  
         //     });//richiesta
         // }
-        getAutocompleteSearch(addressInput) {
+        getAutocompleteSearch(address) {
             //questa funzione fa una chiamata axios per ottenere i risultati dell'autocomplete
             //in base all'input dell'indirizzo
             axios
                 .get(
-                    `https://api.tomtom.com/search/2/geocode/${encodeURIComponent(addressInput)}.json?key=DbiOfdWsIVqot1ZmNT2KUNMPv2Ydr0mG&language=it-IT&countrySet=IT&limit=5`
+                    `https://api.tomtom.com/search/2/geocode/${encodeURIComponent(address)}.json?key=waiWTZRECqzNGHIbW83D94YfzNv1Uc1e&language=it-IT&countrySet=IT&limit=5`
                 )
                 .then((resp) => {
                     this.addresses = resp.data.results;
@@ -158,7 +157,7 @@ export default {
                         required
                         autofocus
                         maxlength="255"
-                        @input="getAutocompleteSearch(addressInput)"
+                        @input="getAutocompleteSearch(this.newApartment.address)"
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
                     <div v-if="newApartment.errors.address" class="text-red-500 mt-2 text-xs italic">
