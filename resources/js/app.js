@@ -13,8 +13,8 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faCircleUser, faBars, faLocationDot, faMaximize } from '@fortawesome/free-solid-svg-icons';
-import { faCopyright } from '@fortawesome/free-regular-svg-icons';
-library.add(faCircleUser, faBars, faCopyright, faLocationDot, faMaximize);
+import { faCopyright, faTrashCan } from '@fortawesome/free-regular-svg-icons';
+library.add(faCircleUser, faBars, faCopyright, faLocationDot, faMaximize, faTrashCan);
 
 
 

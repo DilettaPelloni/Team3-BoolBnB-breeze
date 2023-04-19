@@ -92,7 +92,7 @@ class ApartmentController extends Controller
             }
         }
 
-        return Redirect::route('gestione-appartamenti.index');
+        return Redirect::route('gestione-appartamenti.show', $newApartment->id);
     }
 
     /**
@@ -202,8 +202,13 @@ class ApartmentController extends Controller
      * @param  \App\Models\Apartment  $apartment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Apartment $apartment)
+    public function destroy($apartment_id)
     {
-        //
+        $apartment = Apartment::where('id', $apartment_id)->first();
+
+        Storage::delete($apartment->cover_img);
+        $apartment->delete();
+        return Redirect::route('gestione-appartamenti.index');
+
     }
 }
