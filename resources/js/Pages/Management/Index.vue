@@ -31,7 +31,7 @@
         <div class="container-cards grid grid-cols-5 gap-10">
           <div class="card" v-for="apartment in apartments">
             <Link :href="route('gestione-appartamenti.show', apartment.id)" class="flex flex-col h-full">
-              <img :src="'storage/apartments/' + apartment.cover_img" alt="immagine casa">
+              <img :src="apartment.full_cover_img_path" alt="immagine casa">
               <div class="card-info p-4 grow flex flex-col justify-center">
                 <span><b>{{ apartment.title }}</b></span>
                 <div class="mt-2 grow flex items-center ">

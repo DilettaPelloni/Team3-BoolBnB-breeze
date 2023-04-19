@@ -51,7 +51,7 @@ class Apartment extends Model
         $fullPath = null;
 
         if ($this->cover_img) {
-            $fullPath = asset('storage/apartments/'.$this->cover_img);
+            $fullPath = asset('storage/'.$this->cover_img);
         }
 
         return $fullPath;

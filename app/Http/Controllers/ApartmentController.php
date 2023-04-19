@@ -15,6 +15,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 //Model
 use App\Models\Service;
@@ -131,11 +133,30 @@ class ApartmentController extends Controller
      * @param  \App\Models\Apartment  $apartment
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateApartmentRequest $request, $apartment_id)
+    public function update(Request $request, $apartment_id)
     {
-        $data = $request->validated();
 
         $apartment = Apartment::where('id', $apartment_id)->first();
+
+        $request->validate([
+            'title'=> [
+                'required',
+                'max:255',
+                'string',
+                Rule::unique('apartments')->ignore($apartment)
+            ],
+            'description'=> 'nullable|max:3000',
+            'rooms' => 'required|numeric|max:10|min:1',
+            'beds' => 'required|numeric|max:10|min:1',
+            'bathrooms' => 'required|numeric|max:4|min:1',
+            'size' => 'required|numeric|max:300|min:12',
+            'address' => 'required|string|max:255',
+            'cover_img'=> 'nullable|max:2048|image',
+            'visible' => 'boolean|required',
+            'activeServices' => 'nullable|array|exists:services,id'
+        ]);
+
+        $data = $request->all();
 
         //se una nuova immagine è stata passata sostituisco quella vecchia
         if($data['cover_img'] != null) {
@@ -152,11 +173,8 @@ class ApartmentController extends Controller
         $title_slug = Str::slug($data['title'], '-');
         //faccio lo slug dell'indirizzo
         $address_slug = Str::slug($data['address'], '-');
-        //prendo l'id dello user
-        $user_id = Auth::user()->id;
 
         //aggiorno l'appartamento
-        $apartment->user_id = $user_id;
         $apartment->title = $data['title'];
         $apartment->title_slug = $title_slug;
         $apartment->description = $data['description'];
