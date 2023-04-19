@@ -11,31 +11,32 @@ export default {
   props: {
     canLogin: Boolean,
     canRegister: Boolean,
+    apartments: Array,
   }
 }
 </script>
 
 <template>
   <AppHeader :canLogin="canLogin" :canRegister="canRegister"/>
-  <div class="container-page-index container-fluid">
-    <div class="container-cards flex justify-between flex-wrap h-full overflow-y-scroll">
-      <div class="card h-[400px] w-[300px] ">
-        <div class="image h-3/4 w-full">
-          <img src="https://a0.muscache.com/im/pictures/53992414/64510035_original.jpg?im_w=1200" alt="immagine casa"
-            class="w-full h-full object-cover rounded-2xl">
+  <div class="container-main">
+    <div class="container-cards justify-items-center grid grid-cols-5 gap-10 h-full overflow-y-scroll py-10 ">
+      <div v-for="apartment in apartments" class="card h-[440px] w-[300px] ">
+        <div class="image w-full">
+          <img :src="apartment.full_cover_img_path" alt="immagine casa"
+            class="w-full h-full object-cover rounded-t-2xl">
         </div>
-        <div class="card-info w-full h-1/5">
-          <div class="flex justify-between">
+        <div class="card-info w-full px-4 flex flex-col justify-center">
+          <div>
             <span>
-              <b>Riva, italia</b>
-            </span>
-            <span>
-              4,8 ⭐
+              <b>{{ apartment.title }}</b>
             </span>
           </div>
-          <div>Visto sul mare, lago</div>
-          <div>Host Privato</div>
-          <div><b>Tanti $</b> notte</div>
+          <div>tante belle info here</div>
+          <div>tante belle altre info here
+            <span>
+              ⭐ 4,8 
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -44,7 +45,24 @@ export default {
 </template>
 
 <style scoped lang="scss">
-.container-page-index {
-  // height: calc(100vh - 140px);
+.container-main{
+  height: calc(100vh - 100px);
+  background-color: #f1f1f1;
+  .card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+
+    img {
+        aspect-ratio: 1/1;
+        width: 100%;
+        object-fit: cover;
+    }
+  }
+}
+.card:hover {
+    @apply hover:shadow-lg;
+    @apply hover:shadow-lg hover:scale-105;
 }
 </style>
