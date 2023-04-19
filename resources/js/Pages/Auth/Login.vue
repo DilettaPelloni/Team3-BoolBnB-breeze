@@ -114,5 +114,14 @@ const submit = () => {
     color: #fe5b5f;
 }
 
+[type="checkbox"]:checked {
+    background-color: #fe5b5f;
+}
+
+[type="checkbox"]:focus {
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
+        calc(2px + var(--tw-ring-offset-width)) rgb(254 91 95);
+}
+
 /* wave */
 </style>
