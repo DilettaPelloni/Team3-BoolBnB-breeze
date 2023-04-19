@@ -74,7 +74,7 @@ const submit = () => {
 
             <div class="flex flex-col items-center justify-end mt-4">
                 <PrimaryButton
-                    class="flex pink items-center justify-center w-full px-4 py-2 mt-4 text-sm font-medium text-white transition duration-150 ease-in-out border border-transparent rounded-md group focus:outline-none focus:shadow-outline-pink disabled:opacity-50"
+                    class="rounded-e-full rounded-s-full flex pink items-center justify-center w-40 px-4 py-2 mt-4 text-sm font-medium text-white transition duration-150 ease-in-out border border-transparent rounded-md group focus:outline-none focus:shadow-outline-pink disabled:opacity-50"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
@@ -102,14 +102,6 @@ const submit = () => {
     background-color: #fe5b5f;
 }
 
-[type="email"]:focus,
-[type="password"]:focus {
-    --tw-ring-color: #fe5b5f;
-    border-color: #fe5b5f;
-    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
-        calc(1px + var(--tw-ring-offset-width)) rgb(254 91 95);
-}
-
 [type="checkbox"][data-v-e4ebae0a]:focus {
     color: #fe5b5f;
 }
@@ -123,5 +115,32 @@ const submit = () => {
         calc(2px + var(--tw-ring-offset-width)) rgb(254 91 95);
 }
 
+[type="text"]:focus,
+[type="email"]:focus,
+[type="url"]:focus,
+[type="password"]:focus,
+[type="number"]:focus,
+[type="date"]:focus,
+[type="datetime-local"]:focus,
+[type="month"]:focus,
+[type="search"]:focus,
+[type="tel"]:focus,
+[type="time"]:focus,
+[type="week"]:focus,
+[multiple]:focus,
+textarea:focus,
+select:focus {
+    --tw-ring-color: #fe5b5f;
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
+        calc(1px + var(--tw-ring-offset-width)) rgb(254 91 95);
+    border-color: #fe5b5f;
+}
+
 /* wave */
+/* form {
+    background: #ffe4d7
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffe4d7' fill-opacity='1' d='M0,96L120,122.7C240,149,480,203,720,202.7C960,203,1200,149,1320,122.7L1440,96L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z'%3E%3C/path%3E%3C/svg%3E")
+        no-repeat center center fixed;
+    background-size: cover;
+} */
 </style>

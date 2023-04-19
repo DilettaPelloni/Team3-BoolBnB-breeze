@@ -1,3 +1,17 @@
+/* stile onda */
+
+/* .login-container {
+    background: #f3f4f6;
+    position: relative;
+}
+
+svg {
+    position: absolute;
+    fill: #ffe4d7;
+} */
+
+/* fine stile onda */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
