@@ -41,4 +41,19 @@ class Apartment extends Model
     public function messages() {
         return $this->hasMany(Message::class);
     }
+
+    protected $appends = [
+        'full_cover_img_path',
+    ];
+
+    public function getFullCoverImgPathAttribute()
+    {
+        $fullPath = null;
+
+        if ($this->cover_img) {
+            $fullPath = asset('storage/apartments/'.$this->cover_img);
+        }
+
+        return $fullPath;
+    }
 }

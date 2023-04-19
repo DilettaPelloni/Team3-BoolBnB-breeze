@@ -227,9 +227,10 @@ export default {
                         class="block pb-2 font-medium text-gray-700 text-lg"
                         >Immagine di copertina</label
                     >
+                    {{ apartment.full_cover_img_path }}
                     <!-- se l'appartamento ha un'immagine, la mostro in anteprima -->
                     <div v-if="apartment.cover_img != null">
-                        <img :src="'storage/apartments/' + apartment.cover_img" alt="anteprima immagine">
+                        <img :src="apartment.full_cover_img_path" alt="anteprima immagine">
                     </div>
                     <input
                         @input="newApartment.cover_img = $event.target.files[0]"
