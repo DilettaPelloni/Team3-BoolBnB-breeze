@@ -7,6 +7,7 @@ use Inertia\Inertia;
 
 // Controllers
 use App\Http\Controllers\ApartmentController;
+use App\Http\Controllers\PageController;
 
 //Model
 use App\Models\Apartment;
@@ -22,6 +23,7 @@ use App\Models\Apartment;
 |
 */
 
+//HOME PAGE
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -30,10 +32,17 @@ Route::get('/', function () {
     ]);
 });
 
+//PAGINA APPARTAMENTO
+Route::get('/scopri/{title_slug}', [PageController::class, 'show'])->name('guest_show');
+
+//PAGINE SOLO PER UTENTI LOGGATI
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource("gestione-appartamenti", ApartmentController::class);
     Route::get('/dashboard', function () { return Inertia::render('Dashboard'); })->name('dashboard');
 });
+
+
+
 
 //VECCHIA ROUTE DASHBOARD
 // Route::get('/dashboard', function () {

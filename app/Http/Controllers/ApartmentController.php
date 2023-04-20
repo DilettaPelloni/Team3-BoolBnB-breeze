@@ -119,8 +119,17 @@ class ApartmentController extends Controller
      */
     public function edit($apartment_id)
     {
-        $services = Service::all();
+        //prendo l'id dello user
+        $user_id = Auth::user()->id;
+        //prendo l'appartamento
         $apartment = Apartment::where('id', $apartment_id)->with('services')->first();
+
+        //se l'utente loggato è diverso dall'utente che ha creato l'appartamento, viene reindirizzato alla dashboard
+        if($user_id != $apartment->user_id) {
+            return Redirect::route('dashboard');
+        }
+
+        $services = Service::all();
         return Inertia::render('Management/Edit', [
             'services' => $services,
             'apartment' => $apartment,
