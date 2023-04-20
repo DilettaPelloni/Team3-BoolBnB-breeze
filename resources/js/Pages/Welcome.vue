@@ -1,12 +1,14 @@
 <script>
 import AppHeader from "../Components/MyComponents/AppHeader.vue";
 import AppFooter from "../Components/MyComponents/AppFooter.vue";
+import { Link } from '@inertiajs/vue3';
 
 export default {
     name: "App",
     components: {
         AppHeader,
         AppFooter,
+        Link
     },
     props: {
         canLogin: Boolean,
@@ -24,13 +26,13 @@ export default {
         >
             <div
                 v-for="apartment in apartments"
-                class="card h-[440px] w-[300px]"
+                class="card w-[300px]"
             >
                 <div class="image w-full">
                     <img
                         :src="apartment.full_cover_img_path"
                         alt="immagine casa"
-                        class="w-full h-full object-cover rounded-t-2xl"
+                        class="w-full h-20 object-cover rounded-t-2xl"
                     />
                 </div>
                 <div
@@ -47,6 +49,9 @@ export default {
                         <span> ⭐ 4,8 </span>
                     </div>
                 </div>
+        <Link :href="route('guest_show', apartment.title_slug)" class="mt-8 px-4 py-2 rounded-full button text-white">
+            Vedi appartamento
+        </Link>
             </div>
         </div>
     </div>
@@ -54,6 +59,10 @@ export default {
 </template>
 
 <style scoped lang="scss">
+@import "../../scss/app.scss";
+.button {
+    background-color: $main-color;
+  }
 .container-main {
     height: calc(100vh - 100px);
     background-color: #f1f1f1;
