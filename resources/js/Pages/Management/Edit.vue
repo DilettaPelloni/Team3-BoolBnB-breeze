@@ -21,6 +21,8 @@ export default {
                 title: this.apartment.title,
                 description: this.apartment.description,
                 address: this.apartment.address,
+                latitude: this.apartment.lat,
+                longitude: this.apartment.lng,
                 rooms: this.apartment.rooms,
                 beds: this.apartment.beds,
                 bathrooms: this.apartment.bathrooms,
@@ -67,8 +69,8 @@ export default {
                 .then((resp) => {
                     this.addresses = resp.data.results;
                     this.showAddresses = true;
-                    this.newApartment.lat = resp.data.results[0].position.lat;
-                    this.newApartment.lng = resp.data.results[0].position.lon;
+                    this.newApartment.latitude = resp.data.results[0].position.lat;
+                    this.newApartment.longitude = resp.data.results[0].position.lon;
                 })
         },//getAutocompleteSearch
         selectAddress(address) {
@@ -103,15 +105,15 @@ export default {
             <form @submit.prevent="submit">
                 <!-- ----------------------TITLE---------------------- -->
                 <div class="mb-3">
-                    <label for="title" class="block text-gray-700 font-bold mb-2 text-lg">Nome Appartamento</label>
-                    <input type="text" id="title" name="title" v-model="newApartment.title"
+                <label for="title" class="block text-gray-700 font-bold mb-2 text-lg">Nome Appartamento</label>
+                <input type="text" id="title" name="title" v-model="newApartment.title"
                         placeholder="Inserisci il nome..." required autofocus maxlength="255"
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                     <div v-if="newApartment.errors.title" class="text-red-500 text-xs italic">
                         {{ newApartment.errors.title }}
                     </div>
-            </div>
-            <!-- ----------------------DESCRIPTION---------------------- -->
+                </div>
+                <!-- ----------------------DESCRIPTION---------------------- -->
                 <div class="mb-3">
                     <label for="description" class="block text-gray-700 font-bold mb-2 text-lg">Descrizione</label>
                     <textarea v-model="newApartment.description" rows="10" id="description" name="description"
@@ -146,11 +148,6 @@ export default {
                         </ul>
                     </div>
                 </div>
-
-                <!-- ----------------------LATITUDE---------------------- -->
-
-
-
 
 
                 <!-- ----------------------ROOMS---------------------- -->
@@ -208,8 +205,8 @@ export default {
 
                     <!-- PER VEDERE PROGRESSO DI CARICAMENTO DEL FILE (E' TROPPO VELOCE PER VEDERE QUALCOSA) -->
                     <!-- <progress v-if="newApartment.progress" :value="newApartment.progress.percentage" max="100">
-                                            {{ newApartment.progress.percentage }}%
-                                        </progress> -->
+                                                {{ newApartment.progress.percentage }}%
+                                            </progress> -->
 
                     <div v-if="newApartment.errors.cover_img" class="text-red-600">
                         {{ newApartment.errors.cover_img }}

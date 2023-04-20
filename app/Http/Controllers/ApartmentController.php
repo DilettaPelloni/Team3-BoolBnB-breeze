@@ -64,8 +64,7 @@ class ApartmentController extends Controller
         //faccio lo slug del titolo
         $title_slug = Str::slug($data['title'], '-');
         //compongo l'indirizzo completo e lo slugifico
-        $address = $data['cap'] . ' ' . $data['city'] . ' ' . $data['street'] . ' n. ' . $data['civic_number'];
-        $address_slug = Str::slug($address, '-');
+        $address_slug = Str::slug($data['address'], '-');
         //salvo l'immagine
         $imgPath = Storage::put('apartments', $data['cover_img']);
         //prendo l'id dello user
@@ -80,8 +79,10 @@ class ApartmentController extends Controller
             'beds' => $data['beds'],
             'bathrooms' => $data['bathrooms'],
             'size' => $data['size'],
-            'address' => $address,
+            'address' => $data['address'],
             'address_slug' => $address_slug,
+            'latitude' => $data['latitude'],
+            'longitude' => $data['longitude'],
             'cover_img' => $imgPath,
             'visible' => $data['visible'],
         ]);
@@ -139,19 +140,21 @@ class ApartmentController extends Controller
         $apartment = Apartment::where('id', $apartment_id)->first();
 
         $request->validate([
-            'title'=> [
+            'title' => [
                 'required',
                 'max:255',
                 'string',
                 Rule::unique('apartments')->ignore($apartment)
             ],
-            'description'=> 'nullable|max:3000',
+            'description' => 'nullable|max:3000',
             'rooms' => 'required|numeric|max:10|min:1',
             'beds' => 'required|numeric|max:10|min:1',
             'bathrooms' => 'required|numeric|max:4|min:1',
             'size' => 'required|numeric|max:300|min:12',
             'address' => 'required|string|max:255',
-            'cover_img'=> 'nullable|max:2048|image',
+            "latitude" => "required|numeric|between:-90,90",
+            "longitude" => "required|numeric|between:-180,180",
+            'cover_img' => 'nullable|max:2048|image',
             'visible' => 'boolean|required',
             'activeServices' => 'nullable|array|exists:services,id'
         ]);
@@ -159,11 +162,11 @@ class ApartmentController extends Controller
         $data = $request->all();
 
         //se una nuova immagine è stata passata sostituisco quella vecchia
-        if($data['cover_img'] != null) {
+        if ($data['cover_img'] != null) {
             $imgPath = Storage::put('apartments', $data['cover_img']);
             $data['cover_img'] = $imgPath;
 
-            if($apartment->cover_img) {
+            if ($apartment->cover_img) {
                 Storage::delete($apartment->cover_img);
                 $apartment->cover_img = $imgPath;
             }
@@ -184,6 +187,8 @@ class ApartmentController extends Controller
         $apartment->size = $data['size'];
         $apartment->address = $data['address'];
         $apartment->address_slug = $address_slug;
+        $apartment->latitude = $data['latitude'];
+        $apartment->longitude = $data['longitude'];
         $apartment->visible = $data['visible'];
         $apartment->save();
 
@@ -209,6 +214,5 @@ class ApartmentController extends Controller
         Storage::delete($apartment->cover_img);
         $apartment->delete();
         return Redirect::route('gestione-appartamenti.index');
-
     }
 }
