@@ -129,7 +129,12 @@ export default {
 
             <!-- MODALE -->
             <div class="modal-overlay" v-if="modalVisible">
-                <div class="modal">
+                <div class="modal mt-[80px]">
+                    <img
+                        src="storage/img/cancella.png"
+                        alt="imgCancella"
+                        class="object-contain w-48 mb-[25px]"
+                    />
                     <h3>Sei sicuro di voler eliminare questo appartamento?</h3>
                     <div
                         class="form-button-container flex justify-between xl:gap-4 lg:gap-0 md:gap-0 sm:gap-0 xl:flex-row lg:flex-col md:flex-col sm:flex-col"
