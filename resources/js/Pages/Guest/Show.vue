@@ -1,73 +1,121 @@
 <script>
 import { Head } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
-import AppHeader from '../../Components/MyComponents/AppHeader.vue';
-import AppFooter from '../../Components/MyComponents/AppFooter.vue';
-
 
 export default {
   name: 'Show',
   props: {
     apartment: Object,
-    canLogin: Boolean,
-    canRegister: Boolean,
   },
   components: {
     Head,
-    Link,
-    AppHeader,
-    AppFooter,
+    Link
   }
 }
 </script>
 
 <template>
-    <Head :title="apartment.title" />
-    <!-- APPHEADER -->
-    <AppHeader :canLogin="canLogin" :canRegister="canRegister"/>
-
-    <!-- CARD CONTAINER -->
-    <div class="container-cards grid grid-cols-5 gap-10">
-
-        <!-- CARD -->
-        <div class="card">
-            <img :src="apartment.full_cover_img_path">
-            <div class="card-info p-4 grow flex flex-col justify-center">
-                <span><b>{{ apartment.title }}</b></span>
-                <div class="mt-2 grow flex items-center ">
-                    <font-awesome-icon :icon="['fas', 'location-dot']" class="me-2" />
-                    {{ apartment.address }}
-                </div>
-                <div class="mt-2">
-                    <font-awesome-icon :icon="['fas', 'maximize']" />
-                    {{ apartment.size }} m<sup>2</sup>
-                </div>
-            </div><!-- CHIUSURA CARD INFO -->
-        </div><!-- CHIUSURA CARD -->
-
-    </div><!-- CHIUSURA CARD CONTAINER-->
-    
-    <!-- APP FOOTER -->
-    <AppFooter />
-
+  <Head :title="apartment.title" />
+    <div class="main-container">
+      <div class="container-title mb-[50px]">
+        <h1 class="pb-2">
+          {{ apartment.title }}
+        </h1>
+        <span>
+          <font-awesome-icon :icon="['fas', 'location-dot']" /> {{ apartment.address }}
+        </span>
+      </div>
+      <div class="container-img w-full">
+        <img :src="apartment.full_cover_img_path" alt="Cover Image Apartment" class="w-full h-full object-cover max-h-[900px] object-center">
+      </div>
+      <div class="container-info-msg flex justify-between mt-20">
+        <div class="container-info flex flex-col justify-between border-b-2">
+          <div class="border-b-2 pb-5">
+            <h2 class="pb-2">
+              {{ apartment.title }}
+            </h2>
+            <span>{{ apartment.rooms }} Stanze &bull; </span>
+            <span>{{ apartment.beds }} Letti &bull; </span>
+            <span>{{ apartment.bathrooms }} Bagni &bull; </span>
+            <span>{{ apartment.size }} M<sup>2</sup></span>
+          </div>
+          <div v-if="apartment.services.length > 0">
+            <h2 class="pt-5">
+              Servizi inclusi
+            </h2>
+            <div v-for="service in apartment.services" class="py-3">
+              <span>{{ service.icon }}</span>
+              <span>{{ service.name }}</span>
+            </div>
+          </div>
+          <div v-else>
+              <span>Nessun Servizio Aggiuntivo Disponibile</span>
+          </div>
+          <div class="border-y-2 py-5">
+            <div>
+              <h2>
+                Descrizione Appartamento
+              </h2>
+              <p class="pt-3 text-gray-600">
+                {{ apartment.description }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="container-msg">
+          <h2 class="pb-5">
+            Manda un messaggio
+          </h2>
+          <form action="" method="post">
+            <p><label for="name">Nome e Cognome</label></p>
+            <input type="text" name="name" id="name" class="my-4">
+            <p><label for="email">La tua E-Mail</label></p>
+            <input type="text" name="email" id="email" class="my-4">
+            <p><label for="message">Messaggio</label></p>
+            <input type="text" name="message" id="message" class="my-4">
+            <button type="submit" class="button rounded-full text-white px-4 py-2 mt-8">Invia il messaggio</button>
+          </form>
+        </div>
+      </div>
+      <div class="container-map mt-20">
+        mappa dell'appartamento Here
+      </div>
+    </div>
 </template>
 
 <style scoped lang="scss">
-.container-cards {
-  width: 90%;
-  margin: 0 auto;
-  padding-top: 50px;
+@import "../../../scss/app.scss";
+.main-container {
+  width: 65%;
+  margin: 60px auto;
+
+  .container-info {
+    width: 65%;
+  }
+
+  .container-msg {
+    width: 30%;
+
+
+    input {
+      width: 100%;
+    }
+
+    button {
+      background-color: $main-color;
+    }
+  }
 }
 
-.card {
-  background-color: white;
-  border-radius: 15px;
-  overflow: hidden;
+h1 {
+  font-size: 2rem;
+}
 
-  img {
-    aspect-ratio: 1/1;
-    width: 100%;
-    object-fit: cover;
-  }
+h2 {
+  font-size: 1.8rem;
+}
+
+span{
+  color: rgb(75, 85, 99);
 }
 </style>
