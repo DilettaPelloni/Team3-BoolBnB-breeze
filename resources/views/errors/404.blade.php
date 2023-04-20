@@ -95,7 +95,7 @@ button:active {
 
 body {
     height: 100vh;
-    background-color: #fbd2d8;
+    background-color: #fbd2d840;
     position: relative;
 }
 img {
