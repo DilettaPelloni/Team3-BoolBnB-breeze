@@ -16,6 +16,7 @@
                 <h1>OOPS...<br>Errore 404</h1>
                 <h2>La pagina che stai cercando<br>non è più disponibile.</h2>
                 <button>Torna alla Home</button>
+
             </div>
 
             <div class="img">
@@ -84,9 +85,17 @@ button {
     cursor: pointer;
 }
 
+button:hover {background-color: #df5759}
+
+button:active {
+  background-color: #fc9aa1;
+  box-shadow: 0 5px #dd5b5f;
+  transform: translateY(4px);
+}
+
 body {
     height: 100vh;
-    background-color: #fe5b5f0d;
+    background-color: #fbd2d8;
     position: relative;
 }
 img {
