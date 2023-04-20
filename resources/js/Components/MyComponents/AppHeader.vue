@@ -25,7 +25,7 @@ export default {
 <template>
   <div class="container-header flex justify-between items-center border-b border-black py-[5px] px-[20px]">
     <div class="container-img h-[50px] w-[250px]">
-      <img src="storage/img/LogoBoolBnB.png" alt="Logo BoolBnB" class="object-contain h-full">
+      <img src="/img/LogoBoolBnB.png" alt="Logo BoolBnB" class="object-contain h-full">
     </div>
     <div class="flex">
       <div class="container-affitta flex items-center">
