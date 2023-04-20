@@ -21,7 +21,7 @@ export default {
   <AuthenticatedLayout>
 
     <div class="main-container">
-      <div class="container-title">
+      <div class="container-title mb-[50px]">
         <h1 class="pb-2">
           {{ apartment.title }}
         </h1>
@@ -29,8 +29,8 @@ export default {
           <font-awesome-icon :icon="['fas', 'location-dot']" /> {{ apartment.address }}
         </span>
       </div>
-      <div class="container-img">
-        <img :src="apartment.full_cover_img_path" alt="Cover Image Apartment">
+      <div class="container-img w-full">
+        <img :src="apartment.full_cover_img_path" alt="Cover Image Apartment" class="w-full h-full object-cover max-h-[900px] object-center">
       </div>
       <div class="container-info-msg flex justify-between mt-20">
         <div class="container-info flex flex-col justify-between border-b-2">
@@ -43,12 +43,17 @@ export default {
             <span>{{ apartment.bathrooms }} Bagni &bull; </span>
             <span>{{ apartment.size }} M<sup>2</sup></span>
           </div>
-          <h2 class="pt-5">
-            Servizi inclusi
-          </h2>
-          <div v-for="service in apartment.services" class="py-3">
-            <span>{{ service.icon }}</span>
-            <span>{{ service.name }}</span>
+          <div v-if="apartment.services.length > 0">
+            <h2 class="pt-5">
+              Servizi inclusi
+            </h2>
+            <div v-for="service in apartment.services" class="py-3">
+              <span>{{ service.icon }}</span>
+              <span>{{ service.name }}</span>
+            </div>
+          </div>
+          <div v-else>
+              <span>Nessun Servizio Aggiuntivo Disponibile</span>
           </div>
           <div class="border-y-2 py-5">
             <div>
@@ -86,28 +91,9 @@ export default {
 
 <style scoped lang="scss">
 @import "../../../scss/app.scss";
-// * {
-//   border: 1px solid red;
-// }
-
 .main-container {
   width: 65%;
   margin: 60px auto;
-
-  .container-title {
-    margin-bottom: 50px;
-
-  }
-
-  .container-img {
-    width: 100%;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
 
   .container-info {
     width: 65%;
