@@ -22,7 +22,7 @@
             <div class="img">
 
                 <img
-                        src="storage/img/404_2.png"
+                        src="storage/img/404.png"
                         alt="img404"
                         class=""
                     />
