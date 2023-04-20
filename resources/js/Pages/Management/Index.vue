@@ -131,7 +131,7 @@ export default {
             <div class="modal-overlay" v-if="modalVisible">
                 <div class="modal mt-[80px]">
                     <img
-                        src="storage/img/cancella.png"
+                        src="img/cancella.png"
                         alt="imgCancella"
                         class="object-contain w-48 mb-[25px]"
                     />
