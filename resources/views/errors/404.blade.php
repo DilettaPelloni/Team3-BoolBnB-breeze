@@ -109,6 +109,8 @@ img {
     width: 100%;
     height: auto;
   }
+  h1 {
+    font-size: 60px;}
 }
 </style>
 
