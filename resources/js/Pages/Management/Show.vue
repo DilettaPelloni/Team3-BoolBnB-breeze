@@ -25,27 +25,27 @@ export default {
         <h1>
           {{ apartment.title }}
         </h1>
+        <font-awesome-icon :icon="['fas', 'location-dot']"/> {{ apartment.address }}
       </div>
       <div class="container-img">
         <img :src="apartment.full_cover_img_path" alt="Cover Image Apartment">
       </div>
-      <div class="container-info-msg flex mt-20">
-        <div class="container-info flex flex-col justify-between">
-          <div>
+      <div class="container-info-msg flex justify-between mt-20">
+        <div class="container-info flex flex-col justify-between border-b-2">
+          <div class="border-b-2 py-5">
             <h2>
               {{ apartment.title }}
             </h2>
             <span>{{ apartment.rooms }} Stanze &bull; </span>
             <span>{{ apartment.beds }} Letti &bull; </span>
-            <span>{{ apartment.bathroomds }} Bagni &bull; </span>
+            <span>{{ apartment.bathrooms }} Bagni &bull; </span>
             <span>{{ apartment.size }} M<sup>2</sup></span>
           </div>
-          <div>
-            {{ apartment.services }}
-            {{ apartment.services }}
-            Tutti i servizi here
+          <div v-for="service in apartment.services">
+            <span>{{ service.icon }}</span>
+            <span>{{ service.name }}</span>
           </div>
-          <div>
+          <div class="border-y-2 py-5">
             <div>
               <h2>
                 Descrizione Appartamento
@@ -67,7 +67,7 @@ export default {
             <input type="text" name="email" id="email">
             <p><label for="message">Messaggio</label></p>
             <input type="text" name="message" id="message">
-            <button type="submit">Invia il messaggio</button>
+            <button type="submit" class="button rounded-full text-white px-4 py-2 mt-8">Invia il messaggio</button>
           </form>
         </div>
       </div>
@@ -80,6 +80,7 @@ export default {
 </template>
 
 <style scoped lang="scss">
+@import "../../../scss/app.scss";
 // * {
 //   border: 1px solid red;
 // }
@@ -89,8 +90,11 @@ export default {
   margin: 60px auto;
 
   .container-title {
-    font-size: 2rem;
     margin-bottom: 50px;
+
+    h1{
+      font-size: 2rem;
+    }
   }
 
   .container-img {
@@ -104,7 +108,7 @@ export default {
   }
 
   .container-info {
-    width: 70%;
+    width: 65%;
   }
 
   .container-msg {
@@ -116,6 +120,10 @@ export default {
 
     input {
       width: 100%;
+    }
+
+    button{
+      background-color: $main-color;
     }
   }
 }
