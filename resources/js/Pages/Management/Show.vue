@@ -66,20 +66,6 @@ export default {
             </div>
           </div>
         </div>
-        <div class="container-msg">
-          <h2 class="pb-5">
-            Manda un messaggio
-          </h2>
-          <form action="" method="post">
-            <p><label for="name">Nome e Cognome</label></p>
-            <input type="text" name="name" id="name" class="my-4">
-            <p><label for="email">La tua E-Mail</label></p>
-            <input type="text" name="email" id="email" class="my-4">
-            <p><label for="message">Messaggio</label></p>
-            <input type="text" name="message" id="message" class="my-4">
-            <button type="submit" class="button rounded-full text-white px-4 py-2 mt-8">Invia il messaggio</button>
-          </form>
-        </div>
       </div>
       <div class="container-map mt-20">
         mappa dell'appartamento Here
@@ -94,23 +80,6 @@ export default {
 .main-container {
   width: 65%;
   margin: 60px auto;
-
-  .container-info {
-    width: 65%;
-  }
-
-  .container-msg {
-    width: 30%;
-
-
-    input {
-      width: 100%;
-    }
-
-    button {
-      background-color: $main-color;
-    }
-  }
 }
 
 h1 {
