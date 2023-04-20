@@ -1,14 +1,14 @@
 <script>
 import AppHeader from "../Components/MyComponents/AppHeader.vue";
 import AppFooter from "../Components/MyComponents/AppFooter.vue";
-import { Link } from '@inertiajs/vue3';
+import { Link } from "@inertiajs/vue3";
 
 export default {
     name: "App",
     components: {
         AppHeader,
         AppFooter,
-        Link
+        Link,
     },
     props: {
         canLogin: Boolean,
@@ -20,13 +20,13 @@ export default {
 
 <template>
     <AppHeader :canLogin="canLogin" :canRegister="canRegister" />
-    <div class="container-main">
+    <div class="container-main pb-[125px]">
         <div
-            class="container-cards justify-items-center h-full overflow-y-scroll py-10 grid 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-col-1 gap-10"
+            class="container-cards ml-[185px] mr-[185px] pt-[125px] grid 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-col-1 gap-10"
         >
             <div
                 v-for="apartment in apartments"
-                class="card w-[300px]"
+                class="card flex flex-col self-end"
             >
                 <div class="image w-full">
                     <img
@@ -36,7 +36,7 @@ export default {
                     />
                 </div>
                 <div
-                    class="card-info h-[130px] px-4 flex flex-col justify-evenly"
+                    class="card-info px-4 pt-4 flex flex-col justify-center h-40"
                 >
                     <div>
                         <span>
@@ -49,9 +49,12 @@ export default {
                         <span> ⭐ 4,8 </span>
                     </div>
                 </div>
-        <Link :href="route('guest_show', apartment.title_slug)" class="mt-8 px-4 py-2 rounded-full button text-white">
-            Vedi appartamento
-        </Link>
+                <Link
+                    :href="route('guest_show', apartment.title_slug)"
+                    class="mt-8 px-4 py-2 rounded-full button text-white self-center mb-[20px]"
+                >
+                    Vedi appartamento
+                </Link>
             </div>
         </div>
     </div>
@@ -62,20 +65,21 @@ export default {
 @import "../../scss/app.scss";
 .button {
     background-color: $main-color;
-  }
+}
 .container-main {
-    height: calc(100vh - 100px);
     background-color: #f1f1f1;
     .card {
         background-color: #ffffff;
         border-radius: 15px;
         overflow: hidden;
         transition: all 0.3s ease-in-out;
+        width: 274px;
 
         img {
             aspect-ratio: 1/1;
             width: 100%;
             object-fit: cover;
+            height: 276px;
         }
     }
 }
