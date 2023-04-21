@@ -87,7 +87,7 @@ export default {
 
 .footer {
     padding-bottom: 40px;
-    background-image: url("storage/img/mappa.jpg");
+    background-image: url("img/mappa.jpg");
     height: 355px;
     width: 100%;
     background-position: 41% 11%;

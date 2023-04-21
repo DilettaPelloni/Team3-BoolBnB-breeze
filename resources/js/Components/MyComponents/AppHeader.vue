@@ -104,7 +104,7 @@ export default {
 }
 
 .container-jumbotron {
-    background-image: url("storage/img/sfondo-oscurato.jpg");
+    background-image: url("/img/sfondo-oscurato.jpg");
     height: 505px;
     width: 100%;
     background-position: 36% 67%;
