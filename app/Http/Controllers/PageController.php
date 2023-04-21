@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 //Models
 use App\Models\Apartment;
+use App\Models\Service;
 
 //Helpers
 use Illuminate\Support\Facades\Auth;
@@ -37,13 +38,14 @@ class PageController extends Controller
 
     public function search()
     {
-        $apartments = Apartment::all();
-
+        $apartments = Apartment::with('services')->get();
+        $services = Service::all();
 
         return Inertia::render('Guest/Search', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
             'apartments' => $apartments,
+            'services' => $services,
         ]);
     }
 }

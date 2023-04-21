@@ -51,7 +51,10 @@ export default {
                 {{ apartment.title }}
             </h1>
             <span>
-                <font-awesome-icon :icon="['fas', 'location-dot']" />
+                <font-awesome-icon
+                    :icon="['fas', 'location-dot']"
+                    style="color: #fe5b5f"
+                />
                 {{ apartment.address }}
             </span>
         </div>
@@ -62,7 +65,7 @@ export default {
                 class="w-full h-full object-cover max-h-[900px] object-center"
             />
         </div>
-        <div class="container-info-msg flex justify-between mt-20">
+        <div class="container-info-msg flex justify-between mt-20 mb-[65px]">
             <div
                 class="container-info flex flex-col justify-between border-b-2"
             >
@@ -202,5 +205,9 @@ h2 {
 
 span {
     color: rgb(75, 85, 99);
+}
+
+input {
+    border-radius: 50px;
 }
 </style>
