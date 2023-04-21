@@ -71,6 +71,12 @@ export default {
 
 .footer {
     padding-bottom: 40px;
+
+    height: 355px;
+    width: 100%;
+    background-position: 41% 11%;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .logo {
     display: block;

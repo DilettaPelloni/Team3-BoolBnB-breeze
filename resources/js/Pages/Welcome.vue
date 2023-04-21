@@ -1,7 +1,7 @@
 <script>
 import AppHeader from "../Components/MyComponents/AppHeader.vue";
 import AppFooter from "../Components/MyComponents/AppFooter.vue";
-import { Head } from '@inertiajs/vue3';
+import { Head } from "@inertiajs/vue3";
 import { Link } from "@inertiajs/vue3";
 
 export default {
@@ -24,9 +24,9 @@ export default {
     <Head title="Home" />
 
     <AppHeader :canLogin="canLogin" :canRegister="canRegister" />
-    <div class="container-main pb-[125px]">
+    <div class="container-main pb-[95px]">
         <div
-            class="container-cards ml-[185px] mr-[185px] pt-[125px] grid 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-col-1 gap-10"
+            class="container-cards ml-[185px] mr-[185px] pt-[85px] grid 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-col-1 gap-10"
         >
             <div
                 v-for="apartment in apartments"
