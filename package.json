@@ -26,6 +26,8 @@
         "@fortawesome/free-solid-svg-icons": "^6.4.0",
         "@fortawesome/vue-fontawesome": "^3.0.3",
         "@tomtom-international/web-sdk-maps": "^6.23.0",
-        "@tomtom-international/web-sdk-services": "^6.23.0"
+        "@tomtom-international/web-sdk-services": "^6.23.0",
+        "chart.js": "^4.2.1",
+        "vue-chartjs": "^5.2.0"
     }
 }

@@ -1,6 +1,38 @@
-<script setup>
+<script >
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
+
+import { Bar } from 'vue-chartjs'
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+
+export default {
+    name: 'Dashboard',
+    props: {
+    },
+    components: {
+        Head,
+        AuthenticatedLayout,
+        Bar,
+    },
+    data() {
+        return {
+            chartData: {
+                labels: ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'],
+                datasets: [
+                    {
+                        label: 'Visualizzazioni Totali ',
+                        backgroundColor: '#fe5e62',
+                        data: [40, 20, 12, 12, 23, 35, 76, 70, 46, 67, 21, 6]
+                    }
+                ]
+            }
+        }
+    }
+}
+
+
+
 </script>
 
 <template>
@@ -14,7 +46,26 @@ import { Head } from '@inertiajs/vue3';
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">Benvenuto! Per cominciare a gestire gli appartamenti fai click su "Appartamenti"</div>
+                    <div class="p-6 text-gray-900">Benvenuto! Per cominciare a gestire gli appartamenti fai click su
+                        "Appartamenti"</div>
+                </div>
+            </div>
+        </div>
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900">
+                        <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900">
+                        Sponsor belle belle here
+                    </div>
                 </div>
             </div>
         </div>
