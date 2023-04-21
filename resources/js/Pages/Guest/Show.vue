@@ -62,7 +62,7 @@ export default {
                 class="w-full h-full object-cover max-h-[900px] object-center"
             />
         </div>
-        <div class="container-info-msg flex justify-between mt-20">
+        <div class="container-info-msg flex justify-between mt-20 mb-[65px]">
             <div
                 class="container-info flex flex-col justify-between border-b-2"
             >
