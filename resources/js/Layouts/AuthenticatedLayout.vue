@@ -32,6 +32,9 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('gestione-appartamenti.index')" :active="route().current('gestione-appartamenti.index')">
                                     Appartamenti
                                 </NavLink>
+                                <NavLink :href="route('messages.index')" :active="route().current('messages.index')">
+                                    Messaggi ricevuti
+                                </NavLink>
                             </div>
                         </div>
 

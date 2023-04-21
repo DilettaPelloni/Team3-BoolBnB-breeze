@@ -20,6 +20,7 @@ use Illuminate\Validation\Rule;
 
 //Model
 use App\Models\Service;
+use App\Models\Message;
 
 class ApartmentController extends Controller
 {
@@ -223,5 +224,21 @@ class ApartmentController extends Controller
         Storage::delete($apartment->cover_img);
         $apartment->delete();
         return Redirect::route('gestione-appartamenti.index');
+    }
+
+
+    // GESTIONE PAGINA MESSAGGI
+    public function messages()
+    {
+        $user_id = Auth::user()->id;
+        //prendo i messaggi degli appartamenti dell'utente
+        $messages = Message::join('apartments', 'messages.apartment_id', '=', 'apartments.id')
+                            ->join('users', 'apartments.user_id', '=', 'users.id')
+                            ->where('user_id',$user_id)
+                            ->get();
+
+        return Inertia::render('Management/Messages', [
+            'messages' => $messages,
+        ]);
     }
 }

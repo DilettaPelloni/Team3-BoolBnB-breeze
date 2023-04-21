@@ -44,6 +44,7 @@ Route::post('/messages', [MessagesController::class, 'store'])->name('messages.s
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource("gestione-appartamenti", ApartmentController::class);
     Route::get('/dashboard', function () { return Inertia::render('Dashboard'); })->name('dashboard');
+    Route::get('/messaggi', [ApartmentController::class, 'messages'])->name('messages.index');
 });
 
 
