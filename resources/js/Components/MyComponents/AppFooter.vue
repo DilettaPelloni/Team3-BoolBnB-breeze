@@ -18,11 +18,11 @@ export default {
                     />
 
                     <div class="text">
-                        <p class="pb-5 text-[20px]">
+                        <p class="pb-5 text-[20px] text-white">
                             Level 13, 2 Elizabeth St,<br />Melbourne,
                             Victoria<br />3000, Australia
                         </p>
-                        <p class="pb-2">
+                        <p class="pb-2 text-white">
                             Opening hours: Mon - Sat: 9 AM - 6 PM
                         </p>
                     </div>
@@ -34,20 +34,36 @@ export default {
                 </div>
                 <div class="contact text-center">
                     <div class="text pt-[50px]">
-                        <h2 class="pb-[25px] text-[20px]">Contattaci</h2>
-                        <p class="text-[30px] pink-text pb-[35px]">
+                        <h2 class="pb-[25px] text-[20px] text-white">
+                            Contattaci
+                        </h2>
+                        <p class="text-[30px] pb-[35px] text-white">
                             +61 (0) 3 8376 6284
                         </p>
                         <a class="button" href="#">Chiama</a>
                     </div>
                 </div>
-                <div class="linkUtili">
-                    <p class="text-[20px] pb-5 pt-[50px]">Link Utili</p>
+                <div class="linkUtili text-right">
+                    <p class="text-[20px] pb-5 pt-[50px] text-white">
+                        Link Utili
+                    </p>
                     <ul>
-                        <li><a class="link" href="#">Contattaci</a></li>
-                        <li><a class="link" href="#">Destinazioni</a></li>
-                        <li><a class="link" href="#">Privacy Policy</a></li>
-                        <li><a class="link" href="#">Cookie Policy</a></li>
+                        <li>
+                            <a class="link text-white" href="#">Contattaci</a>
+                        </li>
+                        <li>
+                            <a class="link text-white" href="#">Destinazioni</a>
+                        </li>
+                        <li>
+                            <a class="link text-white" href="#"
+                                >Privacy Policy</a
+                            >
+                        </li>
+                        <li>
+                            <a class="link text-white" href="#"
+                                >Cookie Policy</a
+                            >
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -71,7 +87,7 @@ export default {
 
 .footer {
     padding-bottom: 40px;
-
+    background-image: url("storage/img/mappa.jpg");
     height: 355px;
     width: 100%;
     background-position: 41% 11%;
@@ -84,6 +100,10 @@ export default {
 
 .link:hover {
     color: #fe5b5f;
+}
+
+.flex-container > * {
+    flex: 1;
 }
 
 @media (max-width: 768px) {
