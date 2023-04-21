@@ -20,12 +20,12 @@ export default {
     data() {
         return {
             chartData: {
-                labels: ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'],
+                labels: [this.views[0].title],
                 datasets: [
                     {
                         label: 'Visualizzazioni Totali ',
                         backgroundColor: '#fe5e62',
-                        data: [40, 20, 12, 12, 23, 35, 76, 70, 46, 67, 21, 6]
+                        data: [this.views.length]
                     }
                 ]
             }
