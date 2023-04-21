@@ -83,7 +83,10 @@ export default {
     <div class="container-jumbotron">
         <h1 class="text-center">Quale sarà la tua prossima meta?</h1>
         <h2 class="text-center">Scegli subito la tua destinazione!</h2>
-        <button class="button">Cerca la tua meta</button>
+        <Link :href="route('search')">
+            <button class="button">Cerca la tua meta</button>
+        </Link>
+        
     </div>
 </template>
 
@@ -104,7 +107,7 @@ export default {
 }
 
 .container-jumbotron {
-    background-image: url("storage/img/sfondo-oscurato.jpg");
+    background-image: url("/img/sfondo-oscurato.jpg");
     height: 505px;
     width: 100%;
     background-position: 36% 67%;

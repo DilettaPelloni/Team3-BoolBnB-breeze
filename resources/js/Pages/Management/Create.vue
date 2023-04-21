@@ -61,10 +61,10 @@ export default {
         },//getAutocompleteSearch
 
         selectAddress(address) {
-            this.newApartment.address = address;
+            this.newApartment.address = address.address.freeformAddress;
             this.showAddresses = false;
-            this.newApartment.latitude = this.addresses[0].position.lat;
-            this.newApartment.longitude = this.addresses[0].position.lon;
+            this.newApartment.latitude = address.position.lat;
+            this.newApartment.longitude = address.position.lon;
         },//selectAddress
 
     },//methods
@@ -118,10 +118,10 @@ export default {
                 </div>
 
                 <div v-if="(addresses.length > 0) && (showAddresses)"
-                    class="absolute z-10 bg-white w-full rounded-b-lg shadow-lg">
-                    <ul>
-                        <li v-for="address in addresses" :key="address.id" class="border-b border-gray-200">
-                            <p class="hover:bg-gray-100 p-3" @click="selectAddress(address.address.freeformAddress)">
+                    class="absolute z-10 bg-white w-[500px] rounded-b-lg shadow-lg">
+                    <ul class="w-[500px]">
+                        <li v-for="address in addresses" :key="address.id" class="border-b border-gray-200 w-[500px]">
+                            <p class="hover:bg-gray-100 p-3" @click="selectAddress(address)">
                                 {{ address.address.freeformAddress }}
                             </p>
                         </li>
