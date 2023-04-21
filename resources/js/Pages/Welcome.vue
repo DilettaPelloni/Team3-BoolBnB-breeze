@@ -1,6 +1,7 @@
 <script>
 import AppHeader from "../Components/MyComponents/AppHeader.vue";
 import AppFooter from "../Components/MyComponents/AppFooter.vue";
+import { Head } from '@inertiajs/vue3';
 import { Link } from "@inertiajs/vue3";
 
 export default {
@@ -9,6 +10,7 @@ export default {
         AppHeader,
         AppFooter,
         Link,
+        Head,
     },
     props: {
         canLogin: Boolean,
@@ -19,6 +21,8 @@ export default {
 </script>
 
 <template>
+    <Head title="Home" />
+
     <AppHeader :canLogin="canLogin" :canRegister="canRegister" />
     <div class="container-main pb-[125px]">
         <div

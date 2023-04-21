@@ -7,7 +7,8 @@ export default {
   name: 'Show',
   props: {
     apartment: Object,
-
+    canLogin: Boolean,
+    canRegister: Boolean,
   },
   components: {
     Head,
@@ -18,7 +19,7 @@ export default {
 </script>
 
 <template>
-  <AppHeader />
+  <AppHeader :canLogin="canLogin" :canRegister="canRegister"/>
 
   <Head :title="apartment.title" />
   <div class="main-container">
