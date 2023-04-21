@@ -47,18 +47,6 @@ export default {
         submit() {
             this.newApartment.post(route("gestione-appartamenti.update", this.apartment.id));
         }, //submit
-        // getHint() {
-        //     axios.get('https://api.tomtom.com/search/2/autocomplete/', {
-        //         params: {
-        //             query: this.newApartment.address,
-        //             ext: 'json',
-        //             key: 'waiWTZRECqzNGHIbW83D94YfzNv1Uc1e',
-        //             language: 'it-IT'
-        //         }
-        //     }).then((response) => {
-        //         console.log(response)  
-        //     });//richiesta
-        // }
         getAutocompleteSearch(address) {
             //questa funzione fa una chiamata axios per ottenere i risultati dell'autocomplete
             //in base all'input dell'indirizzo
@@ -69,13 +57,13 @@ export default {
                 .then((resp) => {
                     this.addresses = resp.data.results;
                     this.showAddresses = true;
-                    this.newApartment.latitude = resp.data.results[0].position.lat;
-                    this.newApartment.longitude = resp.data.results[0].position.lon;
                 })
         },//getAutocompleteSearch
         selectAddress(address) {
-            this.newApartment.address = address;
+            this.newApartment.address = address.address.freeformAddress;
             this.showAddresses = false;
+            this.newApartment.latitude = address.position.lat;
+            this.newApartment.longitude = address.position.lon;
         }
     },
     watch: {
@@ -140,9 +128,8 @@ export default {
                         class="absolute z-10 bg-white w-full rounded-b-lg shadow-lg">
                         <ul>
                             <li v-for="address in addresses" :key="address.id" class="border-b border-gray-200">
-                                <p class="hover:bg-gray-100 p-3" @click="selectAddress(address.address.freeformAddress)">
+                                <p class="hover:bg-gray-100 p-3" @click="selectAddress(address)">
                                     {{ address.address.freeformAddress }}
-
                                 </p>
                             </li>
                         </ul>
