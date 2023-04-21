@@ -12,13 +12,7 @@
 <body>
     <div class="container">
         <div class="flex-container">
-            <div class="text">
-        <h1>OOPS...</h1>
-                <h2>La pagina che stai cercando<br>non è più disponibile.</h2>
-                <a href="{{ route('welcome') }}"><button>Torna alla home</button></a>
-
-
-            </div>
+            
 
             <div class="img">
 
@@ -28,6 +22,13 @@
                         class=""
                     />
             </div>
+            <div class="text">
+                <h1>OOPS...</h1>
+                        <h2>La pagina che stai cercando non è disponibile su questo sito<br>oppure non hai digitato l'URL correttamente.</h2>
+                        <a href="{{ route('welcome') }}"><button>Torna alla home</button></a>
+        
+        
+                    </div>
         </div>
     
     
@@ -57,7 +58,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 133px;
+    flex-direction: column;
+    text-align: center;
 }
 
 h1, h2 {
