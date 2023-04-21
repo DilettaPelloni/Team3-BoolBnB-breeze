@@ -46,9 +46,7 @@ Route::post('/messages', [MessagesController::class, 'store'])->name('messages.s
 //PAGINE SOLO PER UTENTI LOGGATI
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource("gestione-appartamenti", ApartmentController::class);
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [ApartmentController::class, 'dashboard'])->name('dashboard');
     Route::get('/messaggi', [ApartmentController::class, 'messages'])->name('messages.index');
 });
 

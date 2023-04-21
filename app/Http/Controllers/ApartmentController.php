@@ -21,6 +21,7 @@ use Illuminate\Validation\Rule;
 //Model
 use App\Models\Service;
 use App\Models\Message;
+use App\Models\View;
 
 class ApartmentController extends Controller
 {
@@ -241,4 +242,20 @@ class ApartmentController extends Controller
             'messages' => $messages,
         ]);
     }
+
+        // GESTIONE DASHBOARD
+        public function dashboard()
+        {
+            $user_firstname = Auth::user()->firstname;
+            $user_id = Auth::user()->id;
+            $views = View::join('apartments', 'views.apartment_id', '=', 'apartments.id')
+                        ->join('users', 'apartments.user_id', '=', 'users.id')
+                        ->where('user_id',$user_id)
+                        ->get();
+
+            return Inertia::render('Dashboard', [
+                'views' => $views,
+                'user_firstname' => $user_firstname,
+            ]);
+        }
 }
