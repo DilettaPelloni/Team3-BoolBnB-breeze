@@ -51,7 +51,10 @@ export default {
                 {{ apartment.title }}
             </h1>
             <span>
-                <font-awesome-icon :icon="['fas', 'location-dot']" />
+                <font-awesome-icon
+                    :icon="['fas', 'location-dot']"
+                    style="color: #fe5b5f"
+                />
                 {{ apartment.address }}
             </span>
         </div>
