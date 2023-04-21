@@ -83,7 +83,10 @@ export default {
     <div class="container-jumbotron">
         <h1 class="text-center">Quale sarà la tua prossima meta?</h1>
         <h2 class="text-center">Scegli subito la tua destinazione!</h2>
-        <button class="button">Cerca la tua meta</button>
+        <Link :href="route('search')">
+            <button class="button">Cerca la tua meta</button>
+        </Link>
+        
     </div>
 </template>
 
