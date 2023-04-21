@@ -33,6 +33,9 @@ Route::get('/', function () {
     ]);
 })->name('welcome');;
 
+//PAGINA SEARCH
+Route::get('/ricerca', [PageController::class, 'search'])->name('search');
+
 //PAGINA APPARTAMENTO
 Route::get('/scopri/{title_slug}', [PageController::class, 'show'])->name('guest_show');
 
@@ -43,7 +46,9 @@ Route::post('/messages', [MessagesController::class, 'store'])->name('messages.s
 //PAGINE SOLO PER UTENTI LOGGATI
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource("gestione-appartamenti", ApartmentController::class);
-    Route::get('/dashboard', function () { return Inertia::render('Dashboard'); })->name('dashboard');
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
     Route::get('/messaggi', [ApartmentController::class, 'messages'])->name('messages.index');
 });
 
@@ -67,4 +72,4 @@ Route::middleware('auth')->group(function () {
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

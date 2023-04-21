@@ -20,11 +20,10 @@ class PageController extends Controller
     public function show($title_slug)
     {
         $apartment = Apartment::where('title_slug', $title_slug)->with('services')->first();
-        
+
         if (Auth::check()) {
             $user_email = Auth::user()->email;
-        }
-        else {
+        } else {
             $user_email = '';
         }
 
@@ -33,6 +32,18 @@ class PageController extends Controller
             'canRegister' => Route::has('register'),
             'apartment' => $apartment,
             'user_email' => $user_email
+        ]);
+    }
+
+    public function search()
+    {
+        $apartments = Apartment::all();
+
+
+        return Inertia::render('Guest/Search', [
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            'apartments' => $apartments,
         ]);
     }
 }
