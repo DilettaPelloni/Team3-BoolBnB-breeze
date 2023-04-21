@@ -19,7 +19,7 @@ const showingNavigationDropdown = ref(false);
                         <div class="flex">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
-                                <Link :href="route('dashboard')" class="block h-[50px]">
+                                <Link :href="route('welcome')" class="block h-[50px]">
                                     <img src="/storage/img/LogoBoolBnB.png" alt="Logo BoolBnB" class="object-contain h-full">
                                 </Link>
                             </div>
