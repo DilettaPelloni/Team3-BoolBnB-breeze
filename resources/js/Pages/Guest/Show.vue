@@ -3,6 +3,7 @@ import { Head } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
 import { useForm } from "@inertiajs/vue3";
 import AppHeader from '../../Components/MyComponents/AppHeader.vue'
+import TomTomMap from '@/Components/MyComponents/TomTomMap.vue';
 
 export default {
   name: 'Show',
@@ -15,7 +16,8 @@ export default {
   components: {
     Head,
     Link,
-    AppHeader
+    AppHeader,
+    TomTomMap,
   },
   data() {
     return {
@@ -144,9 +146,7 @@ export default {
         </form>
       </div>
     </div>
-    <div class="container-map mt-20">
-      mappa dell'appartamento Here
-    </div>
+    <TomTomMap :apartment="apartment" />
   </div>
 </template>
 

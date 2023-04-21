@@ -70,10 +70,10 @@ export default {
           </div>
         </div>
       </div>
-
+      <TomTomMap :apartment="apartment" />
     </div>
 
-  <TomTomMap :apartment="apartment" />
+
 
   </AuthenticatedLayout>
 </template>
