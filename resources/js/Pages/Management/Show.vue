@@ -73,9 +73,9 @@ export default {
 
     </div>
 
-  </AuthenticatedLayout>
-
   <TomTomMap :apartment="apartment" />
+
+  </AuthenticatedLayout>
 </template>
 
 <style scoped lang="scss">
