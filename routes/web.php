@@ -8,6 +8,7 @@ use Inertia\Inertia;
 // Controllers
 use App\Http\Controllers\ApartmentController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\MessagesController;
 
 //Model
 use App\Models\Apartment;
@@ -34,6 +35,10 @@ Route::get('/', function () {
 
 //PAGINA APPARTAMENTO
 Route::get('/scopri/{title_slug}', [PageController::class, 'show'])->name('guest_show');
+
+//IMMAGAZZINARE MESSAGGI
+Route::post('/messages', [MessagesController::class, 'store'])->name('messages.store');
+
 
 //PAGINE SOLO PER UTENTI LOGGATI
 Route::middleware(['auth', 'verified'])->group(function () {

@@ -18,7 +18,7 @@ library.add(faCircleUser, faBars, faCopyright, faLocationDot, faMaximize, faTras
 
 
 
-const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
+const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'BoolBnB';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
