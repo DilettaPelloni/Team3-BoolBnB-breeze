@@ -1,6 +1,7 @@
 <script>
 import { Head } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
+import { useForm } from "@inertiajs/vue3";
 import AppHeader from '../../Components/MyComponents/AppHeader.vue'
 
 export default {
@@ -9,12 +10,32 @@ export default {
     apartment: Object,
     canLogin: Boolean,
     canRegister: Boolean,
+    user_email: String,
   },
   components: {
     Head,
     Link,
     AppHeader
-  }
+  },
+  data() {
+    return {
+      newMessage: useForm({
+        apartmentId: this.apartment.id,
+        content: null,
+        sender_email: this.user_email,
+        sender_name: null,
+      }),
+      okMessage: false,
+    }
+  },//data
+  methods: {
+    submit() {
+      this.newMessage.post(route("messages.store"), {
+        onSuccess: () => this.okMessage = true,
+      });
+      this.newMessage.reset();
+    }, //submit
+  },
 }
 </script>
 
@@ -70,17 +91,56 @@ export default {
         </div>
       </div>
       <div class="container-msg">
-        <h2 class="pb-5">
+        <h2>
           Manda un messaggio
         </h2>
-        <form action="" method="post">
-          <p><label for="name">Nome e Cognome</label></p>
-          <input type="text" name="name" id="name" class="my-4">
-          <p><label for="email">La tua E-Mail</label></p>
-          <input type="text" name="email" id="email" class="my-4">
-          <p><label for="message">Messaggio</label></p>
-          <input type="text" name="message" id="message" class="my-4">
+        <p class="text-sm pb-5">
+          *tutti i campi sono obbligatori
+        </p>
+        <!-- FORM  -->
+        <form @submit.prevent="submit">
+          <!-- SENDER NAME  -->
+          <p><label for="sender_name">Nome e Cognome</label></p>
+          <input
+            type="text"
+            name="sender_name"
+            id="sender_name"
+            class="my-4"
+            v-model="newMessage.sender_name"
+          >
+          <div v-if="newMessage.errors.sender_name" class="text-red-500 text-xs italic">
+              {{ newMessage.errors.sender_name }}
+          </div>
+          <!-- SENDER EMAIL  -->
+          <p><label for="sender_email">La tua E-Mail</label></p>
+          <input
+            type="text"
+            name="sender_email"
+            id="sender_email"
+            class="my-4"
+            v-model="newMessage.sender_email"
+          >
+          <div v-if="newMessage.errors.sender_email" class="text-red-500 text-xs italic">
+              {{ newMessage.errors.sender_email }}
+          </div>
+          <!-- CONTENT  -->
+          <p><label for="content">Messaggio</label></p>
+          <input
+            type="text"
+            name="content"
+            id="content"
+            class="my-4"
+            v-model="newMessage.content"
+          >
+          <div v-if="newMessage.errors.content" class="text-red-500 text-xs italic">
+              {{ newMessage.errors.content }}
+          </div>
+          <!-- BOTTONE -->
           <button type="submit" class="button rounded-full text-white px-4 py-2 mt-8">Invia il messaggio</button>
+          <!-- MESSAGGIO OK -->
+          <p v-if="okMessage">
+            Il tuo messaggio è stato inviato correttamente!
+          </p>
         </form>
       </div>
     </div>
