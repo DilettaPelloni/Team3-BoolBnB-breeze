@@ -22,7 +22,7 @@
             <div class="img">
 
                 <img
-                        src="storage/img/404.png"
+                        src="{{ asset('storage/img/404.png') }}"
                         alt="img404"
                         class=""
                     />
