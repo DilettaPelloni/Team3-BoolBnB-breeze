@@ -110,7 +110,7 @@ export default {
                             <!-- <font-awesome-icon
                                 :icon="['far', 'pen-to-square']"
                             /> -->
-                            <font-awesome-icon :icon="['far', 'trash-can']" />
+                            <font-awesome-icon :icon="['far', 'pen-to-square']" />
                             Modifica
                         </Link>
                         <button
