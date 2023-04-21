@@ -30,7 +30,7 @@ Route::get('/', function () {
         'canRegister' => Route::has('register'),
         'apartments' => Apartment::all(),
     ]);
-});
+})->name('welcome');;
 
 //PAGINA APPARTAMENTO
 Route::get('/scopri/{title_slug}', [PageController::class, 'show'])->name('guest_show');

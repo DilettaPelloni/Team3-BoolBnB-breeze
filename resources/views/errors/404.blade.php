@@ -15,7 +15,7 @@
             <div class="text">
                 <h1>OOPS...<br>Errore 404</h1>
                 <h2>La pagina che stai cercando<br>non è più disponibile.</h2>
-                <button>Torna alla Home</button>
+                <a href="{{ route('welcome') }}"><button>Torna alla home</button></a>
 
             </div>
 
