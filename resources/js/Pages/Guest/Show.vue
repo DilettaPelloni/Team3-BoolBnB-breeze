@@ -203,4 +203,8 @@ h2 {
 span {
     color: rgb(75, 85, 99);
 }
+
+input {
+    border-radius: 50px;
+}
 </style>
