@@ -37,7 +37,7 @@ export default {
                         </div>
                         <div class="mail flex items-center">
                             <font-awesome-icon
-                                :icon="['fas', 'circle-user']"
+                                :icon="['far', 'envelope']"
                                 style="
                                     color: rgb(254 91 95 / 78%);
                                     padding-right: 9px;
