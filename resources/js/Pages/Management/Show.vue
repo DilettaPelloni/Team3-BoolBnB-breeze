@@ -1,5 +1,6 @@
 <script>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import TomTomMap from '@/Components/MyComponents/TomTomMap.vue';
 import { Head } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
 
@@ -11,7 +12,8 @@ export default {
   components: {
     Head,
     AuthenticatedLayout,
-    Link
+    Link,
+    TomTomMap,
   }
 }
 </script>
@@ -30,7 +32,8 @@ export default {
         </span>
       </div>
       <div class="container-img w-full">
-        <img :src="apartment.full_cover_img_path" alt="Cover Image Apartment" class="w-full h-full object-cover max-h-[900px] object-center">
+        <img :src="apartment.full_cover_img_path" alt="Cover Image Apartment"
+          class="w-full h-full object-cover max-h-[900px] object-center">
       </div>
       <div class="container-info-msg flex justify-between mt-20">
         <div class="container-info flex flex-col justify-between border-b-2">
@@ -53,7 +56,7 @@ export default {
             </div>
           </div>
           <div v-else>
-              <span>Nessun Servizio Aggiuntivo Disponibile</span>
+            <span>Nessun Servizio Aggiuntivo Disponibile</span>
           </div>
           <div class="border-y-2 py-5">
             <div>
@@ -67,16 +70,17 @@ export default {
           </div>
         </div>
       </div>
-      <div class="container-map mt-20">
-        mappa dell'appartamento Here
-      </div>
+
     </div>
 
   </AuthenticatedLayout>
+
+  <TomTomMap :apartment="apartment" />
 </template>
 
 <style scoped lang="scss">
 @import "../../../scss/app.scss";
+
 .main-container {
   width: 65%;
   margin: 60px auto;
@@ -90,7 +94,7 @@ h2 {
   font-size: 1.8rem;
 }
 
-span{
+span {
   color: rgb(75, 85, 99);
 }
 </style>
