@@ -13,8 +13,8 @@
     <div class="container">
         <div class="flex-container">
             <div class="text">
-                <h1>OOPS...<br>Errore 404</h1>
-                <h2>La pagina che stai cercando<br>non è più disponibile.</h2>
+                <h1>OOPS...</h1>
+                <h2>La pagina che stai cercando<br>non è disponibile.</h2>
                 <button>Torna alla Home</button>
 
             </div>
@@ -65,7 +65,7 @@ h1, h2 {
 }
 
 h1 {
-    font-size: 88px;
+    font-size: 115px;
     font-weight: bolder;
     color: #fe5b5f;
 }
@@ -83,6 +83,7 @@ button {
     font-family: 'Figtree';
     font-size: 17px;
     cursor: pointer;
+    margin-top: 23px;
 }
 
 button:hover {background-color: #df5759}
