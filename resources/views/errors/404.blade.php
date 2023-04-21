@@ -13,9 +13,10 @@
     <div class="container">
         <div class="flex-container">
             <div class="text">
-                <h1>OOPS...</h1>
-                <h2>La pagina che stai cercando<br>non è disponibile.</h2>
-                <button>Torna alla Home</button>
+        <h1>OOPS...</h1>
+                <h2>La pagina che stai cercando<br>non è più disponibile.</h2>
+                <a href="{{ route('welcome') }}"><button>Torna alla home</button></a>
+
 
             </div>
 
