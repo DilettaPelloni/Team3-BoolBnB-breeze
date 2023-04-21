@@ -71,7 +71,7 @@ export default {
 
 .footer {
     padding-bottom: 40px;
-    background-image: url(storage/img/sfondo-oscurato.jpg);
+
     height: 355px;
     width: 100%;
     background-position: 41% 11%;
