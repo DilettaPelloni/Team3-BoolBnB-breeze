@@ -16,12 +16,23 @@ export default {
     },
     data() {
         return {
-
+            rooms: 1,
+            beds: 1,
+            bathrooms: 1
         };
     },
     methods: {
 
     },
+    computed: {
+        showApartments() {
+            let apartments = this.apartments;
+            apartments = apartments.filter(apartment => apartment.rooms >= this.rooms);
+            apartments = apartments.filter(apartment => apartment.beds >= this.beds);
+            apartments = apartments.filter(apartment => apartment.bathrooms >= this.bathrooms);
+            return apartments;
+        },//showApartments
+    }
 };
 </script>
 
@@ -52,33 +63,21 @@ export default {
                     <div class="flex flex-wrap gap-10">
                         <div class="flex flex-col w-1/3">
                             <label class="mb-2">Filtro per numero di stanze</label>
-                            <select class="rounded-full py-2 px-4 w-full">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
+                            <select class="rounded-full py-2 px-4 w-full" v-model="rooms">
+                                <option v-for="i in 10" :value="i">{{ i }}</option>
                             </select>
                         </div>
 
                         <div class="flex flex-col w-1/3">
                             <label class="mb-2">Filtro per numero di letti</label>
-                            <select class="rounded-full py-2 px-4 w-full">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
+                            <select class="rounded-full py-2 px-4 w-full" v-model="beds">
+                                <option v-for="i in 10" :value="i">{{ i }}</option>
                             </select>
                         </div>
                         <div class="flex flex-col w-1/3">
                             <label class="mb-2">Filtro per numero di bagni</label>
-                            <select class="rounded-full py-2 px-4 w-full">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
+                            <select class="rounded-full py-2 px-4 w-full" v-model="bathrooms">
+                                <option v-for="i in 4" :value="i">{{ i }}</option>
                             </select>
                         </div>
 
@@ -91,13 +90,13 @@ export default {
 
 
             <div class="container-cards grid 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-col-1 gap-10">
-                <div class="card flex flex-col self-end" v-for="apartment in apartments">
+                <div class="card flex flex-col self-end" v-for="apartment in showApartments">
                     <Link :href="route('gestione-appartamenti.show', apartment.id)
                         " class="flex flex-col">
                     <!-- IMMAGINE -->
                     <img :src="apartment.full_cover_img_path" alt="immagine casa" />
                     <!-- CARD INFO -->
-                    <div class="card-info px-4 pt-4 flex flex-col justify-center h-40">
+                    <div class="card-info px-4 pt-4 flex flex-col justify-center ">
                         <span><b>{{ apartment.title }}</b></span>
                         <div class="mt-2 grow flex items-center">
                             <font-awesome-icon :icon="['fas', 'location-dot']" class="me-2" />
@@ -107,6 +106,9 @@ export default {
                             <font-awesome-icon :icon="['fas', 'maximize']" />
                             {{ apartment.size }} m<sup>2</sup>
                         </div>
+                        {{ apartment.rooms }}
+                        {{ apartment.beds }}
+                        {{ apartment.bathrooms }}
                     </div>
                     <!-- CHIUSURA CARD INFO -->
                     </Link>
