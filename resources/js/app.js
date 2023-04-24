@@ -39,6 +39,9 @@ import {
     faEnvelope,
     faMessage,
 } from "@fortawesome/free-regular-svg-icons";
+import {
+    faFacebookF, faInstagram, faPinterestP
+} from '@fortawesome/free-brands-svg-icons'
 library.add(
     faCircleUser,
     faBars,
@@ -48,7 +51,10 @@ library.add(
     faTrashCan,
     faPenToSquare,
     faEnvelope,
-    faMessage
+    faMessage,
+    faFacebookF,
+    faInstagram,
+    faPinterestP
 );
 
 const appName =

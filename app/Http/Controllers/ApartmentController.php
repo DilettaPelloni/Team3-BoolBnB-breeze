@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 //Model
 use App\Models\Service;
@@ -248,6 +249,13 @@ class ApartmentController extends Controller
         {
             $user_firstname = Auth::user()->firstname;
             $user_id = Auth::user()->id;
+
+            $apartments = Apartment::where('user_id',$user_id)->get();
+
+            $viewsPerApartment = View::select(DB::raw('apartment_id, COUNT(*) as total'))
+                        ->groupBy('apartment_id')
+                        ->get();
+
             $views = View::join('apartments', 'views.apartment_id', '=', 'apartments.id')
                         ->join('users', 'apartments.user_id', '=', 'users.id')
                         ->where('user_id',$user_id)
@@ -256,6 +264,8 @@ class ApartmentController extends Controller
             return Inertia::render('Dashboard', [
                 'views' => $views,
                 'user_firstname' => $user_firstname,
+                'apartments' => $apartments,
+                'viewsPerApartment' => $viewsPerApartment,
             ]);
         }
 }

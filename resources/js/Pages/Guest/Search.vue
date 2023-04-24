@@ -4,6 +4,11 @@ import AppFooter from "../../Components/MyComponents/AppFooter.vue";
 import { Head } from "@inertiajs/vue3";
 import { Link } from "@inertiajs/vue3";
 import { useForm } from "@inertiajs/vue3";
+//TOMOTOM MAP
+import Maps from '@tomtom-international/web-sdk-maps';
+import tt from '@tomtom-international/web-sdk-maps';
+import '@tomtom-international/web-sdk-maps/dist/maps.css';
+import '@tomtom-international/web-sdk-services/';
 
 export default {
     name: "Index",
@@ -18,6 +23,8 @@ export default {
         AppFooter,
         Head,
         Link,
+        Maps,
+        tt,
     },
     data() {
         return {
@@ -31,6 +38,8 @@ export default {
             radius: 20,
             addresses: [],
             showAddresses: false,
+            map:null,
+            zoom: 10,
         };
     },
     methods: {
@@ -88,6 +97,30 @@ export default {
 
             //filtro per coordinate
             if(this.centerAddress) {
+                //determino lo zoom in base al raggio
+                if(this.radius <= 20) {
+                    this.zoom = 10;
+                }
+                else if((this.radius > 20) && (this.radius < 50)) {
+                    this.zoom = 9;
+                }
+                else if((this.radius >= 50) && (this.radius < 125)) {
+                    this.zoom = 8;
+                }
+                else {
+                    this.zoom = 7;
+                }
+                
+                //creo la mappa cha ha come centro l'indirizzo inserito dall'utente
+                const mapElement = document.getElementById("map");
+                const map = tt.map({
+                    key: "waiWTZRECqzNGHIbW83D94YfzNv1Uc1e",
+                    container: mapElement,
+                    center: [this.centerLongitude, this.centerLatitude],
+                    zoom: this.zoom,
+                });
+
+                //filtro gli appartamenti in base al raggio, se rientrano metto un marker
                 apartments = apartments.filter((apartment)=> {
                     const R = 6371e3; // metres
                     const φ1 = this.centerLatitude * Math.PI/180; // φ, λ in radians
@@ -101,10 +134,11 @@ export default {
                     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 
                     const d = R * c; // in metres
-
-                    console.log(d);
                     
                     if(d <= (this.radius * 1000)) {
+                        new tt.Marker()
+                        .setLngLat([apartment.longitude, apartment.latitude])
+                        .addTo(map);
                         return true;
                     }
                     return false;
@@ -117,7 +151,16 @@ export default {
         addressInput() {
             this.getAutocompleteSearch(this.addressInput);
         },
-    }//watch
+    },//watch
+    mounted() {
+        const mapElement = document.getElementById("map");
+        const map = tt.map({
+            key: "waiWTZRECqzNGHIbW83D94YfzNv1Uc1e",
+            container: mapElement,
+            center: [12.4963655, 41.9027835],
+            zoom: 15,
+        });
+    }//mounted
 };
 </script>
 
@@ -246,16 +289,19 @@ export default {
                 </div>
                 <!-- CHIUSURA CARD INFO -->
                 </Link>
-
-
             </div>
             <!-- CHIUSURA CARD -->
         </div>
         <!-- CHIUSURA CONTAINER CARDS -->
 
+        <!-- MAPPA -->
+        <div class="w-full ">
+            <div v-if="centerAddress">
+                <div id="map" class="h-96 "></div>
+            </div>
+        </div>
 
-    </div>
-    <!-- CHIUSURA CONTAINER -->
+    </div><!-- CHIUSURA CONTAINER -->
     <AppFooter />
 </template>
 

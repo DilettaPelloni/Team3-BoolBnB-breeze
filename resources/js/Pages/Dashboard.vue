@@ -1,4 +1,4 @@
-<script >
+<script>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
 
@@ -11,6 +11,7 @@ export default {
     props: {
         views: Array,
         user_firstname: String,
+        viewsPerApartment: Array,
     },
     components: {
         Head,
@@ -19,8 +20,9 @@ export default {
     },
     data() {
         return {
+            titleArr: [],
             chartData: {
-                labels: [this.views[0].title],
+                labels: ['prova1', 'prova2', 'prova3'],
                 datasets: [
                     {
                         label: 'Visualizzazioni Totali ',
@@ -30,7 +32,14 @@ export default {
                 ]
             }
         }
-    }
+    },
+    // mounted() {
+    //     for (let i = 0; i < (this.views.length -1); i++) {
+
+    //         dove.push(cosa)           
+    //     }
+    //     console.log() 
+    // }
 }
 
 
@@ -53,6 +62,7 @@ export default {
                 </div>
             </div>
         </div>
+        {{ viewsPerApartment }}
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -66,10 +76,32 @@ export default {
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
-                        Sponsor belle belle here
+                        <button class="button rounded-full text-white px-4 py-2"><a href="">Sponsorizza un
+                                appartamento</a></button>
+                    </div>
+                    <div class="p-6 text-gray-900 flex justify-between">
+                        <div>
+                            nome appartamento
+                        </div>
+                        <div class="flex">
+                            <div class="pr-3">
+                                sponsor attiva/scaduta
+                            </div>
+                            <div>
+                                data scadenza / v-if rinnova btn
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </AuthenticatedLayout>
 </template>
+
+<style lang="scss">
+@import "../../scss/app.scss";
+
+.button {
+    background-color: $main-color;
+}
+</style>
