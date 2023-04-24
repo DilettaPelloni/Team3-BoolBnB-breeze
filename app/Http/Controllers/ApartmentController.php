@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Service;
 use App\Models\Message;
 use App\Models\View;
+use App\Models\Sponsorship;
 
 class ApartmentController extends Controller
 {
@@ -266,6 +267,19 @@ class ApartmentController extends Controller
                 'user_firstname' => $user_firstname,
                 'apartments' => $apartments,
                 'viewsPerApartment' => $viewsPerApartment,
+            ]);
+        }
+
+        // PAGINA SPONSORIZZAZIONI
+        public function sponsorship()
+        {
+            $user_id = Auth::user()->id;
+            $sponsorships = Sponsorship::all();
+            $apartments = Apartment::where('user_id',$user_id)->with('sponsorships')->get();
+
+            return Inertia::render('Management/Sponsorship', [
+                'sponsorships' => $sponsorships,
+                'apartments' => $apartments,
             ]);
         }
 }

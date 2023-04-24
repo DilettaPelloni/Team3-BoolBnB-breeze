@@ -35,6 +35,9 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('messages.index')" :active="route().current('messages.index')">
                                     Messaggi ricevuti
                                 </NavLink>
+                                <NavLink :href="route('sponsorship')" :active="route().current('sponsorship')">
+                                    Sponsorizzazioni
+                                </NavLink>
                             </div>
                         </div>
 
