@@ -51,7 +51,7 @@ export default {
               Servizi inclusi
             </h2>
             <div v-for="service in apartment.services" class="py-3">
-              <span>{{ service.icon }}</span>
+              <span><font-awesome-icon :icon="['fas', service.icon]" /></span>
               <span>{{ service.name }}</span>
             </div>
           </div>

@@ -51,24 +51,16 @@ export default {
                 {{ apartment.title }}
             </h1>
             <span>
-                <font-awesome-icon
-                    :icon="['fas', 'location-dot']"
-                    style="color: #fe5b5f"
-                />
+                <font-awesome-icon :icon="['fas', 'location-dot']" style="color: #fe5b5f" />
                 {{ apartment.address }}
             </span>
         </div>
         <div class="container-img w-full">
-            <img
-                :src="apartment.full_cover_img_path"
-                alt="Cover Image Apartment"
-                class="w-full h-full object-cover max-h-[900px] object-center"
-            />
+            <img :src="apartment.full_cover_img_path" alt="Cover Image Apartment"
+                class="w-full h-full object-cover max-h-[900px] object-center" />
         </div>
         <div class="container-info-msg flex justify-between mt-20 mb-[65px]">
-            <div
-                class="container-info flex flex-col justify-between border-b-2"
-            >
+            <div class="container-info flex flex-col justify-between border-b-2">
                 <div class="border-b-2 pb-5">
                     <h2 class="pb-2">
                         {{ apartment.title }}
@@ -81,7 +73,7 @@ export default {
                 <div v-if="apartment.services.length > 0">
                     <h2 class="pt-5">Servizi inclusi</h2>
                     <div v-for="service in apartment.services" class="py-3">
-                        <span>{{ service.icon }}</span>
+                        <span><font-awesome-icon :icon="['fas', service.icon]" /></span>
                         <span>{{ service.name }}</span>
                     </div>
                 </div>
@@ -104,54 +96,25 @@ export default {
                 <form @submit.prevent="submit">
                     <!-- SENDER NAME  -->
                     <p><label for="sender_name">Nome e Cognome</label></p>
-                    <input
-                        type="text"
-                        name="sender_name"
-                        id="sender_name"
-                        class="my-4"
-                        v-model="newMessage.sender_name"
-                    />
-                    <div
-                        v-if="newMessage.errors.sender_name"
-                        class="text-red-500 text-xs italic"
-                    >
+                    <input type="text" name="sender_name" id="sender_name" class="my-4" v-model="newMessage.sender_name" />
+                    <div v-if="newMessage.errors.sender_name" class="text-red-500 text-xs italic">
                         {{ newMessage.errors.sender_name }}
                     </div>
                     <!-- SENDER EMAIL  -->
                     <p><label for="sender_email">La tua E-Mail</label></p>
-                    <input
-                        type="text"
-                        name="sender_email"
-                        id="sender_email"
-                        class="my-4"
-                        v-model="newMessage.sender_email"
-                    />
-                    <div
-                        v-if="newMessage.errors.sender_email"
-                        class="text-red-500 text-xs italic"
-                    >
+                    <input type="text" name="sender_email" id="sender_email" class="my-4"
+                        v-model="newMessage.sender_email" />
+                    <div v-if="newMessage.errors.sender_email" class="text-red-500 text-xs italic">
                         {{ newMessage.errors.sender_email }}
                     </div>
                     <!-- CONTENT  -->
                     <p><label for="content">Messaggio</label></p>
-                    <input
-                        type="text"
-                        name="content"
-                        id="content"
-                        class="my-4"
-                        v-model="newMessage.content"
-                    />
-                    <div
-                        v-if="newMessage.errors.content"
-                        class="text-red-500 text-xs italic"
-                    >
+                    <input type="text" name="content" id="content" class="my-4" v-model="newMessage.content" />
+                    <div v-if="newMessage.errors.content" class="text-red-500 text-xs italic">
                         {{ newMessage.errors.content }}
                     </div>
                     <!-- BOTTONE -->
-                    <button
-                        type="submit"
-                        class="button rounded-full text-white px-4 py-2 mt-8"
-                    >
+                    <button type="submit" class="button rounded-full text-white px-4 py-2 mt-8">
                         Invia il messaggio
                     </button>
                     <!-- MESSAGGIO OK -->
@@ -174,6 +137,7 @@ export default {
     gap: 15px;
     padding: 40px 0px;
 }
+
 .main-container {
     width: 65%;
     margin: 60px auto;

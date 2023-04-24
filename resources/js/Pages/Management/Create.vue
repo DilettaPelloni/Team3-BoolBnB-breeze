@@ -96,8 +96,8 @@ export default {
             <!-- ----------------------DESCRIPTION---------------------- -->
             <div class="mb-3">
                 <label for="description" class="block text-gray-700 font-bold mb-2 text-lg">Descrizione</label>
-            <textarea v-model="newApartment.description" rows="10" id="description" name="description"
-                placeholder="Inserisci una descrizione per la tua abitazione..." maxlength="3000"
+                <textarea v-model="newApartment.description" rows="10" id="description" name="description"
+                    placeholder="Inserisci una descrizione per la tua abitazione..." maxlength="3000"
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
                 <div v-if="newApartment.errors.description" class="text-red-500 text-xs italic">
                     {{ newApartment.errors.description }}
@@ -218,7 +218,7 @@ export default {
                             <span class="inline-block font-bold">{{
                                 service.name
                             }}</span>
-                            {{ service.icon }}
+                            <span><font-awesome-icon :icon="['fas', service.icon]" /></span>
                         </label>
                         <input @click="pushService(service.id)" type="checkbox" :id="service.id" :name="service.id"
                             :value="service.id" class="mx-2" />
