@@ -1,6 +1,7 @@
 <script>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/vue3';
 
 import { Bar } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
@@ -17,6 +18,7 @@ export default {
         Head,
         AuthenticatedLayout,
         Bar,
+        Link,
     },
     data() {
         return {
@@ -76,8 +78,9 @@ export default {
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
-                        <button class="button rounded-full text-white px-4 py-2"><a href="">Sponsorizza un
-                                appartamento</a></button>
+                        <button class="button rounded-full text-white px-4 py-2">
+                            <Link :href="route('sponsorship')">Sponsorizza un appartamento</Link>
+                        </button>
                     </div>
                     <div class="p-6 text-gray-900 flex justify-between">
                         <div>
