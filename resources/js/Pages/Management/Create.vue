@@ -375,6 +375,7 @@ export default {
                             :name="service.id"
                             :value="service.id"
                             class="inline-flex mx-2 align-middle"
+                            style="align-self: center"
                         />
                     </template>
                 </div>
