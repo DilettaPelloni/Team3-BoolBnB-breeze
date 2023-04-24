@@ -35,6 +35,7 @@ Route::get('/', function () {
 
 //PAGINA SEARCH
 Route::get('/ricerca', [PageController::class, 'search'])->name('search');
+Route::post('/ricerca', [PageController::class, 'apartmentSearch'])->name('apartmentSearch');
 
 //PAGINA APPARTAMENTO
 Route::get('/scopri/{title_slug}', [PageController::class, 'show'])->name('guest_show');

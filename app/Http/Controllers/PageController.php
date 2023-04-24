@@ -44,8 +44,43 @@ class PageController extends Controller
         return Inertia::render('Guest/Search', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
-            'apartments' => $apartments,
+            'apartments' => null,
             'services' => $services,
         ]);
     }
+
+    public function apartmentSearch(Request $request)
+    {   
+        //prendo i dati
+        $data = $request->all();
+        $address = $data['completeAddress'];
+        $radius = $data['radius'];
+        $lat = null;
+        $lon = null;
+        $error = null;
+
+        if ($address) {
+        
+            $lat = $address['position']['lat'];
+            $lon = $address['position']['lon'];
+
+            $apartments = Apartment::selectRaw('*, ( 6371 * acos( cos( radians(?) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude) ) ) ) AS distance', [$lat, $lon, $lat])
+                        ->having('distance', '<=', $radius)->get();
+        }
+        else {
+            $apartments = null;
+            $error = 'Non è stato dato un indirizzo';
+        }
+
+        $services = Service::all();
+        
+        return Inertia::render('Guest/Search', [
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            'apartments' => $apartments,
+            'services' => $services,
+            'error' => $error,
+        ]);
+    }
+    
 }
