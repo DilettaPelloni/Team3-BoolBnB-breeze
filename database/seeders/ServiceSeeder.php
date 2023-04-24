@@ -20,55 +20,55 @@ class ServiceSeeder extends Seeder
         $services = [
             [
                 "name" => 'Wi-Fi',
-                "icon" => 'icona-wifi'
+                "icon" => 'wifi'
             ],
             [
                 "name" => 'Lavatrice',
-                "icon" => 'icona-lavatrice'
+                "icon" => 'soap'
             ],
             [
                 "name" => 'Cucina',
-                "icon" => 'icona-cucina'
+                "icon" => 'kitchen-set',
             ],
             [
                 "name" => 'Aria Condizionata',
-                "icon" => 'icona-AriaCondizionata'
+                "icon" => 'fan'
             ],
             [
                 "name" => 'TV',
-                "icon" => 'icona-TV'
+                "icon" => 'tv'
             ],
             [
                 "name" => 'Piscina',
-                "icon" => 'icona-piscina'
+                "icon" => 'person-swimming'
             ],
             [
                 "name" => 'Parcheggio',
-                "icon" => 'icona-Parcheggio'
+                "icon" => 'square-parking',
             ],
             [
                 "name" => 'Asciugacapelli',
-                "icon" => 'icona-Asciugacapelli'
+                "icon" => 'wind'
             ],
             [
                 "name" => 'Ferro da Stiro',
-                "icon" => 'icona-ferroDaStiro'
+                "icon" => 'shirt'
             ],
             [
                 "name" => 'Ricarica veicoli elettrici',
-                "icon" => 'icona-ricaricaVeicoli'
+                "icon" => 'car-battery'
             ],
             [
                 "name" => 'Frigorifero',
-                "icon" => 'icona-Frigorifero'
+                "icon" => 'snowflake'
             ],
             [
                 "name" => 'Bollitore',
-                "icon" => 'icona-Bollitore'
+                "icon" => 'mug-hot'
             ],
             [
                 "name" => 'Idromassaggio',
-                "icon" => 'icona-idromassaggio'
+                "icon" => 'bath'
             ],
         ];
 
