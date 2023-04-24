@@ -1,5 +1,6 @@
 <script>
 import { Link } from "@inertiajs/vue3";
+
 export default {
     name: "AppHeader",
     components: {
@@ -27,11 +28,13 @@ export default {
         class="container-header flex justify-between items-center py-[5px] px-[185px] 2xl:flex-row xl:flex-row lg:flex-row md:flex-col sm:flex-col"
     >
         <div class="container-img h-[50px] w-[250px]">
-            <img
-                src="/img/LogoBoolBnB.png"
-                alt="Logo BoolBnB"
-                class="object-contain h-full"
-            />
+            <Link :href="route('welcome')">
+                <img
+                    src="/img/LogoBoolBnB.png"
+                    alt="Logo BoolBnB"
+                    class="object-contain h-full"
+                />
+            </Link>
         </div>
         <div class="flex flex-col">
             <div class="container-login ml-5 relative">
