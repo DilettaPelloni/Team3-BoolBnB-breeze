@@ -70,6 +70,58 @@ class ServiceSeeder extends Seeder
                 "name" => 'Idromassaggio',
                 "icon" => 'bath'
             ],
+            [
+                "name" => 'Cassaforte',
+                "icon" => 'vault',
+            ],
+            [
+                "name" => 'Accessori Cucina',
+                "icon" => 'utensils',
+            ],
+            [
+                "name" => 'Biciclette',
+                "icon" => 'bicycle',
+            ],
+            [
+                "name" => 'Animali domestici',
+                "icon" => 'dog',
+            ],
+            [
+                "name" => 'Vista panoramica',
+                "icon" => 'mountain',
+            ],
+            [
+                "name" => 'Riscaldamento', 
+                "icon" => 'temperature-quarter',
+            ],
+            [
+                "name" => 'Possibilità di escursioni',
+                "icon" => 'person-hiking',
+            ],
+            [
+                "name" => 'Biancheria da letto',
+                "icon" => 'bed',
+            ],
+            [
+                "name" => 'Tavolo da gioco',
+                "icon" => 'table-tennis-paddle-ball',
+            ],
+            [
+                "name" => 'Accesso alla spiaggia',
+                "icon" => 'umbrella-beach',
+            ],
+            [
+                "name" => 'Area fumatori',
+                "icon" => 'smoking',
+            ],
+            [
+                "name" => 'Self check-in',
+                "icon" => 'key',
+            ],
+            [
+                "name" => 'Telecamere di sicurezza',
+                "icon" => 'eye', 
+            ],
         ];
 
         foreach ($services as $service) {
