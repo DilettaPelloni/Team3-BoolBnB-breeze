@@ -122,7 +122,8 @@ export default {
     background-color: #fe5b5f;
     border-radius: 50px;
     position: relative;
-    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
 }
 
 .social-icon {
