@@ -352,6 +352,7 @@ export default {
                 </p>
                 <div
                     class="grid 2xl:grid-cols-6 xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-30"
+                    style="grid-row-gap: 20px"
                 >
                     <template v-for="service in services">
                         <label :for="service.id" class="mr-2 align-middle">
