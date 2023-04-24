@@ -26,10 +26,10 @@ export default {
                             Opening hours: Mon - Sat: 9 AM - 6 PM
                         </p>
                     </div>
-                    <div class="socialIcon">
-                        <font-awesome-icon :icon="['fab', 'facebook-f']" />
-                        <font-awesome-icon :icon="['fab', 'instagram']" />
-                        <font-awesome-icon :icon="['fab', 'pinterest-p']" />
+                    <div class="socialIcon text-white">
+                        <font-awesome-icon :icon="['fab', 'facebook-f']" size="lg" class="pr-4"/>
+                        <font-awesome-icon :icon="['fab', 'instagram']" size="lg" class="pr-4"/>
+                        <font-awesome-icon :icon="['fab', 'pinterest-p']" size="lg"/>
                     </div>
                 </div>
                 <div class="contact text-center">
