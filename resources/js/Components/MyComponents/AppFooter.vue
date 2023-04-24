@@ -27,9 +27,19 @@ export default {
                         </p>
                     </div>
                     <div class="socialIcon">
-                        <font-awesome-icon :icon="['fab', 'facebook-f']" />
-                        <font-awesome-icon :icon="['fab', 'instagram']" />
-                        <font-awesome-icon :icon="['fab', 'pinterest-p']" />
+                        <div class="cont-icon">
+                            <font-awesome-icon
+                                class="social-icon"
+                                :icon="['fab', 'facebook-f']"
+                            />
+                        </div>
+
+                        <div class="cont-icon">
+                            <font-awesome-icon
+                                class="social-icon"
+                                :icon="['fab', 'instagram']"
+                            />
+                        </div>
                     </div>
                 </div>
                 <div class="contact text-center">
@@ -106,15 +116,48 @@ export default {
     flex: 1;
 }
 
+.cont-icon {
+    width: 27px;
+    height: 27px;
+    background-color: #fe5b5f;
+    border-radius: 50px;
+    position: relative;
+    margin-left: 10px;
+}
+
+.social-icon {
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.socialIcon {
+    display: flex;
+    flex-direction: row;
+}
 @media (max-width: 768px) {
     .logo img {
         margin: auto;
     }
 
     .contact {
-        background-color: #ffeeee;
         padding-bottom: 59px;
         margin-top: 36px;
+    }
+
+    .footer {
+        height: auto;
+    }
+
+    .socialIcon {
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .linkUtili {
+        text-align: center;
     }
 }
 </style>

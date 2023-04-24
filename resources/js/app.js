@@ -16,6 +16,22 @@ import {
     faLocationDot,
     faMaximize,
 } from "@fortawesome/free-solid-svg-icons";
+import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
+import { faInstagram } from "@fortawesome/free-brands-svg-icons";
+
+library.add(
+    faCircleUser,
+    faBars,
+    faLocationDot,
+    faMaximize,
+    faTrashCan,
+    faPenToSquare,
+    faEnvelope,
+    faMessage,
+    faFacebookF,
+    faInstagram
+);
+
 import {
     faCopyright,
     faTrashCan,
