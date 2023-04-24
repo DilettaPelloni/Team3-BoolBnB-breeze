@@ -13,6 +13,14 @@ export default {
         AuthenticatedLayout,
         Link,
     },
+    data() {
+        return {
+            apartmentTitle: "",
+        };
+    },
+    created() {
+        this.apartmentTitle = this.messages[0].title; // Il primo messaggio nell'array contiene il titolo dell'appartamento
+    },
 };
 </script>
 
@@ -21,6 +29,11 @@ export default {
 
     <AuthenticatedLayout>
         <div class="main-container">
+            <h2 class="pb-2 text-center">
+                {{ apartmentTitle }}
+            </h2>
+            <!-- <img :src="apartment.full_cover_img_path" /> -->
+
             <h1>I messaggi dell'appartamento:</h1>
             <ul>
                 <li v-for="message in messages">
@@ -45,6 +58,16 @@ export default {
                             />
                             <p><b>Email: </b>{{ message.sender_email }}</p>
                         </div>
+                        <div class="mail flex items-center">
+                            <font-awesome-icon
+                                :icon="['far', 'message']"
+                                style="
+                                    color: rgb(254 91 95 / 78%);
+                                    padding-right: 9px;
+                                "
+                            />
+                            <p><b>Messaggio: </b>{{ message.content }}</p>
+                        </div>
                     </div>
                 </li>
             </ul>
@@ -56,12 +79,17 @@ export default {
 @import "../../../scss/app.scss";
 .main-container {
     width: 65%;
-    margin: 60px auto;
+    margin: 60px auto 0px auto;
+    padding-bottom: 100px;
 }
 
 h1 {
+    font-size: 25px;
+    padding: 50px 0px 0px 0px;
+}
+
+h2 {
     font-size: 35px;
-    padding: 50px 0px;
 }
 
 .utente {

@@ -21,6 +21,7 @@ import {
     faTrashCan,
     faPenToSquare,
     faEnvelope,
+    faMessage,
 } from "@fortawesome/free-regular-svg-icons";
 library.add(
     faCircleUser,
@@ -30,7 +31,8 @@ library.add(
     faMaximize,
     faTrashCan,
     faPenToSquare,
-    faEnvelope
+    faEnvelope,
+    faMessage
 );
 
 const appName =
