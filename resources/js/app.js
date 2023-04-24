@@ -16,21 +16,6 @@ import {
     faLocationDot,
     faMaximize,
 } from "@fortawesome/free-solid-svg-icons";
-import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
-import { faInstagram } from "@fortawesome/free-brands-svg-icons";
-
-library.add(
-    faCircleUser,
-    faBars,
-    faLocationDot,
-    faMaximize,
-    faTrashCan,
-    faPenToSquare,
-    faEnvelope,
-    faMessage,
-    faFacebookF,
-    faInstagram
-);
 
 import {
     faCopyright,
@@ -39,9 +24,8 @@ import {
     faEnvelope,
     faMessage,
 } from "@fortawesome/free-regular-svg-icons";
-import {
-    faFacebookF, faInstagram, faPinterestP
-} from '@fortawesome/free-brands-svg-icons'
+
+import { faFacebookF, faInstagram } from "@fortawesome/free-brands-svg-icons";
 library.add(
     faCircleUser,
     faBars,
@@ -53,8 +37,7 @@ library.add(
     faEnvelope,
     faMessage,
     faFacebookF,
-    faInstagram,
-    faPinterestP
+    faInstagram
 );
 
 const appName =
