@@ -96,4 +96,14 @@ h2 {
     padding: 50px 0px;
     border-bottom: 1px solid #fe5b5f;
 }
+
+ul {
+    overflow-y: auto;
+    height: 60vh;
+    margin: 70px 0px;
+}
+
+li {
+    padding-right: 50px;
+}
 </style>
