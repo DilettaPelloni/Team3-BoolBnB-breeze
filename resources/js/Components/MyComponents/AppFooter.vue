@@ -116,6 +116,11 @@ export default {
     position: relative;
     margin-right: 10px;
     cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.cont-icon:hover {
+    transform: scale(1.8);
 }
 
 .social-icon {
