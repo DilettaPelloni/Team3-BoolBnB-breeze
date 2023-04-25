@@ -356,7 +356,7 @@ export default {
                 >
                     <template v-for="service in services">
                         <label :for="service.id" class="mr-2 align-middle">
-                            <span class="inline-block width: 55px;"
+                            <span class="inline-block" style="width: 55px"
                                 ><font-awesome-icon
                                     :icon="['fas', service.icon]"
                                     class="text-red-500 h-5 ml-1"
