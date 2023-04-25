@@ -161,8 +161,8 @@ export default {
                     </button>
                     <!-- MESSAGGIO OK -->
                     <div class="messaggioInviato" v-if="okMessage">
-                        <p>Il tuo messaggio è stato inviato correttamente!</p>
-                        <img src="img/mailSent.png" />
+                        <p>Messaggio inviato correttamente!</p>
+                        <img src="/img/mailSent.png" style="height: 41px" />
                     </div>
                 </form>
             </div>
