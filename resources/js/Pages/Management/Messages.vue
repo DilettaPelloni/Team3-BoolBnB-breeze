@@ -48,7 +48,7 @@ export default {
                             />
                             <p><b>Nome: </b>{{ message.sender_name }}</p>
                         </div>
-                        <div class="mail flex items-center">
+                        <div class="mail flex items-center mb-[3px]">
                             <font-awesome-icon
                                 :icon="['far', 'envelope']"
                                 style="
