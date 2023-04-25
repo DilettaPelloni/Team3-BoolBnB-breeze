@@ -24,119 +24,77 @@ const submit = () => {
 
 <template>
     <GuestLayout>
+
         <Head title="Register" />
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="firstname" value="firstname" />
+                <InputLabel for="firstname" value="Nome" />
 
-                <TextInput
-                    id="firstname"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.firstname"
-                    autofocus
-                    autocomplete="firstname"
-                />
+                <TextInput id="firstname" type="text" class="mt-1 block w-full" v-model="form.firstname" autofocus
+                    autocomplete="firstname" />
 
                 <InputError class="mt-2" :message="form.errors.firstname" />
             </div>
 
             <div class="mt-4">
-                <InputLabel for="surname" value="surname" />
+                <InputLabel for="surname" value="Cognome" />
 
-                <TextInput
-                    id="surname"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.surname"
-                    autofocus
-                    autocomplete="surname"
-                />
+                <TextInput id="surname" type="text" class="mt-1 block w-full" v-model="form.surname" autofocus
+                    autocomplete="surname" />
 
                 <InputError class="mt-2" :message="form.errors.surname" />
             </div>
 
             <div class="mt-4">
-                <InputLabel for="birthday" value="birthday" />
+                <InputLabel for="birthday" value="Data di Nascita" />
 
-                <TextInput
-                    id="birthday"
-                    type="date"
-                    class="mt-1 block w-full"
-                    v-model="form.birthday"
-                    autofocus
-                    autocomplete="birthday"
-                />
+                <TextInput id="birthday" type="date" class="mt-1 block w-full" v-model="form.birthday" autofocus
+                    autocomplete="birthday" />
 
                 <InputError class="mt-2" :message="form.errors.birthday" />
             </div>
 
             <div class="mt-4">
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email" value="Email*" />
 
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autocomplete="username"
-                />
+                <TextInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required
+                    autocomplete="username" />
 
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+                <InputLabel for="password" value="Password*" />
 
-                <TextInput
-                    id="password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password"
-                    required
-                    autocomplete="new-password"
-                />
+                <TextInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required
+                    autocomplete="new-password" />
 
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
             <div class="mt-4">
-                <InputLabel
-                    for="password_confirmation"
-                    value="Confirm Password"
-                />
+                <InputLabel for="password_confirmation" value="Conferma Password*" />
 
-                <TextInput
-                    id="password_confirmation"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password_confirmation"
-                    required
-                    autocomplete="new-password"
-                />
+                <TextInput id="password_confirmation" type="password" class="mt-1 block w-full"
+                    v-model="form.password_confirmation" required autocomplete="new-password" />
 
-                <InputError
-                    class="mt-2"
-                    :message="form.errors.password_confirmation"
-                />
+                <InputError class="mt-2" :message="form.errors.password_confirmation" />
             </div>
 
-            <div class="flex flex-col items-center justify-end mt-4">
+            <p class="text-sm mt-2">*Tutti i campi contrassegnati con l'asterisco sono obbligatori</p>
+
+
+            <div class="flex flex-col items-center justify-end mt-3">
                 <PrimaryButton
                     class="rounded-e-full rounded-s-full flex pink items-center justify-center w-40 px-4 py-2 mt-4 text-sm font-medium text-white transition duration-150 ease-in-out border border-transparent rounded-md group focus:outline-none focus:shadow-outline-pink disabled:opacity-50"
-                    :class="{ 'opacity-25': form.processing }"
-                    :disabled="form.processing"
-                >
-                    Register
+                    :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Registrati
                 </PrimaryButton>
 
-                <Link
-                    :href="route('login')"
-                    class="mt-4 text-pink underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                    Already registered?
+                <Link :href="route('login')"
+                    class="mt-4 text-pink underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Già registrato?
                 </Link>
             </div>
         </form>
@@ -168,8 +126,7 @@ const submit = () => {
 textarea:focus,
 select:focus {
     --tw-ring-color: #fe5b5f;
-    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
-        calc(1px + var(--tw-ring-offset-width)) rgb(254 91 95);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) rgb(254 91 95);
     border-color: #fe5b5f;
 }
 </style>
