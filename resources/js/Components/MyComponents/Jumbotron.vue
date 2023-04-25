@@ -5,7 +5,7 @@ export default {
     components: {
         Link,
     },
-}
+};
 </script>
 
 <template>
@@ -15,8 +15,12 @@ export default {
             <source src="/img/sfondo.mp4" type="video/mp4" />
         </video>
         <!-- fine video -->
-        <h1 class="text-center text-white text-[53px]">Quale sarà la tua prossima meta?</h1>
-        <h2 class="text-center text-white text-[20px]">Scegli subito la tua destinazione!</h2>
+        <h1 class="text-center text-white text-[53px]">
+            Quale sarà la tua prossima meta?
+        </h1>
+        <h2 class="text-center text-white text-[20px]">
+            Scegli subito la tua destinazione!
+        </h2>
         <Link :href="route('search')">
             <button class="button">Cerca la tua meta</button>
         </Link>
@@ -24,13 +28,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.button {
-    background-color: #fe5b5f;
-    padding: 10px 25px;
-    color: #fff;
-    border-radius: 50px;
-    cursor: pointer;
-}
 .video-bg {
     position: absolute;
     top: 0;
@@ -55,5 +52,28 @@ export default {
     align-items: center;
 
     position: relative;
+}
+
+/* bottone */
+button {
+    padding: 11px 20px;
+    border-radius: 50px;
+    border: none;
+    background-color: #fe5b5f;
+    color: #fff;
+    font-family: "Figtree";
+    font-size: 17px;
+    cursor: pointer;
+    margin-top: 40px;
+}
+
+button:hover {
+    background-color: #fd4e4e;
+}
+
+button:active {
+    background-color: #fc9aa1 !important;
+    box-shadow: 0 5px #dd5b5f;
+    transform: translateY(4px);
 }
 </style>

@@ -48,7 +48,7 @@ export default {
                             />
                             <p><b>Nome: </b>{{ message.sender_name }}</p>
                         </div>
-                        <div class="mail flex items-center">
+                        <div class="mail flex items-center mb-[3px]">
                             <font-awesome-icon
                                 :icon="['far', 'envelope']"
                                 style="
@@ -58,7 +58,7 @@ export default {
                             />
                             <p><b>Email: </b>{{ message.sender_email }}</p>
                         </div>
-                        <div class="mail flex items-center">
+                        <div class="mail flex" style="align-items: baseline">
                             <font-awesome-icon
                                 :icon="['far', 'message']"
                                 style="
@@ -95,5 +95,15 @@ h2 {
 .utente {
     padding: 50px 0px;
     border-bottom: 1px solid #fe5b5f;
+}
+
+ul {
+    overflow-y: auto;
+    height: 60vh;
+    margin: 70px 0px;
+}
+
+li {
+    padding-right: 50px;
 }
 </style>
