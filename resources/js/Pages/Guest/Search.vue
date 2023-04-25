@@ -18,7 +18,6 @@ export default {
         services: Array,
         canLogin: Boolean,
         canRegister: Boolean,
-        error: String //contiene un errore se non viene passato un indirizzo quando si fa la ricerca
     },
     components: {
         AppHeader,
@@ -32,15 +31,21 @@ export default {
         return {
             searchForm: useForm({
                 radius: 20,  //raggio di ricerca
-                completeAddress: null //qua va l'indirizzo completo di tutte le sue info preso da TomTom
+                completeAddress: null, //qua va l'indirizzo completo di tutte le sue info preso da TomTom
+                filters: {
+                    rooms: 1, //numero minimo di stanze
+                    beds: 1, //numero minimo di letti
+                    services: [], //servizi richiesti
+                }
             }),
             addressInput: '', //v-model dell'input indirizzo
             addresses: [], //qui vengono messi gli indirizzi suggeriti
             showAddresses: false, //determina se sono visibili gli indirizzi suggeriti
             zoom: 10, //determina lo zoom della mappa
-            rooms: 1,
-            beds: 1,
-            activeServices: [],
+            error: null, //contiene messaggio d'errore
+            showFilters: false, //determina se sono visibili i filtri
+            filterButton: 'Mostra più filtri', //contenuto del bottone che toggola i filtri
+            noResult: false, //mostra il messaggio "La ricerca non ha prodotto risultati"
         };
     },
     methods: {
@@ -54,10 +59,6 @@ export default {
                     this.addresses = resp.data.results;
                     //li mostro in pagina
                     this.showAddresses = true;
-
-                    this.centerAddress = resp.data.results[0];
-                    this.centerLatitude = this.centerAddress.position.lat;
-                    this.centerLongitude = this.centerAddress.position.lon;
                 })
                 .catch((err) => {
                     console.log(err);
@@ -74,46 +75,45 @@ export default {
         },//selectAddress
 
         searchApartments() {
+            //se l'utente clicca cerca senza aver inserito un indirizzo
+            if(this.addresses.length == 0) {
+                this.error = 'Devi inserire un indirizzo per cercare';
+                return;
+            }
             //se l'utente non ha scelto un indirizzo dalla lista
             if(this.searchForm.completeAddress == null) {
-                axios
-                .get(
-                    `https://api.tomtom.com/search/2/geocode/${encodeURIComponent(this.addressInput)}.json?key=waiWTZRECqzNGHIbW83D94YfzNv1Uc1e&language=it-IT&countrySet=IT&limit=5`
-                )
-                .then((resp) => {
-                    //salvo il primo risultato
-                    this.searchForm.completeAddress = resp.data.results[0];
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
+                this.searchForm.completeAddress = this.addresses[0];
+                this.addressInput = this.addresses[0].address.freeformAddress;
             }
             //poi mando i dati al BE
-            this.searchForm.post(route("apartmentSearch"));            
+            this.searchForm.post(route("apartmentSearch"), {
+                onSuccess: () => {
+                    this.searchForm.completeAddress = null;
+                    //se non ho risultati mostro un messaggio
+                    this.noResult = (this.apartments == null);
+                },
+            });
+
+            //nascondo gli indirizzi suggeriti
+            this.showAddresses = false;
         },//searchApartments
 
-        toggleService(serviceId) {
-            if (this.activeServices.includes(serviceId)) {
-                this.activeServices.splice(this.activeServices.indexOf(serviceId), 1);
-            } else {
-                this.activeServices.push(serviceId);
+        toggleFilters() {
+            if(this.showFilters){
+                this.showFilters = false;
+                this.filterButton = 'Mostra più filtri';
             }
-        }, //toggleService
+            else {
+                this.showFilters = true;
+                this.filterButton = 'Nascondi filtri';
+            }
+        },//toggleFilters
     },
     computed: {
-        filteredApartments() {
-            if(this.apartments != null) {
-                let filteredApartments = this.apartments;
-                return filteredApartments;
-            }
-        }, //filteredApartments
     },
     watch: {
-        addressInput() {
-            this.getAutocompleteSearch();
-        },
-        filteredApartments() {
-            if(this.filteredApartments.length > 0) {
+        apartments() {
+            if(this.apartments?.length > 0) {
                 //creo la mappa
                 const mapElement = document.getElementById("map");
                 const map = tt.map({
@@ -128,10 +128,11 @@ export default {
                         .setLngLat([apartment.longitude, apartment.latitude])
                         .addTo(map);
                 })
-            }
+            }  
         }
     },//watch
     mounted() {
+        
     }//mounted
 };
 </script>
@@ -175,14 +176,96 @@ export default {
                     </li>
                 </ul>
             </div><!-- CHIUSURA INDIRIZZI SUGGERITI -->
+
+            <!-- ERRORE -->
+            <div v-if="error != null">
+                <p>{{ error }}</p>
+            </div>
+
+            <!-- FILTRI -->
+            <button
+                @click="toggleFilters"
+                class="button p-2 mt-4 text-white"
+            >
+                {{ filterButton }}
+            </button>
+
+            <!-- CONTENITORE FILTRI -->
+            <div class="filter-box py-5" v-if="showFilters">
+                <!-- RAGGIO DI RICERCA -->
+                <div>
+                    <label class="mb-2" for="radius">
+                        Definisci il raggio di ricerca (km)
+                    </label>
+                    <input
+                        type="range"
+                        id="radius"
+                        name="radius"
+                        min="10"
+                        max="200"
+                        v-model="searchForm.radius"
+                    />
+                    <span>{{ searchForm.radius }}</span>
+                </div>
+
+                <!-- STANZE -->
+                <div>
+                    <label class="mb-2">Filtra per numero di stanze</label>
+                    <select class="rounded-full py-2 px-4" v-model="searchForm.filters.rooms">
+                        <option v-for="i in 10" :value="i">{{ i }}</option>
+                    </select>
+                </div>
+
+                <!-- LETTI -->
+                <div>
+                    <label class="mb-2">Filtra per numero di posti letto</label>
+                    <select class="rounded-full py-2 px-4" v-model="searchForm.filters.beds">
+                        <option v-for="i in 10" :value="i">{{ i }}</option>
+                    </select>
+                </div>
+
+                <!-- SERVIZI -->
+                <div>
+                    <p class="block pb-2 font-medium text-gray-700 text-lg">
+                        Servizi offerti
+                    </p>
+                    <div class="flex flex-wrap">
+                        <template v-for="service in services">
+                            <input
+                                type="checkbox"
+                                :id="service.id"
+                                :name="service.id"
+                                :value="service.id"
+                                v-model="searchForm.filters.services"
+                                class="mx-2"
+                            />
+                            <label :for="service.id" class="mr-2">
+                                <span class="inline-block font-bold">
+                                    {{ service.name }}
+                                </span>
+                                {{ service.icon }}
+                            </label>
+                        </template>
+                    </div>
+                </div>
+
+            </div><!-- CHIUSURA CONTENITORE FILTRI -->
+
         </div><!-- CHIUSURA SEARCH BOX -->
+
+        <!-- NESSUN RISULTATO -->
+        <div v-if="noResult">
+            <h3>
+                La ricerca non ha prodotto risultati
+            </h3>
+        </div>
 
         <!-- CONTAINER CARTE -->
         <div
-            v-if="filteredApartments != null"
+            v-if="apartments != null"
             class="container-cards grid 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-col-1 gap-10"
         >
-            <div class="card flex flex-col self-end" v-for="apartment in filteredApartments">
+            <div class="card flex flex-col self-end" v-for="apartment in apartments">
                 <Link :href="route('gestione-appartamenti.show', apartment.id)" class="flex flex-col">
                     <!-- IMMAGINE -->
                     <img :src="apartment.full_cover_img_path" alt="immagine casa" />
@@ -211,8 +294,8 @@ export default {
         </div><!-- CHIUSURA CONTAINER CARDS -->
 
         <!-- MAPPA -->
-        <div class="w-full mt-20 mb-20">
-            <div v-show="filteredApartments != null" class="w-full">
+        <div class="mt-20 mb-20">
+            <div v-show="apartments != null">
                 <div id="map" class="h-96 "></div>
             </div>
         </div>

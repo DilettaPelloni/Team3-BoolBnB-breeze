@@ -55,9 +55,11 @@ class PageController extends Controller
         $data = $request->all();
         $address = $data['completeAddress'];
         $radius = $data['radius'];
+        $rooms = $data['filters']['rooms'];
+        $beds = $data['filters']['beds'];
+        $requestedServices = $data['filters']['services'];
         $lat = null;
         $lon = null;
-        $error = null;
 
         if ($address) {
         
@@ -65,11 +67,29 @@ class PageController extends Controller
             $lon = $address['position']['lon'];
 
             $apartments = Apartment::selectRaw('*, ( 6371 * acos( cos( radians(?) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude) ) ) ) AS distance', [$lat, $lon, $lat])
-                        ->having('distance', '<=', $radius)->get();
+            ->having('distance', '<=', $radius)
+            ->having('rooms', '>=', $rooms)
+            ->having('beds', '>=', $beds)
+            ->with('services')
+            ->get();
+
+            $filteredApartments = $apartments;
+            if (count($requestedServices) > 0) {
+                $filteredApartments = [];
+
+                foreach ($apartments as $apartment) {
+                    if ($this->filterApartment($apartment, $requestedServices)) {
+                        array_push($filteredApartments, $apartment);
+                    }
+                }
+            }
+
+            if(count($filteredApartments) == 0) {
+                $filteredApartments = null;
+            }
         }
         else {
-            $apartments = null;
-            $error = 'Non è stato dato un indirizzo';
+            $filteredApartments = null;
         }
 
         $services = Service::all();
@@ -77,10 +97,24 @@ class PageController extends Controller
         return Inertia::render('Guest/Search', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
-            'apartments' => $apartments,
+            'apartments' => $filteredApartments,
             'services' => $services,
-            'error' => $error,
         ]);
+    }
+
+    private function filterApartment($apartment, $requestedServices) {
+
+        $apartmentServicesIds = [];
+        foreach ($apartment['services'] as $service) {
+            array_push($apartmentServicesIds, $service['id']);
+        }
+
+        foreach ($requestedServices as $requestedService) {
+            if(!(in_array($requestedService, $apartmentServicesIds))) {
+                return false;
+            };
+        }
+        return true;
     }
     
 }
