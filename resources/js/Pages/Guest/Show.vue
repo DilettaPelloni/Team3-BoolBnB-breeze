@@ -96,7 +96,7 @@ export default {
                 <div v-else>
                     <span>Nessun Servizio Aggiuntivo Disponibile</span>
                 </div>
-                <div class="border-y-2 py-5">
+                <div class="border-t-2 py-5">
                     <div>
                         <h2>Descrizione Appartamento</h2>
                         <p class="pt-3 text-gray-600">
