@@ -82,14 +82,6 @@ export default {
 </template>
 
 <style scoped lang="scss">
-.button {
-    background-color: #fe5b5f;
-    padding: 10px 25px;
-    color: #fff;
-    border-radius: 50px;
-    cursor: pointer;
-}
-
 .pink-text {
     color: #fe5b5f;
     font-weight: 900;
@@ -138,6 +130,30 @@ export default {
     display: flex;
     flex-direction: row;
 }
+
+/* bottone */
+.button {
+    padding: 11px 20px;
+    border-radius: 50px;
+    border: none;
+    background-color: #fe5b5f;
+    color: #fff;
+    font-family: "Figtree";
+    font-size: 17px;
+    cursor: pointer;
+    margin-top: 80px;
+}
+
+.button:hover {
+    background-color: #fd4e4e;
+}
+
+.button:active {
+    background-color: #fc9aa1;
+    box-shadow: 0 5px #dd5b5f;
+    transform: translateY(4px);
+}
+
 @media (max-width: 768px) {
     .logo img {
         margin: auto;

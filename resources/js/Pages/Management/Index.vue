@@ -45,10 +45,10 @@ export default {
     <Head title="Appartamenti" />
 
     <AuthenticatedLayout>
-        <div class="container">
+        <div class="container pb-[135px]">
             <Link
                 :href="route('gestione-appartamenti.create')"
-                class="mt-8 px-4 py-2 rounded-full button text-white"
+                class="btn-add mt-8 px-4 py-2 rounded-full button text-white"
             >
                 Aggiungi un appartamento
             </Link>
@@ -107,10 +107,9 @@ export default {
                             "
                             class="mt-8 px-4 py-2 rounded-full button text-white"
                         >
-                            <!-- <font-awesome-icon
+                            <font-awesome-icon
                                 :icon="['far', 'pen-to-square']"
-                            /> -->
-                            <font-awesome-icon :icon="['far', 'pen-to-square']" />
+                            />
                             Modifica
                         </Link>
                         <button
@@ -220,5 +219,32 @@ export default {
 .card:hover {
     @apply hover:shadow-lg;
     @apply hover:shadow-lg hover:scale-105;
+}
+
+/* bottone */
+.btn-add {
+    padding: 11px 20px;
+    border-radius: 50px;
+    border: none;
+    background-color: #fe5b5f;
+    color: #fff;
+    font-family: "Figtree";
+    font-size: 17px;
+    cursor: pointer;
+    margin-top: 40px;
+}
+
+.btn-add:hover {
+    background-color: #fd4e4e;
+}
+
+.btn-add:active {
+    background-color: #fc9aa1 !important;
+    box-shadow: 0 5px #dd5b5f;
+    transform: translateY(4px);
+}
+
+.button:hover {
+    background-color: #fd4e4e;
 }
 </style>

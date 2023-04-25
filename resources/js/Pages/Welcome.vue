@@ -73,6 +73,10 @@ export default {
 .button {
     background-color: $main-color;
 }
+
+.button:hover {
+    background-color: #fd4e4e;
+}
 .container-main {
     background-color: #f1f1f1;
     .card {

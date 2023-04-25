@@ -25,7 +25,8 @@ export default {
 
 <template>
     <div
-        class="container-header flex justify-between items-center py-[5px] px-[185px] 2xl:flex-row xl:flex-row lg:flex-row md:flex-col sm:flex-col"
+        style="border-bottom: 1px solid pink"
+        class="container-header flex justify-between items-center py-[10px] px-[185px] 2xl:flex-row xl:flex-row lg:flex-row md:flex-col sm:flex-col"
     >
         <div class="container-img h-[50px] w-[250px]">
             <Link :href="route('welcome')">
@@ -83,7 +84,6 @@ export default {
             </div>
         </div>
     </div>
-    
 </template>
 
 <style lang="scss" scoped>
@@ -101,5 +101,4 @@ export default {
 .container-login:hover {
     box-shadow: 3px 3px 10px 0px rgba(117, 117, 117, 0.35);
 }
-
 </style>

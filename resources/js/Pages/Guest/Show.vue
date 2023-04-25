@@ -156,10 +156,7 @@ export default {
                         {{ newMessage.errors.content }}
                     </div>
                     <!-- BOTTONE -->
-                    <button
-                        type="submit"
-                        class="button rounded-full text-white px-4 py-2 mt-8"
-                    >
+                    <button type="submit" class="button px-4 py-2">
                         Invia il messaggio
                     </button>
                     <!-- MESSAGGIO OK -->
@@ -218,5 +215,28 @@ span {
 
 input {
     border-radius: 50px;
+}
+
+/* bottone */
+button {
+    padding: 11px 20px;
+    border-radius: 50px;
+    border: none;
+    background-color: #fe5b5f;
+    color: #fff;
+    font-family: "Figtree";
+    font-size: 17px;
+    cursor: pointer;
+    margin-top: 40px;
+}
+
+button:hover {
+    background-color: #df5759;
+}
+
+button:active {
+    background-color: #fc9aa1 !important;
+    box-shadow: 0 5px #dd5b5f;
+    transform: translateY(4px);
 }
 </style>

@@ -391,7 +391,7 @@ export default {
                 <button
                     type="submit"
                     :disabled="newApartment.processing"
-                    class="mt-[65px] px-4 py-2 rounded-full pink text-white"
+                    class="px-4 py-2 rounded-full pink text-white shadow-lg"
                 >
                     Salva nuovo appartamento
                 </button>
@@ -439,5 +439,28 @@ select:focus {
 .focus\:ring-2:focus {
     --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
         calc(2px + var(--tw-ring-offset-width)) rgb(254 91 95);
+}
+
+/* bottone */
+button {
+    padding: 11px 20px;
+    border-radius: 50px;
+    border: none;
+    background-color: #fe5b5f;
+    color: #fff;
+    font-family: "Figtree";
+    font-size: 17px;
+    cursor: pointer;
+    margin-top: 80px;
+}
+
+button:hover {
+    background-color: #fd4e4e;
+}
+
+button:active {
+    background-color: #fc9aa1;
+    box-shadow: 0 5px #dd5b5f;
+    transform: translateY(4px);
 }
 </style>
