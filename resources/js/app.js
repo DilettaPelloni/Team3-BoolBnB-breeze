@@ -42,6 +42,7 @@ import {
     faUmbrellaBeach,
     faKey,
     faEye,
+    faHouseChimney,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -92,6 +93,7 @@ library.add(
     faUmbrellaBeach,
     faKey,
     faEye,
+    faHouseChimney,
 );
 
 const appName =

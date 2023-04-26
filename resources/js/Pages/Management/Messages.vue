@@ -15,11 +15,7 @@ export default {
     },
     data() {
         return {
-            apartmentTitle: "",
         };
-    },
-    created() {
-        this.apartmentTitle = this.messages[0].title; // Il primo messaggio nell'array contiene il titolo dell'appartamento
     },
 };
 </script>
@@ -29,15 +25,18 @@ export default {
 
     <AuthenticatedLayout>
         <div class="main-container">
-            <h2 class="pb-2 text-center">
-                {{ apartmentTitle }}
-            </h2>
 
-            <h1>I messaggi dell'appartamento:</h1>
+            <h1>I tuoi messaggi:</h1>
             <ul>
-                
                 <li v-for="message in messages">
                     <div class="utente pb-[20px]">
+                        <div class="appartamento flex items-center">
+                            <font-awesome-icon :icon="['fas', 'house-chimney']" style="
+                                    color: rgb(254 91 95 / 78%);
+                                    padding-right: 9px;
+                                " />
+                            <p><b>Appartamento: </b>{{ message.title }}</p>
+                        </div>
                         <div class="nome flex items-center">
                             <font-awesome-icon :icon="['fas', 'circle-user']" style="
                                     color: rgb(254 91 95 / 78%);
