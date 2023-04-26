@@ -1,6 +1,8 @@
 <script>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
+import '../../braintree';
+
 
 export default {
     name: "Sponsoship",
@@ -15,37 +17,66 @@ export default {
     },
     data() {
         return {
-
+            modalVisible: false,
+            payModalVisible: false,
+            selectedApartment: null,
         };
     },
     methods: {
         isSponsorized (apartment) {
+            //di base ritorno vero
             let flag = true;
+            //prendo la data di oggi
             const today = new Date();
+            //se ci sono sponsorships attive sugli appartamenti di questo utente
             if(this.activeSponsorships.length > 0) {
+                //per ogni sponsorship attiva
                 this.activeSponsorships.forEach((sponsorship) => {
+                    //vedo se è relativa all'appartamento che sto esaminando
                     if(sponsorship.apartment_id == apartment.id) {
+                        //trasformo la sua data di fine in un ogetto Date
                         let end_date = new Date(sponsorship.end_date);
+                        //se la data di fine è maggiore della data di oggi ritorno falso
                         if(end_date > today) {
-                            console.log(end_date);
-                            console.log(today);
-                            console.log('sono qui');
                             flag = false;
                         }
                     }
                 });
             }
             return flag;
-        }
+        }, //isSponsorized
+        selectsApartment(apartment) {
+            this.selectedApartment = apartment.id;
+            this.modalVisible = true;
+        },//selectsApartment
+        activateSponsorship() {
+            this.modalVisible = false;
+            this.payModalVisible = true;
+        },//activateSponsorship
     },
     created() {
-
+        //creo la maschera di pagamento di braintree
+        let button = document.querySelector('#submit-button');
+        braintree.dropin.create({
+            authorization: 'sandbox_g42y39zw_348pk9cgf3bgyw2b',
+            selector: '#dropin-container'
+            },
+            function (err, instance) {
+            button.addEventListener('click', function () {
+                instance.requestPaymentMethod(function (err, payload) {
+                    // Submit payload.nonce to your server
+                    console.log(payload.nonce);
+                });
+            })
+        });
     },
 };
 </script>
 
 <template>
-    <Head :title="Sponsorships" />
+    <Head>
+        <title>Sponsorships</title>
+    </Head>
 
     <AuthenticatedLayout>
         <div class="py-12">
@@ -59,10 +90,12 @@ export default {
                             <h4>{{ apartment.title }}</h4>
 
                             <button
-                                class="rounded-full"
+                                class="rounded-full my-button"
                                 :class="{
                                     disabled: !isSponsorized(apartment),
                                 }"
+                                :disabled="!isSponsorized(apartment)"
+                                @click="selectsApartment(apartment)"
                             >
                                 {{ isSponsorized(apartment) ? 'Sponsorizza' : 'Sponsorizzazione attiva'}}
                             </button>
@@ -70,7 +103,49 @@ export default {
                     </ul>
                 </div>
             </div>
+
+            <!-- MODALE SCELTA SPONSOR -->
+            <div class="modal-overlay" v-if="modalVisible" @click="modalVisible = false">
+                <div class="modal mt-[80px]">
+                    <h3>Scegli il tuo piano di sponsorizzazione</h3>
+                    <div class="columns-container flex mt-3" >
+                        <div
+                            class="column"
+                            v-for="sponsorship in sponsorships"
+                        >
+                            <h4 class="font-bold ">
+                                {{ sponsorship.name }}
+                            </h4>
+                            <div class="price mt-3">
+                                <p class="subtitle">Prezzo</p>
+                                <p>{{ sponsorship.price.replace(/\./g, ',')  }} €</p>
+                            </div>
+                            <div class="duration mt-3">
+                                <p class="subtitle">Durata della sponsorizzazione</p>
+                                <p>{{ sponsorship.duration.substring(0, sponsorship.duration.indexOf(":")) }} ore</p>
+                            </div>
+
+                            <button
+                                class="rounded-full mt-10 my-button"
+                                @click="activateSponsorship(sponsorship)"
+                            >
+                                Inizia
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- CHIUSURA MODALE SCELTA SPONSOR -->
+
+            <!-- MODALE PAGAMENTO -->
+            <div class="modal-overlay" v-if="payModalVisible" @click="payModalVisible = false">
+                <div class="modal mt-[80px]">
+                    <h3>Sono il modale per i pagamenti</h3>
+                    <div id="dropin-container"></div>
+                    <button id="submit-button" class="button button--small button--green">Purchase</button>
+                </div>
+            </div><!-- CHIUSURA MODALE SCELTA SPONSOR -->
         </div>
+
     </AuthenticatedLayout>
 </template>
 
@@ -79,7 +154,43 @@ export default {
 
 .item {
     border-color: $main-color;
-    button {
+}
+
+.button {
+  cursor: pointer;
+  font-weight: 500;
+  left: 3px;
+  line-height: inherit;
+  position: relative;
+  text-decoration: none;
+  text-align: center;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  display: inline-block;
+}
+
+.button--small {
+  padding: 10px 20px;
+  font-size: 0.875rem;
+}
+
+.button--green {
+  outline: none;
+  background-color: #64d18a;
+  border-color: #64d18a;
+  color: white;
+  transition: all 200ms ease;
+}
+
+.button--green:hover {
+  background-color: #8bdda8;
+  color: white;
+}
+
+.my-button {
         padding-block: 0.5rem;
         padding-inline: 0.5rem;
         background-color: $main-color;
@@ -87,6 +198,41 @@ export default {
         &.disabled {
             background-color: grey;
         }
+    }
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2rem;
+    min-height: 250px;
+    text-align: center;
+    border-radius: 15px;
+    background-color: #fff;
+
+    .column {
+        padding-inline: 1rem;
+        border-right: 1px solid gray;
+        .subtitle {
+            color: $main-color;
+        }
+    }
+
+    .column:last-child {
+        border: none;
     }
 }
 
