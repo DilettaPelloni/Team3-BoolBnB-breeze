@@ -280,9 +280,15 @@ class ApartmentController extends Controller
         $sponsorships = Sponsorship::all();
         $apartments = Apartment::where('user_id',$user_id)->with('sponsorships')->get();
 
+        $activeSponsorships = DB::table('apartment_sponsorship')
+                            ->join('apartments', 'apartment_sponsorship.apartment_id', 'apartments.id')
+                            ->where('apartments.user_id', $user_id)
+                            ->get();
+
         return Inertia::render('Management/Sponsorship', [
             'sponsorships' => $sponsorships,
             'apartments' => $apartments,
+            'activeSponsorships' => $activeSponsorships,
         ]);
     }
 }
