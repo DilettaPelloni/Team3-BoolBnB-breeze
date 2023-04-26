@@ -149,7 +149,6 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, $apartment_id)
     {
-
         $apartment = Apartment::where('id', $apartment_id)->first();
 
         $request->validate([

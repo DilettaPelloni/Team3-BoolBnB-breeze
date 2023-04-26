@@ -258,7 +258,15 @@ export default {
                                 <span class="inline-block font-bold">
                                     {{ service.name }}
                                 </span>
-                                {{ service.icon }}
+                                <font-awesome-icon
+                                    :icon="['fas', service.icon]"
+                                    class="text-red-500 h-5 ml-1"
+                                    style="
+                                        color: rgb(254 91 95 / 78%);
+                                        padding-right: 9px;
+                                        height: 25px;
+                                    "
+                                />
                             </label>
                         </template>
                     </div>
@@ -310,7 +318,7 @@ export default {
 
         <!-- MAPPA -->
         <div class="mt-20 mb-20 w-full" >
-            <div v-show="apartments != null">
+            <div>
                 <div id="map" class="h-96" ></div>
             </div>
         </div>

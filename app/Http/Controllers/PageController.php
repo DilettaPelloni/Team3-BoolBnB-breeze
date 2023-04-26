@@ -68,6 +68,7 @@ class PageController extends Controller
 
             $apartments = Apartment::selectRaw('*, ( 6371 * acos( cos( radians(?) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude) ) ) ) AS distance', [$lat, $lon, $lat])
             ->having('distance', '<=', $radius)
+            ->having('visible', '=', '1')
             ->having('rooms', '>=', $rooms)
             ->having('beds', '>=', $beds)
             ->with('services')
