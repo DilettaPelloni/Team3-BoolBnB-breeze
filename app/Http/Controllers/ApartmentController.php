@@ -245,45 +245,45 @@ class ApartmentController extends Controller
         ]);
     }
 
-        // GESTIONE DASHBOARD
-        public function dashboard()
-        {
-            $user_firstname = Auth::user()->firstname;
-            $user_id = Auth::user()->id;
+    // GESTIONE DASHBOARD
+    public function dashboard()
+    {
+        $user_firstname = Auth::user()->firstname;
+        $user_id = Auth::user()->id;
 
-            $apartments = Apartment::where('user_id',$user_id)->get();
+        $apartments = Apartment::where('user_id',$user_id)->get();
 
-            //views per apartment solo per l'utente loggato dell'appartamento
-            $viewsPerApartment = View::join('apartments', 'views.apartment_id', '=', 'apartments.id')
-                        ->join('users', 'apartments.user_id', '=', 'users.id')
-                        ->where('user_id',$user_id)
-                        ->select('apartment_id', DB::raw('count(*) as total'))
-                        ->groupBy('apartment_id')
-                        ->get();
+        //views per apartment solo per l'utente loggato dell'appartamento
+        $viewsPerApartment = View::join('apartments', 'views.apartment_id', '=', 'apartments.id')
+                    ->join('users', 'apartments.user_id', '=', 'users.id')
+                    ->where('user_id',$user_id)
+                    ->select('apartment_id', DB::raw('count(*) as total'))
+                    ->groupBy('apartment_id')
+                    ->get();
 
-            $views = View::join('apartments', 'views.apartment_id', '=', 'apartments.id')
-                        ->join('users', 'apartments.user_id', '=', 'users.id')
-                        ->where('user_id',$user_id)
-                        ->get();
+        $views = View::join('apartments', 'views.apartment_id', '=', 'apartments.id')
+                    ->join('users', 'apartments.user_id', '=', 'users.id')
+                    ->where('user_id',$user_id)
+                    ->get();
 
-            return Inertia::render('Dashboard', [
-                'views' => $views,
-                'user_firstname' => $user_firstname,
-                'apartments' => $apartments,
-                'viewsPerApartment' => $viewsPerApartment,
-            ]);
-        }
+        return Inertia::render('Dashboard', [
+            'views' => $views,
+            'user_firstname' => $user_firstname,
+            'apartments' => $apartments,
+            'viewsPerApartment' => $viewsPerApartment,
+        ]);
+    }
 
-        // PAGINA SPONSORIZZAZIONI
-        public function sponsorship()
-        {
-            $user_id = Auth::user()->id;
-            $sponsorships = Sponsorship::all();
-            $apartments = Apartment::where('user_id',$user_id)->with('sponsorships')->get();
+    // PAGINA SPONSORIZZAZIONI
+    public function sponsorship()
+    {
+        $user_id = Auth::user()->id;
+        $sponsorships = Sponsorship::all();
+        $apartments = Apartment::where('user_id',$user_id)->with('sponsorships')->get();
 
-            return Inertia::render('Management/Sponsorship', [
-                'sponsorships' => $sponsorships,
-                'apartments' => $apartments,
-            ]);
-        }
+        return Inertia::render('Management/Sponsorship', [
+            'sponsorships' => $sponsorships,
+            'apartments' => $apartments,
+        ]);
+    }
 }

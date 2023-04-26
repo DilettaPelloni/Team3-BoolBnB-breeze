@@ -13,6 +13,7 @@ export default {
         views: Array,
         user_firstname: String,
         viewsPerApartment: Array,
+        apartments: Array,
     },
     components: {
         Head,
@@ -35,20 +36,22 @@ export default {
             chartOptions: {
                 responsive: true
             },
-            updateMode: true
         }
     },
     created() {
-        for (let i = 0; i < this.viewsPerApartment.length; i++) {
-
-            let prova = this.viewsPerApartment[i].apartment_id
-            let prova1 = this.viewsPerApartment[i].total
-
-            this.chartData.labels.push(prova)
-            this.chartData.datasets[0].data.push(prova1)
-
-        }
-        console.log(this.chartData.labels, this.chartData.datasets[0].data)
+        this.apartments.forEach((apartment) => {
+            this.chartData.labels.push(apartment.title);
+            let flag = false;
+            this.viewsPerApartment.forEach((view) => {
+                if(view.apartment_id == apartment.id){
+                    this.chartData.datasets[0].data.push(view.total);
+                    flag = true;
+                }
+            })
+            if(flag == false) {
+                this.chartData.datasets[0].data.push(0);
+            }
+        });
     }
 }
 
