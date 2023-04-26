@@ -1,7 +1,6 @@
 <script>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
-import '../../braintree';
 
 
 export default {
@@ -52,23 +51,28 @@ export default {
         activateSponsorship() {
             this.modalVisible = false;
             this.payModalVisible = true;
+
+            let button = document.querySelector('#submit-button');
+
+            braintree.dropin.create({
+                authorization: 'sandbox_g42y39zw_348pk9cgf3bgyw2b',
+                selector: '#dropin-container'
+            },
+            function (err, instance) {
+                button.addEventListener('click', function () {
+                    instance.requestPaymentMethod(function (err, payload) {
+                        // Submit payload.nonce to your server
+                        console.log(err);
+                    });
+                    console.log('pago');
+                })
+            });
         },//activateSponsorship
     },
     created() {
-        //creo la maschera di pagamento di braintree
-        let button = document.querySelector('#submit-button');
-        braintree.dropin.create({
-            authorization: 'sandbox_g42y39zw_348pk9cgf3bgyw2b',
-            selector: '#dropin-container'
-            },
-            function (err, instance) {
-            button.addEventListener('click', function () {
-                instance.requestPaymentMethod(function (err, payload) {
-                    // Submit payload.nonce to your server
-                    console.log(payload.nonce);
-                });
-            })
-        });
+        let recaptchaScript = document.createElement('script');
+        recaptchaScript.setAttribute('src', 'https://js.braintreegateway.com/web/dropin/1.36.1/js/dropin.js');
+        document.head.appendChild(recaptchaScript);
     },
 };
 </script>
@@ -137,7 +141,7 @@ export default {
             </div><!-- CHIUSURA MODALE SCELTA SPONSOR -->
 
             <!-- MODALE PAGAMENTO -->
-            <div class="modal-overlay" v-if="payModalVisible" @click="payModalVisible = false">
+            <div class="modal-overlay" v-show="payModalVisible" @click="payModalVisible = false">
                 <div class="modal mt-[80px]">
                     <h3>Sono il modale per i pagamenti</h3>
                     <div id="dropin-container"></div>
