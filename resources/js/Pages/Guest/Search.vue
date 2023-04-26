@@ -50,6 +50,7 @@ export default {
     },
     methods: {
         getAutocompleteSearch() {
+            this.addresses = [];
             axios
                 .get(
                     `https://api.tomtom.com/search/2/geocode/${encodeURIComponent(this.addressInput)}.json?key=waiWTZRECqzNGHIbW83D94YfzNv1Uc1e&language=it-IT&countrySet=IT&limit=5`
@@ -77,7 +78,7 @@ export default {
         searchApartments() {
             //se l'utente clicca cerca senza aver inserito un indirizzo
             if(this.addresses.length == 0) {
-                this.error = 'Devi inserire un indirizzo per cercare';
+                this.error = 'Devi inserire un indirizzo valido per cercare';
                 return;
             }
             //se l'utente non ha scelto un indirizzo dalla lista
@@ -88,6 +89,7 @@ export default {
             //poi mando i dati al BE
             this.searchForm.post(route("apartmentSearch"), {
                 onSuccess: () => {
+                    this.error = null;
                     this.searchForm.completeAddress = null;
                     //se non ho risultati mostro un messaggio
                     this.noResult = (this.apartments == null);
@@ -114,6 +116,19 @@ export default {
     watch: {
         apartments() {
             if(this.apartments?.length > 0) {
+                //determino lo zoom in base al raggio di ricerca
+                if(this.searchForm.radius <= 20) {
+                    this.zoom = 10;
+                }
+                else if((this.searchForm.radius > 20) && (this.searchForm.radius < 50)) {
+                    this.zoom = 9;
+                }
+                else if((this.searchForm.radius >= 50) && (this.searchForm.radius < 125)) {
+                    this.zoom = 8;
+                }
+                else {
+                    this.zoom = 7;
+                }
                 //creo la mappa
                 const mapElement = document.getElementById("map");
                 const map = tt.map({
@@ -266,7 +281,7 @@ export default {
             class="container-cards grid 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-col-1 gap-10"
         >
             <div class="card flex flex-col self-end" v-for="apartment in apartments">
-                <Link :href="route('gestione-appartamenti.show', apartment.id)" class="flex flex-col">
+                <Link :href="route('guest_show', apartment.title_slug)" class="flex flex-col">
                     <!-- IMMAGINE -->
                     <img :src="apartment.full_cover_img_path" alt="immagine casa" />
                     <!-- CARD INFO -->
@@ -294,9 +309,9 @@ export default {
         </div><!-- CHIUSURA CONTAINER CARDS -->
 
         <!-- MAPPA -->
-        <div class="mt-20 mb-20">
+        <div class="mt-20 mb-20 w-full" >
             <div v-show="apartments != null">
-                <div id="map" class="h-96 "></div>
+                <div id="map" class="h-96" ></div>
             </div>
         </div>
     </div><!-- CHIUSURA CONTAINER -->
