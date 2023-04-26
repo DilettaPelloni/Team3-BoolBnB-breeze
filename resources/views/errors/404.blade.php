@@ -78,7 +78,7 @@ h2 {
 }
 
 button {
-    padding: 17px 20px;
+    padding: 11px 20px;
     border-radius: 50px;
     border: none;
     background-color: #fe5b5f;
@@ -89,7 +89,9 @@ button {
     margin-top: 23px;
 }
 
-button:hover {background-color: #df5759}
+button:hover {
+    background-color: #fd4e4e;
+}
 
 button:active {
   background-color: #fc9aa1;

@@ -22,26 +22,34 @@ export default {
     },
     data() {
         return {
-            titleArr: [],
             chartData: {
-                labels: ['prova1', 'prova2', 'prova3'],
+                labels: [],
                 datasets: [
                     {
                         label: 'Visualizzazioni Totali ',
                         backgroundColor: '#fe5e62',
-                        data: [this.views.length]
+                        data: []
                     }
                 ]
-            }
+            },
+            chartOptions: {
+                responsive: true
+            },
+            updateMode: true
         }
     },
-    // mounted() {
-    //     for (let i = 0; i < (this.views.length -1); i++) {
+    created() {
+        for (let i = 0; i < this.viewsPerApartment.length; i++) {
 
-    //         dove.push(cosa)           
-    //     }
-    //     console.log() 
-    // }
+            let prova = this.viewsPerApartment[i].apartment_id
+            let prova1 = this.viewsPerApartment[i].total
+
+            this.chartData.labels.push(prova)
+            this.chartData.datasets[0].data.push(prova1)
+
+        }
+        console.log(this.chartData.labels, this.chartData.datasets[0].data)
+    }
 }
 
 
@@ -59,17 +67,17 @@ export default {
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">Benvenuto! Per cominciare a gestire gli appartamenti fai click su
+                    <div class="p-6 text-gray-900">Benvenuto {{ this.user_firstname }}! Per cominciare a gestire gli
+                        appartamenti fai click su
                         "Appartamenti"</div>
                 </div>
             </div>
         </div>
-        {{ viewsPerApartment }}
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
-                        <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
+                        <Bar :options="chartOptions" :data="chartData" />
                     </div>
                 </div>
             </div>

@@ -32,40 +32,31 @@ export default {
             <h2 class="pb-2 text-center">
                 {{ apartmentTitle }}
             </h2>
-            <!-- <img :src="apartment.full_cover_img_path" /> -->
 
             <h1>I messaggi dell'appartamento:</h1>
             <ul>
+                
                 <li v-for="message in messages">
                     <div class="utente pb-[20px]">
                         <div class="nome flex items-center">
-                            <font-awesome-icon
-                                :icon="['fas', 'circle-user']"
-                                style="
+                            <font-awesome-icon :icon="['fas', 'circle-user']" style="
                                     color: rgb(254 91 95 / 78%);
                                     padding-right: 9px;
-                                "
-                            />
+                                " />
                             <p><b>Nome: </b>{{ message.sender_name }}</p>
                         </div>
-                        <div class="mail flex items-center">
-                            <font-awesome-icon
-                                :icon="['far', 'envelope']"
-                                style="
+                        <div class="mail flex items-center mb-[3px]">
+                            <font-awesome-icon :icon="['far', 'envelope']" style="
                                     color: rgb(254 91 95 / 78%);
                                     padding-right: 9px;
-                                "
-                            />
+                                " />
                             <p><b>Email: </b>{{ message.sender_email }}</p>
                         </div>
-                        <div class="mail flex items-center">
-                            <font-awesome-icon
-                                :icon="['far', 'message']"
-                                style="
+                        <div class="mail flex" style="align-items: baseline">
+                            <font-awesome-icon :icon="['far', 'message']" style="
                                     color: rgb(254 91 95 / 78%);
                                     padding-right: 9px;
-                                "
-                            />
+                                " />
                             <p><b>Messaggio: </b>{{ message.content }}</p>
                         </div>
                     </div>
@@ -77,6 +68,7 @@ export default {
 
 <style scoped lang="scss">
 @import "../../../scss/app.scss";
+
 .main-container {
     width: 65%;
     margin: 60px auto 0px auto;
@@ -95,5 +87,15 @@ h2 {
 .utente {
     padding: 50px 0px;
     border-bottom: 1px solid #fe5b5f;
+}
+
+ul {
+    overflow-y: auto;
+    height: 60vh;
+    margin: 70px 0px;
+}
+
+li {
+    padding-right: 50px;
 }
 </style>

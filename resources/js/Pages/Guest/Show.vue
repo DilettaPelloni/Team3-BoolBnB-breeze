@@ -81,14 +81,22 @@ export default {
                 <div v-if="apartment.services.length > 0">
                     <h2 class="pt-5">Servizi inclusi</h2>
                     <div v-for="service in apartment.services" class="py-3">
-                        <span>{{ service.icon }}</span>
+                        <span
+                            ><font-awesome-icon
+                                :icon="['fas', service.icon]"
+                                style="
+                                    color: rgb(254 91 95 / 78%);
+                                    padding-right: 9px;
+                                    height: 25px;
+                                "
+                        /></span>
                         <span>{{ service.name }}</span>
                     </div>
                 </div>
                 <div v-else>
                     <span>Nessun Servizio Aggiuntivo Disponibile</span>
                 </div>
-                <div class="border-y-2 py-5">
+                <div class="border-t-2 py-5">
                     <div>
                         <h2>Descrizione Appartamento</h2>
                         <p class="pt-3 text-gray-600">
@@ -148,16 +156,13 @@ export default {
                         {{ newMessage.errors.content }}
                     </div>
                     <!-- BOTTONE -->
-                    <button
-                        type="submit"
-                        class="button rounded-full text-white px-4 py-2 mt-8"
-                    >
+                    <button type="submit" class="button px-4 py-2">
                         Invia il messaggio
                     </button>
                     <!-- MESSAGGIO OK -->
-                    <div class="messaggioInviato" v-if="okMessage">
-                        <p>Il tuo messaggio è stato inviato correttamente!</p>
-                        <img src="img/mailSent.png" />
+                    <div class="messaggioInviato items-center" v-if="okMessage">
+                        <p>Messaggio inviato correttamente!</p>
+                        <img src="/img/mailSent.png" style="height: 41px" />
                     </div>
                 </form>
             </div>
@@ -174,6 +179,7 @@ export default {
     gap: 15px;
     padding: 40px 0px;
 }
+
 .main-container {
     width: 65%;
     margin: 60px auto;
@@ -209,5 +215,28 @@ span {
 
 input {
     border-radius: 50px;
+}
+
+/* bottone */
+button {
+    padding: 11px 20px;
+    border-radius: 50px;
+    border: none;
+    background-color: #fe5b5f;
+    color: #fff;
+    font-family: "Figtree";
+    font-size: 17px;
+    cursor: pointer;
+    margin-top: 40px;
+}
+
+button:hover {
+    background-color: #df5759;
+}
+
+button:active {
+    background-color: #fc9aa1 !important;
+    box-shadow: 0 5px #dd5b5f;
+    transform: translateY(4px);
 }
 </style>

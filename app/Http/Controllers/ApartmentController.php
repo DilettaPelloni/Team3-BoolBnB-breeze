@@ -253,7 +253,11 @@ class ApartmentController extends Controller
 
             $apartments = Apartment::where('user_id',$user_id)->get();
 
-            $viewsPerApartment = View::select(DB::raw('apartment_id, COUNT(*) as total'))
+            //views per apartment solo per l'utente loggato dell'appartamento
+            $viewsPerApartment = View::join('apartments', 'views.apartment_id', '=', 'apartments.id')
+                        ->join('users', 'apartments.user_id', '=', 'users.id')
+                        ->where('user_id',$user_id)
+                        ->select('apartment_id', DB::raw('count(*) as total'))
                         ->groupBy('apartment_id')
                         ->get();
 
