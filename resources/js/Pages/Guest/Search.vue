@@ -47,6 +47,7 @@ export default {
             showFilters: false, //determina se sono visibili i filtri
             filterButton: 'Mostra più filtri', //contenuto del bottone che toggola i filtri
             noResult: false, //mostra il messaggio "La ricerca non ha prodotto risultati"
+            displayMap: false, //determina se la mappa è visibile
         };
     },
     methods: {
@@ -112,6 +113,7 @@ export default {
             }
         },//toggleFilters
         createMap() {
+            this.displayMap = true;
             if(this.searchForm.radius <= 20) {
                     this.zoom = 10;
                 }
@@ -147,7 +149,10 @@ export default {
             if(this.apartments?.length > 0) {
                 //determino lo zoom in base al raggio di ricerca
                 this.createMap();
-            }  
+            }
+            else {
+                this.displayMap = false;
+            }
         }
     },//watch
     mounted() {
@@ -321,7 +326,7 @@ export default {
         </div><!-- CHIUSURA CONTAINER CARDS -->
 
         <!-- MAPPA -->
-        <div class="mt-20 mb-20 w-full" >
+        <div class="mt-20 mb-20 w-full" v-if="displayMap">
             <div>
                 <div id="map" class="h-96" ></div>
             </div>
