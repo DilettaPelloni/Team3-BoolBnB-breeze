@@ -68,6 +68,10 @@ export default {
                 })
             });
         },//activateSponsorship
+        endDate(apartment) {
+            
+            return '12/05/2022';
+        }
     },
     created() {
         let recaptchaScript = document.createElement('script');
@@ -100,16 +104,26 @@ export default {
                             </div>
 
                             <!-- BOTTONE -->
-                            <button
-                                class="rounded-full my-button"
-                                :class="{
-                                    disabled: !isSponsorized(apartment),
-                                }"
-                                :disabled="!isSponsorized(apartment)"
-                                @click="selectsApartment(apartment)"
-                            >
-                                {{ isSponsorized(apartment) ? 'Sponsorizza' : 'Sponsorizzazione attiva'}}
-                            </button>
+                            <div class="flex flex-col justify-center items-center">
+                                <button
+                                    class="rounded-full my-button"
+                                    :class="{
+                                        disabled: !isSponsorized(apartment),
+                                    }"
+                                    :disabled="!isSponsorized(apartment)"
+                                    @click="selectsApartment(apartment)"
+                                >
+                                    {{ isSponsorized(apartment) ? 'Sponsorizza' : 'Sponsorizzazione attiva'}}
+                                </button>
+                                <p  
+                                    class="remaining-time"
+                                    v-if="!isSponsorized(apartment)"
+                                >
+                                    <font-awesome-icon :icon="['fas', 'stopwatch']" />
+                                    {{ endDate(apartment) }}
+                                </p>
+                            </div>
+                            
                         </li>
                     </ul>
                 </div>
@@ -171,6 +185,14 @@ export default {
     width: 100px;
     aspect-ratio: 1/1;
     object-fit: cover;
+}
+
+.remaining-time {
+    svg {
+        margin-top: 1rem;
+        color: $main-color;
+        font-size: 1.5rem;
+    }
 }
 
 .button {

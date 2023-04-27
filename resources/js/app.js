@@ -43,6 +43,7 @@ import {
     faKey,
     faEye,
     faHouseChimney,
+    faStopwatch,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -94,6 +95,7 @@ library.add(
     faKey,
     faEye,
     faHouseChimney,
+    faStopwatch,
 );
 
 const appName =
