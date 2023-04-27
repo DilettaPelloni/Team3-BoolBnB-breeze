@@ -237,6 +237,7 @@ class ApartmentController extends Controller
         $messages = Message::join('apartments', 'messages.apartment_id', '=', 'apartments.id')
                             ->join('users', 'apartments.user_id', '=', 'users.id')
                             ->where('user_id',$user_id)
+                            ->orderBy('messages.created_at', 'desc')
                             ->get();
 
         return Inertia::render('Management/Messages', [
