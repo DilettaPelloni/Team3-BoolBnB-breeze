@@ -18,6 +18,7 @@ export default {
         services: Array,
         canLogin: Boolean,
         canRegister: Boolean,
+        centerAddress: Object,
     },
     components: {
         AppHeader,
@@ -110,14 +111,8 @@ export default {
                 this.filterButton = 'Nascondi filtri';
             }
         },//toggleFilters
-    },
-    computed: {
-    },
-    watch: {
-        apartments() {
-            if(this.apartments?.length > 0) {
-                //determino lo zoom in base al raggio di ricerca
-                if(this.searchForm.radius <= 20) {
+        createMap() {
+            if(this.searchForm.radius <= 20) {
                     this.zoom = 10;
                 }
                 else if((this.searchForm.radius > 20) && (this.searchForm.radius < 50)) {
@@ -134,7 +129,7 @@ export default {
                 const map = tt.map({
                     key: "waiWTZRECqzNGHIbW83D94YfzNv1Uc1e",
                     container: mapElement,
-                    center: [this.searchForm.completeAddress.position.lon, this.searchForm.completeAddress.position.lat],
+                    center: [this.centerAddress.position.lon, this.centerAddress.position.lat],
                     zoom: this.zoom,
                 });
                 //creo un marker per ogni appartamento
@@ -143,12 +138,21 @@ export default {
                         .setLngLat([apartment.longitude, apartment.latitude])
                         .addTo(map);
                 })
+        }
+    },
+    computed: {
+    },
+    watch: {
+        apartments() {
+            if(this.apartments?.length > 0) {
+                //determino lo zoom in base al raggio di ricerca
+                this.createMap();
             }  
         }
     },//watch
     mounted() {
-        
-    }//mounted
+        setTimeout (this.createMap, 500);
+    },
 };
 </script>
 

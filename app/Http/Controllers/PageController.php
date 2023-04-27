@@ -100,6 +100,7 @@ class PageController extends Controller
             'canRegister' => Route::has('register'),
             'apartments' => $filteredApartments,
             'services' => $services,
+            'centerAddress' => $address,
         ]);
     }
 
