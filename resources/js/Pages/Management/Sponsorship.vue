@@ -89,10 +89,17 @@ export default {
                     <ul class="p-6 text-gray-900">
                         <li
                             v-for="apartment in apartments"
-                            class="py-5 border-b item flex justify-between"
-                        >
-                            <h4>{{ apartment.title }}</h4>
+                            class="py-5 border-b item flex justify-between items-center"
+                        >   
+                            <!-- TITOLO E IMMAGINE -->
+                            <div class="flex items-center">
+                                <img :src="apartment.full_cover_img_path" alt="apartment_image" class="image-preview">
+                                <h4 class="ms-10">
+                                    {{ apartment.title }}
+                                </h4>
+                            </div>
 
+                            <!-- BOTTONE -->
                             <button
                                 class="rounded-full my-button"
                                 :class="{
@@ -158,6 +165,12 @@ export default {
 
 .item {
     border-color: $main-color;
+}
+
+.image-preview {
+    width: 100px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
 }
 
 .button {
