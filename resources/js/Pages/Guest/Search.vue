@@ -112,20 +112,16 @@ export default {
                 this.filterButton = 'Nascondi filtri';
             }
         },//toggleFilters
+
         createMap() {
             this.displayMap = true;
             if(this.searchForm.radius <= 20) {
                     this.zoom = 10;
-                }
-                else if((this.searchForm.radius > 20) && (this.searchForm.radius < 50)) {
-                    this.zoom = 9;
-                }
-                else if((this.searchForm.radius >= 50) && (this.searchForm.radius < 125)) {
-                    this.zoom = 8;
-                }
-                else {
-                    this.zoom = 7;
-                }
+            }
+            else {
+                this.zoom = 9;
+            }
+            setTimeout (() => {
                 //creo la mappa
                 const mapElement = document.getElementById("map");
                 const map = tt.map({
@@ -140,6 +136,8 @@ export default {
                         .setLngLat([apartment.longitude, apartment.latitude])
                         .addTo(map);
                 })
+            }, 500);
+            
         }
     },
     computed: {
@@ -156,7 +154,11 @@ export default {
         }
     },//watch
     mounted() {
-        setTimeout (this.createMap, 500);
+        setTimeout (() => {
+            if(this.apartments?.length > 0) {
+                this.createMap();
+            }
+        }, 500);
     },
 };
 </script>
@@ -226,7 +228,7 @@ export default {
                         id="radius"
                         name="radius"
                         min="10"
-                        max="200"
+                        max="30"
                         v-model="searchForm.radius"
                     />
                     <span>{{ searchForm.radius }}</span>
