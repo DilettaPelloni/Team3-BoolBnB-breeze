@@ -12,6 +12,7 @@ export default {
         canLogin: Boolean,
         canRegister: Boolean,
         user_email: String,
+        user_name: String,
     },
     components: {
         Head,
@@ -25,15 +26,15 @@ export default {
                 apartmentId: this.apartment.id,
                 content: null,
                 sender_email: this.user_email,
-                sender_name: null,
+                sender_name: this.user_name,
             }),
-            okMessage: false,
+            modalVisible: false,
         };
     }, //data
     methods: {
         submit() {
             this.newMessage.post(route("messages.store"), {
-                onSuccess: () => (this.okMessage = true),
+                onSuccess: () => (this.modalVisible = true),
             });
             this.newMessage.reset();
         }, //submit
@@ -159,15 +160,21 @@ export default {
                     <button type="submit" class="button px-4 py-2">
                         Invia il messaggio
                     </button>
-                    <!-- MESSAGGIO OK -->
-                    <div class="messaggioInviato items-center" v-if="okMessage">
-                        <p>Messaggio inviato correttamente!</p>
-                        <img src="/img/mailSent.png" style="height: 41px" />
-                    </div>
+                    
                 </form>
             </div>
         </div>
         <TomTomMap :apartment="apartment" />
+        <!-- MODALE SUCCESSO MESSAGGIO -->
+        <div class="modal-overlay" v-show="modalVisible" @click="modalVisible = false">
+            <div class="modal mt-[80px]">
+                <!-- MESSAGGIO OK -->
+                <div class="messaggioInviato">
+                    <p>Messaggio inviato correttamente!</p>
+                    <img src="/img/mailSent.png"/>
+                </div>
+            </div>
+        </div><!-- CHIUSURA MODALE SUCCESSO MESSAGGIO -->
     </div>
 </template>
 
@@ -176,8 +183,15 @@ export default {
 
 .messaggioInviato {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 15px;
     padding: 40px 0px;
+    img {
+        height: 100px;
+        margin-top: 2rem;
+    }
 }
 
 .main-container {
@@ -238,5 +252,29 @@ button:active {
     background-color: #fc9aa1 !important;
     box-shadow: 0 5px #dd5b5f;
     transform: translateY(4px);
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2rem;
+    min-height: 250px;
+    text-align: center;
+    border-radius: 15px;
+    background-color: #fff;
 }
 </style>

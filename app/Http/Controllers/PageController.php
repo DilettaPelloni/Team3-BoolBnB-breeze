@@ -22,17 +22,22 @@ class PageController extends Controller
     {
         $apartment = Apartment::where('title_slug', $title_slug)->with('services')->first();
 
+        $user_name = '';
+        $user_email = '';
+
         if (Auth::check()) {
             $user_email = Auth::user()->email;
-        } else {
-            $user_email = '';
+            if(Auth::user()->firstname != null) {
+                $user_name = Auth::user()->firstname;
+            }
         }
 
         return Inertia::render('Guest/Show', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
             'apartment' => $apartment,
-            'user_email' => $user_email
+            'user_email' => $user_email,
+            'user_name' => $user_name,
         ]);
     }
 

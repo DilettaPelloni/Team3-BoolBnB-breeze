@@ -334,6 +334,7 @@ export default {
             </div>
         </div>
     </div><!-- CHIUSURA CONTAINER -->
+
     <AppFooter />
 </template>
 
@@ -365,4 +366,6 @@ export default {
         object-fit: cover;
     }
 }
+
+
 </style>
