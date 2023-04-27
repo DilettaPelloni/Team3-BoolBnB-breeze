@@ -114,6 +114,7 @@ export default {
                     <!-- SENDER NAME  -->
                     <p><label for="sender_name">Nome e Cognome</label></p>
                     <input
+                        required
                         type="text"
                         name="sender_name"
                         id="sender_name"
@@ -129,6 +130,7 @@ export default {
                     <!-- SENDER EMAIL  -->
                     <p><label for="sender_email">La tua E-Mail</label></p>
                     <input
+                        required
                         type="text"
                         name="sender_email"
                         id="sender_email"
@@ -144,6 +146,7 @@ export default {
                     <!-- CONTENT  -->
                     <p><label for="content">Messaggio</label></p>
                     <input
+                        required
                         type="text"
                         name="content"
                         id="content"
