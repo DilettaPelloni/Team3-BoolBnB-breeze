@@ -14,7 +14,7 @@ export default {
                     <img
                         src="/img/LogoBoolBnB.png"
                         alt="Logo BoolBnB"
-                        class="object-contain w-[230px] pb-5"
+                        class="object-contain w-[230px] pb-5 md:m-auto sm:m-auto"
                     />
 
                     <div class="text">
@@ -26,7 +26,7 @@ export default {
                             Orari di apertura: Lun - Ven: 9 AM - 6 PM
                         </p>
                     </div>
-                    <div class="socialIcon">
+                    <div class="socialIcon flex 2xl:justify-start xl:justify-start md:justify-center sm:justify-center">
                         <div class="cont-icon">
                             <font-awesome-icon
                                 class="social-icon"
@@ -53,7 +53,7 @@ export default {
                         <a class="button" href="#">Chiama</a>
                     </div>
                 </div>
-                <div class="linkUtili text-right">
+                <div class="linkUtili text-right md:text-center md:m-auto sm:text-center sm:m-auto">
                     <p class="text-[20px] pb-5 pt-[50px] text-white">
                         Link Utili
                     </p>
@@ -90,7 +90,7 @@ export default {
 .footer {
     padding-bottom: 40px;
     background-image: url("img/mappa.jpg");
-    height: 355px;
+    // height: 355px;
     width: 100%;
     background-position: 41% 11%;
     background-repeat: no-repeat;
@@ -159,27 +159,27 @@ export default {
     transform: translateY(4px);
 }
 
-@media (max-width: 768px) {
-    .logo img {
-        margin: auto;
-    }
+// @media (max-width: 768px) {
+//     .logo img {
+//         margin: auto;
+//     }
 
-    .contact {
-        padding-bottom: 59px;
-        margin-top: 36px;
-    }
+//     .contact {
+//         padding-bottom: 59px;
+//         margin-top: 36px;
+//     }
 
-    .footer {
-        height: auto;
-    }
+//     .footer {
+//         height: auto;
+//     }
 
-    .socialIcon {
-        justify-content: center;
-        margin-top: 20px;
-    }
+//     .socialIcon {
+//         justify-content: center;
+//         margin-top: 20px;
+//     }
 
-    .linkUtili {
-        text-align: center;
-    }
-}
+//     .linkUtili {
+//         text-align: center;
+//     }
+// }
 </style>
