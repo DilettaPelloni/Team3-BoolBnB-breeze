@@ -1,6 +1,8 @@
 <script>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
+import axios from "axios";
+import { useForm } from "@inertiajs/vue3";
 
 
 export default {
@@ -19,6 +21,9 @@ export default {
             modalVisible: false,
             payModalVisible: false,
             selectedApartment: null,
+            clientToken: '',
+            error: '',
+            dropinInstance: null,
         };
     },
     methods: {
@@ -48,26 +53,31 @@ export default {
             this.selectedApartment = apartment.id;
             this.modalVisible = true;
         },//selectsApartment
-        activateSponsorship() {
+        activateSponsorship(sponsorship) {
             this.modalVisible = false;
             this.payModalVisible = true;
 
+            this.getClientToken();
+            console.log(this.clientToken);
+            // const { clientToken } = this;
+
             let button = document.querySelector('#submit-button');
 
-            braintree.dropin.create({
-                authorization: 'sandbox_g42y39zw_348pk9cgf3bgyw2b',
-                selector: '#dropin-container',
-                locale: 'it_IT'
-            },
-            function (err, instance) {
-                button.addEventListener('click', function () {
-                    instance.requestPaymentMethod(function (err, payload) {
-                        // Submit payload.nonce to your server
-                        console.log(err);
-                    });
-                    console.log('pago');
-                })
-            });
+            // braintree.dropin.create({
+            //     authorization: clientToken,
+            //     selector: '#dropin-container',
+            //     locale: 'it_IT'
+            // },
+            // (err, instance) => {
+            //     button.addEventListener('click', function () {
+            //         instance.requestPaymentMethod(function (err, payload) {
+            //             console.log(payload);
+            //             console.log(err);
+            //         });
+            //         console.log('pago');
+            //     })
+            //     this.dropinInstance = instance;
+            // });
         },//activateSponsorship
         endDate(apartment) {
             let endDate = '';
@@ -90,7 +100,17 @@ export default {
                 });
             }
             return endDate;
-        }
+        },//endDate
+        getClientToken() {
+            axios.get('http://127.0.0.1:8000/api/token')
+                .then(response => {
+                    this.clientToken = response.data.token;
+                })
+                .catch(error => {
+                    console.error(error);
+                    this.error = 'Could not get client token';
+                });
+        },
     },
     created() {
         let recaptchaScript = document.createElement('script');
