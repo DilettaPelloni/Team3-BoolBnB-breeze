@@ -19,11 +19,11 @@ export default {
 
                     <div class="text">
                         <p class="pb-5 text-[20px] text-white">
-                            Level 13, 2 Elizabeth St,<br />Melbourne,
-                            Victoria<br />3000, Australia
+                            Viale Booleaner 4<br />Milano,
+                            Lombardia<br />20100, Italia
                         </p>
                         <p class="pb-2 text-white">
-                            Opening hours: Mon - Sat: 9 AM - 6 PM
+                            Orari di apertura: Lun - Ven: 9 AM - 6 PM
                         </p>
                     </div>
                     <div class="socialIcon">
@@ -48,7 +48,7 @@ export default {
                             Contattaci
                         </h2>
                         <p class="text-[30px] pb-[35px] text-white">
-                            +61 (0) 3 8376 6284
+                            +39 334 837 662842
                         </p>
                         <a class="button" href="#">Chiama</a>
                     </div>

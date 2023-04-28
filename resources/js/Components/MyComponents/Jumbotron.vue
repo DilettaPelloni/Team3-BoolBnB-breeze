@@ -100,9 +100,9 @@ export default {
                 placeholder="Inserisci un indirizzo..."
                 v-model="addressInput"
                 @input="getAutocompleteSearch()"
-                class="me-3"
+                class="me-3 rounded-full"
             />
-            <button type="submit" class="button p-2 text-white">
+            <button type="submit" class="button text-white">
                 Cerca la tua meta
             </button>
         </form>
@@ -121,6 +121,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+@import '../../../scss/app.scss'; 
 .video-bg {
     position: absolute;
     top: 0;
@@ -149,7 +150,7 @@ export default {
 
 /* bottone */
 button {
-    padding: 11px 20px;
+    padding: 8px 20px;
     border-radius: 50px;
     border: none;
     background-color: #fe5b5f;
@@ -168,5 +169,8 @@ button:active {
     background-color: #fc9aa1 !important;
     box-shadow: 0 5px #dd5b5f;
     transform: translateY(4px);
+}
+#addressInput{
+    border-color: $main-color;
 }
 </style>

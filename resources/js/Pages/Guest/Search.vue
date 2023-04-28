@@ -346,6 +346,14 @@ export default {
 .button {
     background-color: $main-color;
 }
+.button:hover {
+    background-color: #fd4e4e;
+}
+.button:active {
+    background-color: #fc9aa1;
+    box-shadow: 0 5px #dd5b5f;
+    transform: translateY(4px);
+}
 
 .container {
     padding: 0 20px;
