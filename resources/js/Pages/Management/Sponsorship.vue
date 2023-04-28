@@ -181,7 +181,7 @@ export default {
 
             <!-- MODALE PAGAMENTO -->
             <div class="modal-overlay" v-show="payModalVisible" @click="payModalVisible = false">
-                <div class="modal mt-[80px]">
+                <div class="modal mt-[80px]" @click.stop>
                     <h3>Sono il modale per i pagamenti</h3>
                     <div id="dropin-container"></div>
                     <button id="submit-button" class="button button--small button--green">Purchase</button>
