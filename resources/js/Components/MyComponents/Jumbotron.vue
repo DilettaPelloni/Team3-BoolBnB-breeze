@@ -100,7 +100,7 @@ export default {
                 placeholder="Inserisci un indirizzo..."
                 v-model="addressInput"
                 @input="getAutocompleteSearch()"
-                class="me-3 rounded-full"
+                class="me-3 rounded-full focus:ring-transparent"
             />
             <button type="submit" class="button text-white">
                 Cerca la tua meta
@@ -132,19 +132,16 @@ export default {
 }
 
 .container-jumbotron {
-    // background-image: url("/img/sfondo-oscurato.jpg");
     height: 505px;
     width: 100%;
     background-position: 36% 67%;
     background-repeat: no-repeat;
     background-size: cover;
-
     display: flex;
     justify-content: center;
     flex-direction: column;
     gap: 30px;
     align-items: center;
-
     position: relative;
 }
 
