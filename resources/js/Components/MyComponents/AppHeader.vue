@@ -25,7 +25,7 @@ export default {
 
 <template>
     <div style="border-bottom: 1px solid pink"
-        class="container-header flex justify-between items-center py-[10px] md:px-[185px] sm:px-[100px] 2xl:flex-row xl:flex-row lg:flex-row">
+        class="container-header flex justify-between items-center py-[10px] md:px-[185px] sm:px-[100px] px-[30px] 2xl:flex-row xl:flex-row lg:flex-row">
         <div class="container-img h-[50px]">
             <Link :href="route('welcome')">
             <img src="/img/LogoBoolBnB.png" alt="Logo BoolBnB" class="object-contain h-full" />
