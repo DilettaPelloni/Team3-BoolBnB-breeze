@@ -56,7 +56,8 @@ export default {
 
             braintree.dropin.create({
                 authorization: 'sandbox_g42y39zw_348pk9cgf3bgyw2b',
-                selector: '#dropin-container'
+                selector: '#dropin-container',
+                locale: 'it_IT'
             },
             function (err, instance) {
                 button.addEventListener('click', function () {
@@ -182,9 +183,8 @@ export default {
             <!-- MODALE PAGAMENTO -->
             <div class="modal-overlay" v-show="payModalVisible" @click="payModalVisible = false">
                 <div class="modal mt-[80px]" @click.stop>
-                    <h3>Sono il modale per i pagamenti</h3>
                     <div id="dropin-container"></div>
-                    <button id="submit-button" class="button button--small button--green">Purchase</button>
+                    <button id="submit-button" class="button button--small button--coral">Inizia sponsorizzazione</button>
                 </div>
             </div><!-- CHIUSURA MODALE SCELTA SPONSOR -->
         </div>
@@ -234,16 +234,16 @@ export default {
   font-size: 0.875rem;
 }
 
-.button--green {
+.button--coral {
   outline: none;
-  background-color: #64d18a;
-  border-color: #64d18a;
+  background-color: $main-color;
+  border-color: $main-color;
   color: white;
   transition: all 200ms ease;
 }
 
-.button--green:hover {
-  background-color: #8bdda8;
+.button--coral:hover {
+  background-color: $main-color-light;
   color: white;
 }
 
