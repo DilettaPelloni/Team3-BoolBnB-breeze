@@ -287,19 +287,11 @@ class ApartmentController extends Controller
                             ->where('apartments.user_id', $user_id)
                             ->get();
 
-        $lastSponsorship = DB::table('apartment_sponsorship')
-                            ->join('apartments', 'apartment_sponsorship.apartment_id', 'apartments.id')
-                            ->where('apartments.user_id', $user_id)
-                            ->select('apartment_id','apartment_sponsorship.end_date')
-                            ->orderBy('apartment_sponsorship.apartment_id', 'desc')
-                            ->get();
-
 
         return Inertia::render('Management/Sponsorship', [
             'sponsorships' => $sponsorships,
             'apartments' => $apartments,
             'activeSponsorships' => $activeSponsorships,
-            'lastSponsorship' => $lastSponsorship,
         ]);
     }
 }

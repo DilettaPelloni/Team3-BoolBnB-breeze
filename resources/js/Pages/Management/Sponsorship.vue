@@ -9,7 +9,6 @@ export default {
         sponsorships: Array,
         apartments: Array,
         activeSponsorships: Array,
-        lastSponsorship: Array,
     },
     components: {
         Head,
@@ -70,8 +69,26 @@ export default {
             });
         },//activateSponsorship
         endDate(apartment) {
-            
-            return '12/05/2022';
+            let endDate = '';
+            const today = new Date();
+            //se ci sono sponsorship sugli appartamenti
+            if(this.activeSponsorships.length > 0) {
+                //per ogni sponsorship
+                this.activeSponsorships.forEach((sponsorship) => {
+                    //vedo se è relativa all'appartamento che sto esaminando
+                    if(sponsorship.apartment_id == apartment.id) {
+                        let end_date = new Date(sponsorship.end_date);
+                        //verifico se è attiva
+                        if(end_date > today) {
+                            let year = end_date.getFullYear();
+                            let month = end_date.getMonth() + 1;
+                            let day = end_date.getDate();
+                            endDate = day + '/' + month + '/' + year;
+                        }
+                    }
+                });
+            }
+            return endDate;
         }
     },
     created() {
@@ -88,9 +105,6 @@ export default {
     </Head>
 
     <AuthenticatedLayout>
-        
-        {{ lastSponsorship }}
-        
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
