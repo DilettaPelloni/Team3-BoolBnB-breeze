@@ -184,10 +184,11 @@ export default {
                     name="addressInput"
                     placeholder="Inserisci un indirizzo..."
                     v-model="addressInput"
+                    
                     @input="getAutocompleteSearch()"
-                    class="me-3"
+                    class="me-3 rounded-full"
                 />
-                <button type="submit" class="button p-2 text-white">
+                <button type="submit" class="button px-4 py-2 text-white rounded-full">
                     Cerca
                 </button>
             </form>
@@ -211,17 +212,17 @@ export default {
             <!-- FILTRI -->
             <button
                 @click="toggleFilters"
-                class="button p-2 mt-4 text-white"
+                class="button p-2 mt-8 text-white rounded-full py-2 px-4"
             >
                 {{ filterButton }}
             </button>
 
             <!-- CONTENITORE FILTRI -->
-            <div class="filter-box py-5" v-if="showFilters">
+            <div class="filter-box py-5 " v-if="showFilters">
                 <!-- RAGGIO DI RICERCA -->
-                <div>
+                <div class="py-5">
                     <label class="mb-2" for="radius">
-                        Definisci il raggio di ricerca (km)
+                        Definisci il raggio di ricerca
                     </label>
                     <input
                         type="range"
@@ -229,14 +230,15 @@ export default {
                         name="radius"
                         min="10"
                         max="30"
+                        class="mx-3"
                         v-model="searchForm.radius"
                     />
-                    <span>{{ searchForm.radius }}</span>
+                    <span>{{ searchForm.radius }} km</span>
                 </div>
 
                 <!-- STANZE -->
                 <div>
-                    <label class="mb-2">Filtra per numero di stanze</label>
+                    <label class="mb-2 me-3">Filtra per numero di stanze</label>
                     <select class="rounded-full py-2 px-4" v-model="searchForm.filters.rooms">
                         <option v-for="i in 10" :value="i">{{ i }}</option>
                     </select>
@@ -244,40 +246,40 @@ export default {
 
                 <!-- LETTI -->
                 <div>
-                    <label class="mb-2">Filtra per numero di posti letto</label>
-                    <select class="rounded-full py-2 px-4" v-model="searchForm.filters.beds">
+                    <label class="mb-2 me-3">Filtra per numero di posti letto</label>
+                    <select class="rounded-full py-2 px-4 my-4" v-model="searchForm.filters.beds">
                         <option v-for="i in 10" :value="i">{{ i }}</option>
                     </select>
                 </div>
 
                 <!-- SERVIZI -->
                 <div>
-                    <p class="block pb-2 font-medium text-gray-700 text-lg">
-                        Servizi offerti
+                    <p class="block py-5 font-bold text-gray-700 text-lg">
+                        Servizi offerti:
                     </p>
-                    <div class="flex flex-wrap">
+                    <div class="grid 2xl:grid-cols-4 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-30 items-center justify-items-start">
                         <template v-for="service in services">
-                            <input
-                                type="checkbox"
-                                :id="service.id"
-                                :name="service.id"
-                                :value="service.id"
-                                v-model="searchForm.filters.services"
-                                class="mx-2"
-                            />
-                            <label :for="service.id" class="mr-2">
-                                <span class="inline-block font-bold">
-                                    {{ service.name }}
-                                </span>
-                                <font-awesome-icon
-                                    :icon="['fas', service.icon]"
-                                    class="text-red-500 h-5 ml-1"
-                                    style="
-                                        color: rgb(254 91 95 / 78%);
-                                        padding-right: 9px;
-                                        height: 25px;
-                                    "
+                            <label :for="service.id" class="my-3">
+                                <input
+                                    type="checkbox"
+                                    :id="service.id"
+                                    :name="service.id"
+                                    :value="service.id"
+                                    v-model="searchForm.filters.services"
+                                    class="mr-4"
                                 />
+                                <span class="font-bold ">
+                                    {{ service.name }}
+                                    <font-awesome-icon
+                                        :icon="['fas', service.icon]"
+                                        class="text-red-500 h-5 ml-3"
+                                        style="
+                                            color: rgb(254 91 95 / 78%);
+                                            padding-right: 9px;
+                                            height: 25px;
+                                        "
+                                    />
+                                </span>
                             </label>
                         </template>
                     </div>
@@ -365,6 +367,9 @@ export default {
         width: 100%;
         object-fit: cover;
     }
+}
+input , select{
+    border-color: $main-color;
 }
 
 
