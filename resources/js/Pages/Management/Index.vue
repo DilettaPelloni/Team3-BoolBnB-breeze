@@ -70,10 +70,11 @@ export default {
                         <img
                             :src="apartment.full_cover_img_path"
                             alt="immagine casa"
+                            class="mb-4"
                         />
                         <!-- CARD INFO -->
                         <div
-                            class="card-info px-4 pt-4 flex flex-col justify-center h-40"
+                            class="card-info px-4 flex flex-col justify-evenly h-44"
                         >
                             <span
                                 ><b>{{ apartment.title }}</b></span
@@ -113,7 +114,7 @@ export default {
                             Modifica
                         </Link>
                         <button
-                            class="button rounded-full text-white px-4 py-2 mt-8"
+                            class="button rounded-full text-white px-4 mt-8"
                             @click="toggleModal(apartment.id)"
                         >
                             <font-awesome-icon :icon="['far', 'trash-can']" />

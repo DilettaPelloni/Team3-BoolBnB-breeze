@@ -70,13 +70,13 @@ export default {
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">Benvenuto {{ this.user_firstname }}! Per cominciare a gestire gli
-                        appartamenti fai click su
-                        "Appartamenti"</div>
+                    <div class="p-6 text-gray-900">
+                        Benvenuto {{ this.user_firstname }}! Questa è la tua Dashboard per la gestione dei tuoi appartamenti!
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="py-12">
+        <div>
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
