@@ -55,6 +55,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
 
+
+
 //VECCHIA ROUTE DASHBOARD
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');

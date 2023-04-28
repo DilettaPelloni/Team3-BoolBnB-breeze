@@ -1,6 +1,8 @@
 <script>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
+import axios from "axios";
+import { useForm } from "@inertiajs/vue3";
 
 
 export default {
@@ -19,6 +21,11 @@ export default {
             modalVisible: false,
             payModalVisible: false,
             selectedApartment: null,
+            clientToken: '',
+            error: '',
+            dropinInstance: null,
+            selectedSponsor: null, //sponsorship scelta dall'utente
+            amount: null,
         };
     },
     methods: {
@@ -48,25 +55,12 @@ export default {
             this.selectedApartment = apartment.id;
             this.modalVisible = true;
         },//selectsApartment
-        activateSponsorship() {
+        activateSponsorship(sponsorship) {
             this.modalVisible = false;
             this.payModalVisible = true;
+            this.selectedSponsor = sponsorship;
+            this.getClientToken();
 
-            let button = document.querySelector('#submit-button');
-
-            braintree.dropin.create({
-                authorization: 'sandbox_g42y39zw_348pk9cgf3bgyw2b',
-                selector: '#dropin-container'
-            },
-            function (err, instance) {
-                button.addEventListener('click', function () {
-                    instance.requestPaymentMethod(function (err, payload) {
-                        // Submit payload.nonce to your server
-                        console.log(err);
-                    });
-                    console.log('pago');
-                })
-            });
         },//activateSponsorship
         endDate(apartment) {
             let endDate = '';
@@ -89,7 +83,49 @@ export default {
                 });
             }
             return endDate;
-        }
+        },//endDate
+        getClientToken() {
+            axios.get('http://127.0.0.1:8000/api/token')
+                .then(response => {
+                    this.clientToken = response.data.token;
+
+                    braintree.dropin.create({
+                        authorization: this.clientToken,
+                        selector: '#dropin-container',
+                        locale: 'it_IT'
+                    },
+                    (err, instance) => {
+                        this.dropinInstance = instance;
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
+                    this.error = 'Could not get client token';
+                });
+        },//getClientToken
+        sendPayment() {
+            this.amount = this.selectedSponsor.price;
+            console.log(this.dropinInstance);
+            this.dropinInstance.requestPaymentMethod((error, payload) => {
+                
+                const nonce = payload.nonce;
+
+                axios.post('http://127.0.0.1:8000/api/transaction/create', { nonce: nonce, amount: this.amount })
+                    .then(response => {
+                        if (response.data.success) {
+                            console.log('bravo');
+                            // this.$swal({
+                            //     title: 'Payment successful',
+                            //     text: "of" + " " + this.amount + " " + "€",
+                            //     icon: 'success',
+                            //     confirmButtonText: "ok"
+                            // }).then(() => {
+                            //     console.log('bravo')
+                            // });
+                        }
+                    })
+            });
+        },//sendPayment
     },
     created() {
         let recaptchaScript = document.createElement('script');
@@ -182,9 +218,17 @@ export default {
             <!-- MODALE PAGAMENTO -->
             <div class="modal-overlay" v-show="payModalVisible" @click="payModalVisible = false">
                 <div class="modal mt-[80px]" @click.stop>
-                    <h3>Sono il modale per i pagamenti</h3>
-                    <div id="dropin-container"></div>
-                    <button id="submit-button" class="button button--small button--green">Purchase</button>
+                    <form @submit.prevent="sendPayment">
+                        <div id="dropin-container"></div>
+                        <h3>Prezzo: {{ selectedSponsor?.price.replace(/\./g, ',')  }} € </h3>
+                        <button
+                            id="submit-button"
+                            type="submit"
+                            class="button button--small button--coral"
+                        >
+                            Inizia sponsorizzazione
+                        </button>
+                    </form>
                 </div>
             </div><!-- CHIUSURA MODALE SCELTA SPONSOR -->
         </div>
@@ -234,16 +278,16 @@ export default {
   font-size: 0.875rem;
 }
 
-.button--green {
+.button--coral {
   outline: none;
-  background-color: #64d18a;
-  border-color: #64d18a;
+  background-color: $main-color;
+  border-color: $main-color;
   color: white;
   transition: all 200ms ease;
 }
 
-.button--green:hover {
-  background-color: #8bdda8;
+.button--coral:hover {
+  background-color: $main-color-light;
   color: white;
 }
 
