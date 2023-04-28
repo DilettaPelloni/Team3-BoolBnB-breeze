@@ -24,6 +24,8 @@ export default {
             clientToken: '',
             error: '',
             dropinInstance: null,
+            selectedSponsor: null, //sponsorship scelta dall'utente
+            amount: null,
         };
     },
     methods: {
@@ -56,28 +58,9 @@ export default {
         activateSponsorship(sponsorship) {
             this.modalVisible = false;
             this.payModalVisible = true;
-
+            this.selectedSponsor = sponsorship;
             this.getClientToken();
-            console.log(this.clientToken);
-            // const { clientToken } = this;
 
-            let button = document.querySelector('#submit-button');
-
-            // braintree.dropin.create({
-            //     authorization: clientToken,
-            //     selector: '#dropin-container',
-            //     locale: 'it_IT'
-            // },
-            // (err, instance) => {
-            //     button.addEventListener('click', function () {
-            //         instance.requestPaymentMethod(function (err, payload) {
-            //             console.log(payload);
-            //             console.log(err);
-            //         });
-            //         console.log('pago');
-            //     })
-            //     this.dropinInstance = instance;
-            // });
         },//activateSponsorship
         endDate(apartment) {
             let endDate = '';
@@ -105,12 +88,44 @@ export default {
             axios.get('http://127.0.0.1:8000/api/token')
                 .then(response => {
                     this.clientToken = response.data.token;
+
+                    braintree.dropin.create({
+                        authorization: this.clientToken,
+                        selector: '#dropin-container',
+                        locale: 'it_IT'
+                    },
+                    (err, instance) => {
+                        this.dropinInstance = instance;
+                    });
                 })
                 .catch(error => {
                     console.error(error);
                     this.error = 'Could not get client token';
                 });
-        },
+        },//getClientToken
+        sendPayment() {
+            this.amount = this.selectedSponsor.price;
+            console.log(this.dropinInstance);
+            this.dropinInstance.requestPaymentMethod((error, payload) => {
+                
+                const nonce = payload.nonce;
+
+                axios.post('http://127.0.0.1:8000/api/transaction/create', { nonce: nonce, amount: this.amount })
+                    .then(response => {
+                        if (response.data.success) {
+                            console.log('bravo');
+                            // this.$swal({
+                            //     title: 'Payment successful',
+                            //     text: "of" + " " + this.amount + " " + "€",
+                            //     icon: 'success',
+                            //     confirmButtonText: "ok"
+                            // }).then(() => {
+                            //     console.log('bravo')
+                            // });
+                        }
+                    })
+            });
+        },//sendPayment
     },
     created() {
         let recaptchaScript = document.createElement('script');
@@ -203,8 +218,17 @@ export default {
             <!-- MODALE PAGAMENTO -->
             <div class="modal-overlay" v-show="payModalVisible" @click="payModalVisible = false">
                 <div class="modal mt-[80px]" @click.stop>
-                    <div id="dropin-container"></div>
-                    <button id="submit-button" class="button button--small button--coral">Inizia sponsorizzazione</button>
+                    <form @submit.prevent="sendPayment">
+                        <div id="dropin-container"></div>
+                        <h3>Prezzo: {{ selectedSponsor?.price.replace(/\./g, ',')  }} € </h3>
+                        <button
+                            id="submit-button"
+                            type="submit"
+                            class="button button--small button--coral"
+                        >
+                            Inizia sponsorizzazione
+                        </button>
+                    </form>
                 </div>
             </div><!-- CHIUSURA MODALE SCELTA SPONSOR -->
         </div>

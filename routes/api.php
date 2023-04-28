@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('token', [PaymentController::class, 'getToken'])->name('token');
+Route::post('transaction/create', [PaymentController::class, 'createTransaction'])->name('transaction');
