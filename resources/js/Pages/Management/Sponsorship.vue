@@ -5,6 +5,7 @@ import axios from "axios";
 import { useForm } from "@inertiajs/vue3";
 
 
+
 export default {
     name: "Sponsoship",
     props: {
@@ -29,21 +30,21 @@ export default {
         };
     },
     methods: {
-        isSponsorized (apartment) {
+        isSponsorized(apartment) {
             //di base ritorno vero
             let flag = true;
             //prendo la data di oggi
             const today = new Date();
             //se ci sono sponsorships attive sugli appartamenti di questo utente
-            if(this.activeSponsorships.length > 0) {
+            if (this.activeSponsorships.length > 0) {
                 //per ogni sponsorship attiva
                 this.activeSponsorships.forEach((sponsorship) => {
                     //vedo se è relativa all'appartamento che sto esaminando
-                    if(sponsorship.apartment_id == apartment.id) {
+                    if (sponsorship.apartment_id == apartment.id) {
                         //trasformo la sua data di fine in un ogetto Date
                         let end_date = new Date(sponsorship.end_date);
                         //se la data di fine è maggiore della data di oggi ritorno falso
-                        if(end_date > today) {
+                        if (end_date > today) {
                             flag = false;
                         }
                     }
@@ -66,14 +67,14 @@ export default {
             let endDate = '';
             const today = new Date();
             //se ci sono sponsorship sugli appartamenti
-            if(this.activeSponsorships.length > 0) {
+            if (this.activeSponsorships.length > 0) {
                 //per ogni sponsorship
                 this.activeSponsorships.forEach((sponsorship) => {
                     //vedo se è relativa all'appartamento che sto esaminando
-                    if(sponsorship.apartment_id == apartment.id) {
+                    if (sponsorship.apartment_id == apartment.id) {
                         let end_date = new Date(sponsorship.end_date);
                         //verifico se è attiva
-                        if(end_date > today) {
+                        if (end_date > today) {
                             let year = end_date.getFullYear();
                             let month = end_date.getMonth() + 1;
                             let day = end_date.getDate();
@@ -94,9 +95,9 @@ export default {
                         selector: '#dropin-container',
                         locale: 'it_IT'
                     },
-                    (err, instance) => {
-                        this.dropinInstance = instance;
-                    });
+                        (err, instance) => {
+                            this.dropinInstance = instance;
+                        });
                 })
                 .catch(error => {
                     console.error(error);
@@ -104,24 +105,40 @@ export default {
                 });
         },//getClientToken
         sendPayment() {
+            console.log(this.selectedSponsor.duration)
             this.amount = this.selectedSponsor.price;
             console.log(this.dropinInstance);
+
             this.dropinInstance.requestPaymentMethod((error, payload) => {
-                
                 const nonce = payload.nonce;
 
-                axios.post('http://127.0.0.1:8000/api/transaction/create', { nonce: nonce, amount: this.amount })
+                axios.post('http://127.0.0.1:8000/api/transaction/create', {
+                    nonce: nonce,
+                    amount: this.amount,
+                    transaction_id: this.selectedSponsor.id,
+                    apartment_id: this.selectedApartment,
+                    duration: this.selectedSponsor.duration,
+                    sponsorship_id: this.selectedSponsor.id,
+                })
                     .then(response => {
                         if (response.data.success) {
                             console.log('bravo');
-                            // this.$swal({
-                            //     title: 'Payment successful',
-                            //     text: "of" + " " + this.amount + " " + "€",
-                            //     icon: 'success',
-                            //     confirmButtonText: "ok"
-                            // }).then(() => {
-                            //     console.log('bravo')
-                            // });
+                            console.log(nonce);
+                            console.log(this.amount);
+                            console.log(this.selectedSponsor.price);
+                            console.log(this.selectedSponsor.id);
+                            console.log(this.selectedSponsor.duration)
+                            console.log(this.selectedApartment);
+                            alert('Grazie, pagamento effettuato con successo!');
+                            this.payModalVisible = false;
+
+                            location.reload();
+
+                        } else {
+                            console.log('errore');
+                            this.error = response.data.message;
+                            alert('Errore, pagamento non effettuato!');
+                            this.payModalVisible = false;
                         }
                     })
             });
@@ -145,10 +162,7 @@ export default {
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <ul class="p-6 text-gray-900">
-                        <li
-                            v-for="apartment in apartments"
-                            class="py-5 border-b item flex justify-between items-center"
-                        >   
+                        <li v-for="apartment in apartments" class="py-5 border-b item flex justify-between items-center">
                             <!-- TITOLO E IMMAGINE -->
                             <div class="flex items-center">
                                 <img :src="apartment.full_cover_img_path" alt="apartment_image" class="image-preview">
@@ -159,25 +173,17 @@ export default {
 
                             <!-- BOTTONE -->
                             <div class="flex flex-col justify-center items-center">
-                                <button
-                                    class="rounded-full my-button"
-                                    :class="{
+                                <button class="rounded-full my-button" :class="{
                                         disabled: !isSponsorized(apartment),
-                                    }"
-                                    :disabled="!isSponsorized(apartment)"
-                                    @click="selectsApartment(apartment)"
-                                >
-                                    {{ isSponsorized(apartment) ? 'Sponsorizza' : 'Sponsorizzazione attiva'}}
+                                    }" :disabled="!isSponsorized(apartment)" @click="selectsApartment(apartment)">
+                                    {{ isSponsorized(apartment) ? 'Sponsorizza' : 'Sponsorizzazione attiva' }}
                                 </button>
-                                <p  
-                                    class="remaining-time"
-                                    v-if="!isSponsorized(apartment)"
-                                >
+                                <p class="remaining-time" v-if="!isSponsorized(apartment)">
                                     <font-awesome-icon :icon="['fas', 'stopwatch']" />
                                     {{ endDate(apartment) }}
                                 </p>
                             </div>
-                            
+
                         </li>
                     </ul>
                 </div>
@@ -187,27 +193,21 @@ export default {
             <div class="modal-overlay" v-if="modalVisible" @click="modalVisible = false">
                 <div class="modal mt-[80px]">
                     <h3>Scegli il tuo piano di sponsorizzazione</h3>
-                    <div class="columns-container flex mt-3" >
-                        <div
-                            class="column"
-                            v-for="sponsorship in sponsorships"
-                        >
+                    <div class="columns-container flex mt-3">
+                        <div class="column" v-for="sponsorship in sponsorships">
                             <h4 class="font-bold ">
                                 {{ sponsorship.name }}
                             </h4>
                             <div class="price mt-3">
                                 <p class="subtitle">Prezzo</p>
-                                <p>{{ sponsorship.price.replace(/\./g, ',')  }} €</p>
+                                <p>{{ sponsorship.price.replace(/\./g, ',') }} €</p>
                             </div>
                             <div class="duration mt-3">
                                 <p class="subtitle">Durata della sponsorizzazione</p>
                                 <p>{{ sponsorship.duration.substring(0, sponsorship.duration.indexOf(":")) }} ore</p>
                             </div>
 
-                            <button
-                                class="rounded-full mt-10 my-button"
-                                @click="activateSponsorship(sponsorship)"
-                            >
+                            <button class="rounded-full mt-10 my-button" @click="activateSponsorship(sponsorship)">
                                 Inizia
                             </button>
                         </div>
@@ -220,12 +220,8 @@ export default {
                 <div class="modal mt-[80px]" @click.stop>
                     <form @submit.prevent="sendPayment">
                         <div id="dropin-container"></div>
-                        <h3>Prezzo: {{ selectedSponsor?.price.replace(/\./g, ',')  }} € </h3>
-                        <button
-                            id="submit-button"
-                            type="submit"
-                            class="button button--small button--coral"
-                        >
+                        <h3>Prezzo: {{ selectedSponsor?.price.replace(/\./g, ',') }} € </h3>
+                        <button id="submit-button" type="submit" class="button button--small button--coral">
                             Inizia sponsorizzazione
                         </button>
                     </form>
@@ -258,46 +254,47 @@ export default {
 }
 
 .button {
-  cursor: pointer;
-  font-weight: 500;
-  left: 3px;
-  line-height: inherit;
-  position: relative;
-  text-decoration: none;
-  text-align: center;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 3px;
-  display: inline-block;
+    cursor: pointer;
+    font-weight: 500;
+    left: 3px;
+    line-height: inherit;
+    position: relative;
+    text-decoration: none;
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    display: inline-block;
 }
 
 .button--small {
-  padding: 10px 20px;
-  font-size: 0.875rem;
+    padding: 10px 20px;
+    font-size: 0.875rem;
 }
 
 .button--coral {
-  outline: none;
-  background-color: $main-color;
-  border-color: $main-color;
-  color: white;
-  transition: all 200ms ease;
+    outline: none;
+    background-color: $main-color;
+    border-color: $main-color;
+    color: white;
+    transition: all 200ms ease;
 }
 
 .button--coral:hover {
-  background-color: $main-color-light;
-  color: white;
+    background-color: $main-color-light;
+    color: white;
 }
 
 .my-button {
-        padding-block: 0.5rem;
-        padding-inline: 0.5rem;
-        background-color: $main-color;
-        color: white;
-        &.disabled {
-            background-color: grey;
-        }
+    padding-block: 0.5rem;
+    padding-inline: 0.5rem;
+    background-color: $main-color;
+    color: white;
+
+    &.disabled {
+        background-color: grey;
     }
+}
 
 .modal-overlay {
     position: fixed;
@@ -307,6 +304,7 @@ export default {
     left: 0;
     background-color: rgba(0, 0, 0, 0.7);
 }
+
 .modal {
     display: flex;
     flex-direction: column;
@@ -325,6 +323,7 @@ export default {
     .column {
         padding-inline: 1rem;
         border-right: 1px solid gray;
+
         .subtitle {
             color: $main-color;
         }
@@ -334,5 +333,4 @@ export default {
         border: none;
     }
 }
-
 </style>
