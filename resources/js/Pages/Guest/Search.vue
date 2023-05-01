@@ -250,11 +250,7 @@ export default {
                                     v-model="searchForm.filters.services" class="mr-4" @change="searchApartments" />
                                 <span class="font-bold ">
                                     {{ service.name }}
-                                    <font-awesome-icon :icon="['fas', service.icon]" class="text-red-500 h-5 ml-3" style="
-                                            color: rgb(254 91 95 / 78%);
-                                            padding-right: 9px;
-                                            height: 25px;
-                                        " />
+                                    <font-awesome-icon :icon="['fas', service.icon]" class= "ml-3 text-mainColor-200 pr-[9px] h-[25px]"/>
                                 </span>
                             </label>
                         </template>
@@ -283,7 +279,7 @@ export default {
                 <div class="card-info px-4 pt-4 flex flex-col justify-center pb-4 ">
                     <span><b>{{ apartment.title }}</b></span>
                     <div class="mt-2 grow flex items-center">
-                        <font-awesome-icon :icon="['fas', 'location-dot']" class="me-2" />
+                        <font-awesome-icon :icon="['fas', 'location-dot']" class="me-2 text-mainColor-300" />
                         {{ apartment.address }}
                     </div>
                     <div class="my-3">
@@ -292,9 +288,7 @@ export default {
                     </div>
                     <ul class="flex flex-wrap">
                         <li v-for="service in apartment.services">
-                            <font-awesome-icon :icon="['fas', service.icon]" class="me-2" style="
-                                            color: rgb(254 91 95 / 78%);
-                                        " />
+                            <font-awesome-icon :icon="['fas', service.icon]" class="me-2 text-mainColor-300"/>
                         </li>
                     </ul>
                 </div><!-- CHIUSURA CARD INFO -->
