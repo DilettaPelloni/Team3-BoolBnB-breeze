@@ -286,8 +286,10 @@ export default {
                         <font-awesome-icon :icon="['fas', 'location-dot']" class="me-2" />
                         {{ apartment.address }}
                     </div>
-                    <p>Stanze: {{ apartment.rooms }}</p>
-                    <p>Posti letto: {{ apartment.beds }}</p>
+                    <div class="my-3">
+                        <p>Stanze: {{ apartment.rooms }}</p>
+                        <p>Posti letto: {{ apartment.beds }}</p>
+                    </div>
                     <ul class="flex flex-wrap">
                         <li v-for="service in apartment.services">
                             <font-awesome-icon :icon="['fas', service.icon]" class="me-2" style="
