@@ -12,6 +12,7 @@ use App\Models\Service;
 //Helpers
 use Illuminate\Support\Facades\Auth;
 use DateTime;
+use Illuminate\Database\Query\JoinClause;
 
 //Inertia
 use Inertia\Inertia;
@@ -72,11 +73,19 @@ class PageController extends Controller
             $lat = $address['position']['lat'];
             $lon = $address['position']['lon'];
 
-            $apartments = Apartment::selectRaw('*, ( 6371 * acos( cos( radians(?) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude) ) ) ) AS distance', [$lat, $lon, $lat])
+            
+
+            $apartments = Apartment::selectRaw('*, ( 6371 * acos( cos( radians(?) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude) ) ) ) AS distance, (apartment_sponsorship.end_date) AS sponsored ', [$lat, $lon, $lat])
+            ->leftJoin('apartment_sponsorship', function ($join) {
+                $today = new DateTime('now');
+                $join->on('apartments.id', '=', 'apartment_sponsorship.apartment_id')
+                ->where('apartment_sponsorship.end_date', '>=', $today);
+            })
             ->having('distance', '<=', $radius)
             ->having('visible', '=', '1')
             ->having('rooms', '>=', $rooms)
             ->having('beds', '>=', $beds)
+            ->orderBy('sponsored', 'desc')
             ->with('services')
             ->get();
 
