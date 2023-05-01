@@ -7,15 +7,10 @@ export default {
 <template>
     <div class="footer">
         <div class="container">
-            <div
-                class="flex-container flex align-middle 2xl:justify-between xl:justify-between lg:justify-between md:justify-center sm:justify-center 2xl:flex-row xl:flex-row lg:flex-row md:flex-col sm:flex-col 2xl:text-left xl:text-left lg:text-left md:text-center sm:text-center"
-            >
+            <div class="flex-container flex flex-col text-center 2xl:justify-between xl:justify-between lg:justify-between md:justify-center sm:justify-center 2xl:flex-row xl:flex-row lg:flex-row md:flex-col sm:flex-col 2xl:text-left xl:text-left lg:text-left md:text-center sm:text-center">
                 <div class="logo">
-                    <img
-                        src="/img/LogoBoolBnB.png"
-                        alt="Logo BoolBnB"
-                        class="object-contain w-[230px] pb-5 2xl:ms-0 xl:ms-0 lg:ms-0 md:m-auto sm:m-auto"
-                    />
+                    <img src="/img/LogoBoolBnB.png" alt="Logo BoolBnB"
+                        class="object-contain w-[230px] pb-5 2xl:ms-0 xl:ms-0 lg:ms-0 m-auto" />
 
                     <div class="text">
                         <p class="pb-5 text-[20px] text-white">
@@ -26,19 +21,13 @@ export default {
                             Orari di apertura: Lun - Ven: 9 AM - 6 PM
                         </p>
                     </div>
-                    <div class="socialIcon flex 2xl:justify-start xl:justify-start md:justify-center sm:justify-center">
+                    <div class="socialIcon flex 2xl:justify-start xl:justify-start lg:justify-start md:justify-center justify-center">
                         <div class="cont-icon">
-                            <font-awesome-icon
-                                class="social-icon"
-                                :icon="['fab', 'facebook-f']"
-                            />
+                            <font-awesome-icon class="social-icon" :icon="['fab', 'facebook-f']" />
                         </div>
 
                         <div class="cont-icon">
-                            <font-awesome-icon
-                                class="social-icon"
-                                :icon="['fab', 'instagram']"
-                            />
+                            <font-awesome-icon class="social-icon" :icon="['fab', 'instagram']" />
                         </div>
                     </div>
                 </div>
@@ -53,7 +42,7 @@ export default {
                         <a class="button" href="#">Chiama</a>
                     </div>
                 </div>
-                <div class="linkUtili text-right 2xl:text-end md:text-center md:m-auto sm:text-center sm:m-auto">
+                <div class="linkUtili text-center 2xl:text-end lg:text-end md:text-center md:m-auto sm:text-center m-auto">
                     <p class="text-[20px] pb-5 pt-[50px] text-white">
                         Link Utili
                     </p>
@@ -65,14 +54,10 @@ export default {
                             <a class="link text-white" href="#">Destinazioni</a>
                         </li>
                         <li>
-                            <a class="link text-white" href="#"
-                                >Privacy Policy</a
-                            >
+                            <a class="link text-white" href="#">Privacy Policy</a>
                         </li>
                         <li>
-                            <a class="link text-white" href="#"
-                                >Cookie Policy</a
-                            >
+                            <a class="link text-white" href="#">Cookie Policy</a>
                         </li>
                     </ul>
                 </div>
@@ -96,6 +81,7 @@ export default {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 .logo {
     display: block;
 }
@@ -104,7 +90,7 @@ export default {
     color: #fe5b5f;
 }
 
-.flex-container > * {
+.flex-container>* {
     flex: 1;
 }
 

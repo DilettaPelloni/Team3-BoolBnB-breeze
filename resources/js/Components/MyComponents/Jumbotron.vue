@@ -52,12 +52,12 @@ export default {
 
         searchApartments() {
             //se l'utente clicca cerca senza aver inserito un indirizzo
-            if(this.addresses.length == 0) {
+            if (this.addresses.length == 0) {
                 this.error = 'Devi inserire un indirizzo valido per cercare';
                 return;
             }
             //se l'utente non ha scelto un indirizzo dalla lista
-            if(this.searchForm.completeAddress == null) {
+            if (this.searchForm.completeAddress == null) {
                 this.searchForm.completeAddress = this.addresses[0];
                 this.addressInput = this.addresses[0].address.freeformAddress;
             }
@@ -91,17 +91,10 @@ export default {
         <h2 class="text-center text-white text-[20px]">
             Scegli subito la tua destinazione!
         </h2>
-        <form @submit.prevent="searchApartments">
+        <form @submit.prevent="searchApartments" class="flex flex-col items-stretch sm:block">
             <!-- INDIRIZZO -->
-            <input
-                type="text"
-                id="addressInput"
-                name="addressInput"
-                placeholder="Inserisci un indirizzo..."
-                v-model="addressInput"
-                @input="getAutocompleteSearch()"
-                class="me-3 rounded-full focus:ring-transparent"
-            />
+            <input type="text" id="addressInput" name="addressInput" placeholder="Inserisci un indirizzo..."
+                v-model="addressInput" @input="getAutocompleteSearch()" class="sm:me-3 rounded-full focus:ring-transparent" />
             <button type="submit" class="button text-white">
                 Cerca la tua meta
             </button>
@@ -121,7 +114,8 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-@import '../../../scss/app.scss'; 
+@import '../../../scss/app.scss';
+
 .video-bg {
     position: absolute;
     top: 0;
@@ -168,7 +162,8 @@ button:active {
     box-shadow: 0 5px #dd5b5f;
     transform: translateY(4px);
 }
-#addressInput{
+
+#addressInput {
     border-color: $main-color;
 }
 </style>
