@@ -9,6 +9,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\ApartmentController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\MessagesController;
+use App\Http\Controllers\PaymentController;
 
 //Model
 use App\Models\Apartment;
@@ -52,6 +53,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/sponsorizzazioni', [ApartmentController::class, 'sponsorship'])->name('sponsorship');
 });
 
+//PER CREARE UNA NUOVA SPONSORIZZAZIONE
+Route::post('avtiveSponsoship/create', [PaymentController::class, 'createActiveSponsoship'])->name('createActiveSponsoship');
 
 
 

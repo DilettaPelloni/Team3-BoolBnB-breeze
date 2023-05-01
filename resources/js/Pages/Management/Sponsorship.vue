@@ -19,13 +19,17 @@ export default {
     },
     data() {
         return {
-            modalVisible: false,
-            payModalVisible: false,
-            selectedApartment: null,
+            modalVisible: false,//mostra il modale per scegliere il tipo di sponsorizzazione
+            payModalVisible: false, //mostra il modale per pagare
+            showPaymentButton: false, //mostra il bottone per pagare
+            successMessage: false, //mostra un messaggio di successo se la creazione della sponsorship è andata a buon fine
+            newActiveSponsorship: useForm({
+                selectedApartment: null,
+                selectedSponsor: null, //sponsorship scelta dall'utente
+            }),
             clientToken: '',
             error: '',
             dropinInstance: null,
-            selectedSponsor: null, //sponsorship scelta dall'utente
             amount: null,
         };
     },
@@ -53,15 +57,14 @@ export default {
             return flag;
         }, //isSponsorized
         selectsApartment(apartment) {
-            this.selectedApartment = apartment.id;
+            this.newActiveSponsorship.selectedApartment = apartment.id;
             this.modalVisible = true;
         },//selectsApartment
         activateSponsorship(sponsorship) {
             this.modalVisible = false;
             this.payModalVisible = true;
-            this.selectedSponsor = sponsorship;
+            this.newActiveSponsorship.selectedSponsor = sponsorship;
             this.getClientToken();
-
         },//activateSponsorship
         endDate(apartment) {
             let endDate = '';
@@ -89,7 +92,7 @@ export default {
             axios.get('http://127.0.0.1:8000/api/token')
                 .then(response => {
                     this.clientToken = response.data.token;
-
+                    this.showPaymentButton = true;
                     braintree.dropin.create({
                         authorization: this.clientToken,
                         selector: '#dropin-container',
@@ -105,9 +108,8 @@ export default {
                 });
         },//getClientToken
         sendPayment() {
-            console.log(this.selectedSponsor.duration)
-            this.amount = this.selectedSponsor.price;
-            console.log(this.dropinInstance);
+            this.showPaymentButton = false;
+            this.amount = this.newActiveSponsorship.selectedSponsor.price;
 
             this.dropinInstance.requestPaymentMethod((error, payload) => {
                 const nonce = payload.nonce;
@@ -115,34 +117,26 @@ export default {
                 axios.post('http://127.0.0.1:8000/api/transaction/create', {
                     nonce: nonce,
                     amount: this.amount,
-                    transaction_id: this.selectedSponsor.id,
-                    apartment_id: this.selectedApartment,
-                    duration: this.selectedSponsor.duration,
-                    sponsorship_id: this.selectedSponsor.id,
                 })
                     .then(response => {
                         if (response.data.success) {
-                            console.log('bravo');
-                            console.log(nonce);
-                            console.log(this.amount);
-                            console.log(this.selectedSponsor.price);
-                            console.log(this.selectedSponsor.id);
-                            console.log(this.selectedSponsor.duration)
-                            console.log(this.selectedApartment);
-                            alert('Grazie, pagamento effettuato con successo!');
-                            this.payModalVisible = false;
-
-                            location.reload();
+                            this.createActiveSponsorship();
 
                         } else {
-                            console.log('errore');
+                            console.log(response.data);
                             this.error = response.data.message;
-                            alert('Errore, pagamento non effettuato!');
-                            this.payModalVisible = false;
                         }
                     })
             });
         },//sendPayment
+        createActiveSponsorship() {
+            this.newActiveSponsorship.post(route('createActiveSponsoship'), {
+                onSuccess: () => {
+                    this.payModalVisible = false;
+                    this.successMessage = true;
+                },
+            });
+        },//createActiveSponsorship
     },
     created() {
         let recaptchaScript = document.createElement('script');
@@ -173,9 +167,14 @@ export default {
 
                             <!-- BOTTONE -->
                             <div class="flex flex-col justify-center items-center">
-                                <button class="rounded-full my-button" :class="{
+                                <button
+                                    class="rounded-full my-button"
+                                    :class="{
                                         disabled: !isSponsorized(apartment),
-                                    }" :disabled="!isSponsorized(apartment)" @click="selectsApartment(apartment)">
+                                    }"
+                                    :disabled="!isSponsorized(apartment)"
+                                    @click="selectsApartment(apartment)"
+                                >
                                     {{ isSponsorized(apartment) ? 'Sponsorizza' : 'Sponsorizzazione attiva' }}
                                 </button>
                                 <p class="remaining-time" v-if="!isSponsorized(apartment)">
@@ -191,7 +190,7 @@ export default {
 
             <!-- MODALE SCELTA SPONSOR -->
             <div class="modal-overlay" v-if="modalVisible" @click="modalVisible = false">
-                <div class="modal mt-[80px]">
+                <div class="modal mt-[80px]" @click.stop>
                     <h3>Scegli il tuo piano di sponsorizzazione</h3>
                     <div class="columns-container flex mt-3">
                         <div class="column" v-for="sponsorship in sponsorships">
@@ -218,15 +217,61 @@ export default {
             <!-- MODALE PAGAMENTO -->
             <div class="modal-overlay" v-show="payModalVisible" @click="payModalVisible = false">
                 <div class="modal mt-[80px]" @click.stop>
+
                     <form @submit.prevent="sendPayment">
+
+                        <!-- QUA DENTRO SI CREA LA MASCHERA PER IL PAGAMENTO -->
                         <div id="dropin-container"></div>
-                        <h3>Prezzo: {{ selectedSponsor?.price.replace(/\./g, ',') }} € </h3>
-                        <button id="submit-button" type="submit" class="button button--small button--coral">
-                            Inizia sponsorizzazione
-                        </button>
+
+                        <!-- IN CASO DI ERRORE LO MOSTRO -->
+                        <div v-if="error != ''">
+                            <p>{{ error }}</p>
+                        </div>
+
+                        <!-- ANIMAZIONE DI CARICAMENTO -->
+                        <div v-show="!showPaymentButton">
+                            <div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                        </div>
+
+                        <!-- COMPARE QUANDO OTTENGO IL TOKEN, SCOMPARE QUANDO CREO LA TRANSAZIONE -->
+                        <div v-show="showPaymentButton">
+                            <!-- PREZZO E DURATA DELLA SPONSORIZZAZIONE -->
+                            <h3 class="mt-5 mb-5">
+                                Importo della transazione:
+                                <strong>
+                                    {{ newActiveSponsorship.selectedSponsor?.price.replace(/\./g, ',') }} €
+                                </strong>
+                            </h3>
+                            <h3 class="mt-5 mb-5">
+                                Durata della sponsorizzazione:
+                                <strong>
+                                    {{ newActiveSponsorship.selectedSponsor?.duration.substring(0, newActiveSponsorship.selectedSponsor.duration.indexOf(":")) }} ore
+                                </strong>
+                            </h3>
+
+                            <!-- PULSANTE PER PAGARE -->
+                            <button
+                                id="submit-button"
+                                type="submit"
+                                class="button button--small button--coral"
+                            >
+                                Inizia sponsorizzazione
+                            </button>
+                        </div>
+
                     </form>
                 </div>
             </div><!-- CHIUSURA MODALE SCELTA SPONSOR -->
+
+            <!-- MODALE SUCCESSO -->
+            <div class="modal-overlay" v-if="successMessage" @click="successMessage = false">
+                <div class="modal mt-[80px]" @click.stop>
+                    <div class="messaggioInviato">
+                        <p>Sponsorizzazione attivata correttamente!</p>
+                        <img src="/img/mailSent.png"/>
+                </div>
+                </div>
+            </div><!-- CHIUSURA MODALE SUCCESSO -->
         </div>
 
     </AuthenticatedLayout>
@@ -316,6 +361,7 @@ export default {
     transform: translate(-50%, -50%);
     padding: 2rem;
     min-height: 250px;
+    min-width: 250px;
     text-align: center;
     border-radius: 15px;
     background-color: #fff;
@@ -333,4 +379,102 @@ export default {
         border: none;
     }
 }
+
+.messaggioInviato {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 40px 0px;
+    img {
+        height: 100px;
+        margin-top: 2rem;
+    }
+}
+
+//loader
+.lds-default {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-default div {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #fdd;
+  border-radius: 50%;
+  animation: lds-default 1.2s linear infinite;
+}
+.lds-default div:nth-child(1) {
+  animation-delay: 0s;
+  top: 37px;
+  left: 66px;
+}
+.lds-default div:nth-child(2) {
+  animation-delay: -0.1s;
+  top: 22px;
+  left: 62px;
+}
+.lds-default div:nth-child(3) {
+  animation-delay: -0.2s;
+  top: 11px;
+  left: 52px;
+}
+.lds-default div:nth-child(4) {
+  animation-delay: -0.3s;
+  top: 7px;
+  left: 37px;
+}
+.lds-default div:nth-child(5) {
+  animation-delay: -0.4s;
+  top: 11px;
+  left: 22px;
+}
+.lds-default div:nth-child(6) {
+  animation-delay: -0.5s;
+  top: 22px;
+  left: 11px;
+}
+.lds-default div:nth-child(7) {
+  animation-delay: -0.6s;
+  top: 37px;
+  left: 7px;
+}
+.lds-default div:nth-child(8) {
+  animation-delay: -0.7s;
+  top: 52px;
+  left: 11px;
+}
+.lds-default div:nth-child(9) {
+  animation-delay: -0.8s;
+  top: 62px;
+  left: 22px;
+}
+.lds-default div:nth-child(10) {
+  animation-delay: -0.9s;
+  top: 66px;
+  left: 37px;
+}
+.lds-default div:nth-child(11) {
+  animation-delay: -1s;
+  top: 62px;
+  left: 52px;
+}
+.lds-default div:nth-child(12) {
+  animation-delay: -1.1s;
+  top: 52px;
+  left: 62px;
+}
+@keyframes lds-default {
+  0%, 20%, 80%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+}
+
 </style>
