@@ -26,13 +26,7 @@ use App\Models\Apartment;
 */
 
 //HOME PAGE
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'apartments' => Apartment::where('visible', '=', '1')->get(),
-    ]);
-})->name('welcome');;
+Route::get('/', [PageController::class, 'home'])->name('welcome');
 
 //PAGINA SEARCH
 Route::get('/ricerca', [PageController::class, 'search'])->name('search');
