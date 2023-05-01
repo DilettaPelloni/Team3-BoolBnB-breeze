@@ -79,12 +79,12 @@ export default {
 
         searchApartments() {
             //se l'utente clicca cerca senza aver inserito un indirizzo
-            if(this.addresses.length == 0) {
+            if (this.addresses.length == 0) {
                 this.error = 'Devi inserire un indirizzo valido per cercare';
                 return;
             }
             //se l'utente non ha scelto un indirizzo dalla lista
-            if(this.searchForm.completeAddress == null) {
+            if (this.searchForm.completeAddress == null) {
                 this.searchForm.completeAddress = this.addresses[0];
                 this.addressInput = this.addresses[0].address.freeformAddress;
             }
@@ -103,7 +103,7 @@ export default {
         },//searchApartments
 
         toggleFilters() {
-            if(this.showFilters){
+            if (this.showFilters) {
                 this.showFilters = false;
                 this.filterButton = 'Mostra più filtri';
             }
@@ -115,13 +115,13 @@ export default {
 
         createMap() {
             this.displayMap = true;
-            if(this.searchForm.radius <= 20) {
-                    this.zoom = 10;
+            if (this.searchForm.radius <= 20) {
+                this.zoom = 10;
             }
             else {
                 this.zoom = 8;
             }
-            setTimeout (() => {
+            setTimeout(() => {
                 //creo la mappa
                 const mapElement = document.getElementById("map");
                 const map = tt.map({
@@ -137,14 +137,14 @@ export default {
                         .addTo(map);
                 })
             }, 500);
-            
+
         }
     },
     computed: {
     },
     watch: {
         apartments() {
-            if(this.apartments?.length > 0) {
+            if (this.apartments?.length > 0) {
                 //determino lo zoom in base al raggio di ricerca
                 this.createMap();
             }
@@ -154,8 +154,8 @@ export default {
         }
     },//watch
     mounted() {
-        setTimeout (() => {
-            if(this.apartments?.length > 0) {
+        setTimeout(() => {
+            if (this.apartments?.length > 0) {
                 this.createMap();
             }
         }, 500);
@@ -170,7 +170,7 @@ export default {
     <AppHeader :canLogin="canLogin" :canRegister="canRegister" />
 
     <!-- MAIN -->
-    <div class="container">
+    <div class="container ">
         <!-- SEARCH BOX -->
         <div class="search-box text-center p-10">
             <h2 class="mb-4">
@@ -178,16 +178,8 @@ export default {
             </h2>
             <form @submit.prevent="searchApartments" class="relative w-fit mx-auto ">
                 <!-- INDIRIZZO -->
-                <input
-                    type="text"
-                    id="addressInput"
-                    name="addressInput"
-                    placeholder="Inserisci un indirizzo..."
-                    v-model="addressInput"
-                    
-                    @input="getAutocompleteSearch()"
-                    class="me-3 rounded-full"
-                />
+                <input type="text" id="addressInput" name="addressInput" placeholder="Inserisci un indirizzo..."
+                    v-model="addressInput" @input="getAutocompleteSearch()" class="me-3 rounded-full" />
                 <button type="submit" class="button px-4 py-2 text-white rounded-full">
                     Cerca
                 </button>
@@ -212,10 +204,7 @@ export default {
             </div>
 
             <!-- FILTRI -->
-            <button
-                @click="toggleFilters"
-                class="button p-2 mt-8 text-white rounded-full py-2 px-4"
-            >
+            <button @click="toggleFilters" class="button p-2 mt-8 text-white rounded-full py-2 px-4">
                 {{ filterButton }}
             </button>
 
@@ -226,16 +215,8 @@ export default {
                     <label class="mb-2" for="radius">
                         Definisci il raggio di ricerca
                     </label>
-                    <input
-                        type="range"
-                        id="radius"
-                        name="radius"
-                        min="10"
-                        max="30"
-                        class="mx-3"
-                        v-model="searchForm.radius"
-                        @change="searchApartments"
-                    />
+                    <input type="range" id="radius" name="radius" min="10" max="30" class="mx-3" v-model="searchForm.radius"
+                        @change="searchApartments" />
                     <span>{{ searchForm.radius }} km</span>
                 </div>
 
@@ -250,7 +231,8 @@ export default {
                 <!-- LETTI -->
                 <div>
                     <label class="mb-2 me-3">Filtra per numero di posti letto</label>
-                    <select class="rounded-full py-2 px-4 my-4" v-model="searchForm.filters.beds" @change="searchApartments">
+                    <select class="rounded-full py-2 px-4 my-4" v-model="searchForm.filters.beds"
+                        @change="searchApartments">
                         <option v-for="i in 10" :value="i">{{ i }}</option>
                     </select>
                 </div>
@@ -260,29 +242,19 @@ export default {
                     <p class="block py-5 font-bold text-gray-700 text-lg">
                         Servizi offerti:
                     </p>
-                    <div class="grid 2xl:grid-cols-4 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-30 items-center justify-items-start">
+                    <div
+                        class="grid 2xl:grid-cols-4 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-30 items-center justify-items-start">
                         <template v-for="service in services">
                             <label :for="service.id" class="my-3">
-                                <input
-                                    type="checkbox"
-                                    :id="service.id"
-                                    :name="service.id"
-                                    :value="service.id"
-                                    v-model="searchForm.filters.services"
-                                    class="mr-4"
-                                    @change="searchApartments"
-                                />
+                                <input type="checkbox" :id="service.id" :name="service.id" :value="service.id"
+                                    v-model="searchForm.filters.services" class="mr-4" @change="searchApartments" />
                                 <span class="font-bold ">
                                     {{ service.name }}
-                                    <font-awesome-icon
-                                        :icon="['fas', service.icon]"
-                                        class="text-red-500 h-5 ml-3"
-                                        style="
+                                    <font-awesome-icon :icon="['fas', service.icon]" class="text-red-500 h-5 ml-3" style="
                                             color: rgb(254 91 95 / 78%);
                                             padding-right: 9px;
                                             height: 25px;
-                                        "
-                                    />
+                                        " />
                                 </span>
                             </label>
                         </template>
@@ -301,34 +273,29 @@ export default {
         </div>
 
         <!-- CONTAINER CARTE -->
-        <div
-            v-if="apartments != null"
-            class="container-cards grid 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-col-1 gap-10"
-        >
+        <div v-if="apartments != null"
+            class="container-cards grid 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-col-1 gap-10 bg-[#f1f1f1]">
             <div class="card flex flex-col self-end" v-for="apartment in apartments">
                 <Link :href="route('guest_show', apartment.title_slug)" class="flex flex-col">
-                    <!-- IMMAGINE -->
-                    <img :src="apartment.full_cover_img_path" alt="immagine casa" />
-                    <!-- CARD INFO -->
-                    <div class="card-info px-4 pt-4 flex flex-col justify-center ">
-                        <span><b>{{ apartment.title }}</b></span>
-                        <div class="mt-2 grow flex items-center">
-                            <font-awesome-icon :icon="['fas', 'location-dot']" class="me-2" />
-                            {{ apartment.address }}
-                        </div>
-                        <div class="mt-2">
-                            <font-awesome-icon :icon="['fas', 'maximize']" />
-                            {{ apartment.size }} m<sup>2</sup>
-                        </div>
-                        {{ apartment.rooms }}
-                        {{ apartment.beds }}
-                        {{ apartment.bathrooms }}
-                        <ul>
-                            <li v-for="service in apartment.services">
-                                {{ service.name }}
-                            </li>
-                        </ul>
-                    </div><!-- CHIUSURA CARD INFO -->
+                <!-- IMMAGINE -->
+                <img :src="apartment.full_cover_img_path" alt="immagine casa" />
+                <!-- CARD INFO -->
+                <div class="card-info px-4 pt-4 flex flex-col justify-center pb-4 ">
+                    <span><b>{{ apartment.title }}</b></span>
+                    <div class="mt-2 grow flex items-center">
+                        <font-awesome-icon :icon="['fas', 'location-dot']" class="me-2" />
+                        {{ apartment.address }}
+                    </div>
+                    <p>Stanze: {{ apartment.rooms }}</p>
+                    <p>Posti letto: {{ apartment.beds }}</p>
+                    <ul class="flex flex-wrap">
+                        <li v-for="service in apartment.services">
+                            <font-awesome-icon :icon="['fas', service.icon]" class="me-2" style="
+                                            color: rgb(254 91 95 / 78%);
+                                        " />
+                        </li>
+                    </ul>
+                </div><!-- CHIUSURA CARD INFO -->
                 </Link><!-- CHIUSURA CARD LINK -->
             </div><!-- CHIUSURA CARD -->
         </div><!-- CHIUSURA CONTAINER CARDS -->
@@ -336,7 +303,7 @@ export default {
         <!-- MAPPA -->
         <div class="mt-20 mb-20 w-full" v-if="displayMap">
             <div>
-                <div id="map" class="h-96" ></div>
+                <div id="map" class="h-96"></div>
             </div>
         </div>
     </div><!-- CHIUSURA CONTAINER -->
@@ -346,13 +313,14 @@ export default {
 
 <style scoped lang="scss">
 @import "../../../scss/app.scss";
-
 .button {
     background-color: $main-color;
 }
+
 .button:hover {
     background-color: #fd4e4e;
 }
+
 .button:active {
     background-color: #fc9aa1;
     box-shadow: 0 5px #dd5b5f;
@@ -365,7 +333,8 @@ export default {
 }
 
 .container-cards {
-    padding-top: 50px;
+    padding: 50px;
+    border-radius: 7.5px;
 }
 
 .card {
@@ -373,6 +342,7 @@ export default {
     border-radius: 15px;
     overflow: hidden;
     transition: all 0.3s ease-in-out;
+    cursor: pointer;
 
     img {
         aspect-ratio: 1/1;
@@ -380,9 +350,18 @@ export default {
         object-fit: cover;
     }
 }
-input , select{
+
+input,
+select {
     border-color: $main-color;
 }
 
+#map{
+    border-radius: 7.5px;
+}
 
+.card:hover {
+    @apply hover:shadow-lg;
+    @apply hover:shadow-lg hover:scale-105;
+}
 </style>
