@@ -156,7 +156,7 @@ export default {
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <ul class="p-6 text-gray-900">
-                        <li v-for="apartment in apartments" class="py-5 border-b item flex justify-between items-center">
+                        <li v-for="apartment in apartments" class="py-5 border-b item flex  flex-col sm:flex-row sm:justify-between sm:items-center justify-center items-start">
                             <!-- TITOLO E IMMAGINE -->
                             <div class="flex items-center">
                                 <img :src="apartment.full_cover_img_path" alt="apartment_image" class="image-preview">
@@ -166,7 +166,7 @@ export default {
                             </div>
 
                             <!-- BOTTONE -->
-                            <div class="flex flex-col justify-center items-center">
+                            <div class="flex flex-col justify-center items-center md:mt-0 mt-5">
                                 <button
                                     class="rounded-full my-button"
                                     :class="{
