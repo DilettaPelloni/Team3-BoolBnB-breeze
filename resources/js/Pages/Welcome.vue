@@ -29,7 +29,7 @@ export default {
     <Jumbotron />
     <div class="container-main pb-[95px]">
         <div
-            class="container-cards mx-[185px] pt-[85px] md:mx-[100px] sm:mx-[180px] grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-col-1 gap-10"
+            class="container-cards justify-items-center 2xl:mx-[160px] pt-[85px] md:mx-[100px] grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-col-1 gap-10"
         >
             <div
                 v-for="apartment in apartments"

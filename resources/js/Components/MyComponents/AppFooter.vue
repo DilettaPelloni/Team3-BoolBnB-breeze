@@ -14,7 +14,7 @@ export default {
                     <img
                         src="/img/LogoBoolBnB.png"
                         alt="Logo BoolBnB"
-                        class="object-contain w-[230px] pb-5 md:m-auto sm:m-auto"
+                        class="object-contain w-[230px] pb-5 2xl:ms-0 xl:ms-0 lg:ms-0 md:m-auto sm:m-auto"
                     />
 
                     <div class="text">
@@ -53,7 +53,7 @@ export default {
                         <a class="button" href="#">Chiama</a>
                     </div>
                 </div>
-                <div class="linkUtili text-right md:text-center md:m-auto sm:text-center sm:m-auto">
+                <div class="linkUtili text-right 2xl:text-end md:text-center md:m-auto sm:text-center sm:m-auto">
                     <p class="text-[20px] pb-5 pt-[50px] text-white">
                         Link Utili
                     </p>
