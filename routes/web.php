@@ -9,6 +9,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\ApartmentController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\MessagesController;
+use App\Http\Controllers\PaymentController;
 
 //Model
 use App\Models\Apartment;
@@ -25,13 +26,7 @@ use App\Models\Apartment;
 */
 
 //HOME PAGE
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'apartments' => Apartment::where('visible', '=', '1')->get(),
-    ]);
-})->name('welcome');;
+Route::get('/', [PageController::class, 'home'])->name('welcome');
 
 //PAGINA SEARCH
 Route::get('/ricerca', [PageController::class, 'search'])->name('search');
@@ -52,6 +47,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/sponsorizzazioni', [ApartmentController::class, 'sponsorship'])->name('sponsorship');
 });
 
+//PER CREARE UNA NUOVA SPONSORIZZAZIONE
+Route::post('avtiveSponsoship/create', [PaymentController::class, 'createActiveSponsoship'])->name('createActiveSponsoship');
 
 
 

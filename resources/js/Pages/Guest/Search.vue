@@ -119,7 +119,7 @@ export default {
                     this.zoom = 10;
             }
             else {
-                this.zoom = 9;
+                this.zoom = 8;
             }
             setTimeout (() => {
                 //creo la mappa
@@ -176,7 +176,7 @@ export default {
             <h2 class="mb-4">
                 Inserisci una destinazione per cominciare la tua ricerca
             </h2>
-            <form @submit.prevent="searchApartments">
+            <form @submit.prevent="searchApartments" class="relative w-fit mx-auto ">
                 <!-- INDIRIZZO -->
                 <input
                     type="text"
@@ -191,18 +191,20 @@ export default {
                 <button type="submit" class="button px-4 py-2 text-white rounded-full">
                     Cerca
                 </button>
+
+                <!-- ELENCO INDIRIZZI SUGGERITI -->
+                <div v-if="(addresses.length > 0) && (showAddresses)"
+                    class="absolute z-10 bg-white w-[500px] rounded-b-lg shadow-lg">
+                    <ul class="w-[500px]">
+                        <li v-for="address in addresses" :key="address.id" class="border-b border-gray-200 w-[500px]">
+                            <p class="hover:bg-gray-100 p-3" @click="selectAddress(address)">
+                                {{ address.address.freeformAddress }}
+                            </p>
+                        </li>
+                    </ul>
+                </div><!-- CHIUSURA INDIRIZZI SUGGERITI -->
             </form>
-            <!-- ELENCO INDIRIZZI SUGGERITI -->
-            <div v-if="(addresses.length > 0) && (showAddresses)"
-                class="absolute z-10 bg-white w-[500px] rounded-b-lg shadow-lg">
-                <ul class="w-[500px]">
-                    <li v-for="address in addresses" :key="address.id" class="border-b border-gray-200 w-[500px]">
-                        <p class="hover:bg-gray-100 p-3" @click="selectAddress(address)">
-                            {{ address.address.freeformAddress }}
-                        </p>
-                    </li>
-                </ul>
-            </div><!-- CHIUSURA INDIRIZZI SUGGERITI -->
+
 
             <!-- ERRORE -->
             <div v-if="error != null">
@@ -232,6 +234,7 @@ export default {
                         max="30"
                         class="mx-3"
                         v-model="searchForm.radius"
+                        @change="searchApartments"
                     />
                     <span>{{ searchForm.radius }} km</span>
                 </div>
@@ -239,7 +242,7 @@ export default {
                 <!-- STANZE -->
                 <div>
                     <label class="mb-2 me-3">Filtra per numero di stanze</label>
-                    <select class="rounded-full py-2 px-4" v-model="searchForm.filters.rooms">
+                    <select class="rounded-full py-2 px-4" v-model="searchForm.filters.rooms" @change="searchApartments">
                         <option v-for="i in 10" :value="i">{{ i }}</option>
                     </select>
                 </div>
@@ -247,7 +250,7 @@ export default {
                 <!-- LETTI -->
                 <div>
                     <label class="mb-2 me-3">Filtra per numero di posti letto</label>
-                    <select class="rounded-full py-2 px-4 my-4" v-model="searchForm.filters.beds">
+                    <select class="rounded-full py-2 px-4 my-4" v-model="searchForm.filters.beds" @change="searchApartments">
                         <option v-for="i in 10" :value="i">{{ i }}</option>
                     </select>
                 </div>
@@ -267,6 +270,7 @@ export default {
                                     :value="service.id"
                                     v-model="searchForm.filters.services"
                                     class="mr-4"
+                                    @change="searchApartments"
                                 />
                                 <span class="font-bold ">
                                     {{ service.name }}

@@ -11,6 +11,7 @@ use App\Models\Service;
 
 //Helpers
 use Illuminate\Support\Facades\Auth;
+use DateTime;
 
 //Inertia
 use Inertia\Inertia;
@@ -122,6 +123,22 @@ class PageController extends Controller
             };
         }
         return true;
+    }
+
+    public function home() {
+
+        $today = new DateTime('now');
+
+        $apartments = Apartment::join('apartment_sponsorship', 'apartments.id', '=', 'apartment_sponsorship.apartment_id')
+            ->where('visible', '=', '1')
+            ->where('apartment_sponsorship.end_date', '>=', $today)
+            ->get();
+
+        return Inertia::render('Welcome', [
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            'apartments' => $apartments,
+        ]);
     }
     
 }

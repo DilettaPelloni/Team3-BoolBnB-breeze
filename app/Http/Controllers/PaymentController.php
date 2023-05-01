@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 //carbon
 use Carbon\Carbon;
 
-
+//Helpers
+use DateTime;
+use DateInterval;
 
 use Illuminate\Support\Facades\DB; //per gestire il db
 
@@ -43,11 +45,10 @@ class PaymentController extends Controller
         ]);
 
         $data = $request->all();
-        $apartment_id = $data['apartment_id'];
-        $sponsorship_id = $data['sponsorship_id'];
-        $duration = $data['duration'];
+
         $nonce = $data['nonce'];
         $amount = $data['amount'];
+
         $result = $gateway->transaction()->sale([
             'amount' => $amount,
             'paymentMethodNonce' => $nonce,
@@ -56,30 +57,33 @@ class PaymentController extends Controller
             ]
         ]);
 
-
-        //gestisco la data di inizio e fine sponsorizzazione
-
-        $duration = substr($duration, 0, 2);
-        $start_date = Carbon::now();
-        $end_date = Carbon::now()->addHours($duration);
-
-
-
-
         if ($result->success) {
-
-            $apartment = Apartment::find($apartment_id);
-
-        //$apartment->sponsorships()->attach($sponsorship_id, ['start_date' => $start_date, 'end_date' => $end_date]);
-        //crisi qui: si genera un duplicato in database 
-
-        //soluzione: updateExistingPivot invece di attach aaaaaaaaa
-        $apartment->sponsorships()->updateExistingPivot($sponsorship_id, ['end_date' => $end_date]);
-
-
-            return response()->json(['success' => true, 'message' => 'Transaction completed']);
+            return response()->json(['success' => true]);
         } else {
             return response()->json(['success' => false, 'error' => $result->message]);
         }
+    }
+
+    public function createActiveSponsoship (Request $request) {
+        $data = $request->all();
+
+        $apartmentId = $data['selectedApartment'];
+        $sponsorshipId = $data['selectedSponsor']['id'];
+
+        $start_date = new DateTime('now');
+
+        //calcolo la data di fine
+        $duration = $data['selectedSponsor']['duration'];
+        $hours = substr($duration, 0, strpos($duration, ':'));
+
+        $endDate = clone $start_date;
+        $endDate->add(new DateInterval('PT' . $hours . 'H'));
+
+        $newActiveSponsorship = DB::table('apartment_sponsorship')->insert([
+            'apartment_id' => $apartmentId,
+            'sponsorship_id' => $sponsorshipId,
+            'start_date' => $start_date,
+            'end_date' => $endDate,
+        ]);
     }
 }
