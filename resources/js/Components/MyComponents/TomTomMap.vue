@@ -45,7 +45,7 @@ export default {
 <template>
     <div class="w-full ">
         <div >
-            <div id="map" class="h-96 "></div>
+            <div id="map" class="h-96 rounded-[7.5px]"></div>
         </div>
     </div>
 </template>

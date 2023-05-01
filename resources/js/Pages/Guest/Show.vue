@@ -63,7 +63,7 @@ export default {
             <img
                 :src="apartment.full_cover_img_path"
                 alt="Cover Image Apartment"
-                class="w-full h-full object-cover max-h-[900px] object-center"
+                class="w-full h-full object-cover max-h-[900px] object-center rounded-[7.5px]"
             />
         </div>
         <div class="container-info-msg flex justify-between mt-20 mb-[65px]">
