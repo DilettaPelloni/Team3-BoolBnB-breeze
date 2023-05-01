@@ -56,7 +56,7 @@ export default {
                         </div>
                         <!-- INDIRIZZO -->
                         <div class="mt-2 grow flex items-start">
-                            <font-awesome-icon :icon="['fas', 'location-dot']" class="me-2 mt-1" />
+                            <font-awesome-icon :icon="['fas', 'location-dot']" class="me-2 mt-1 text-mainColor-300" />
                             {{ apartment.address }}
                         </div>
                     </div>

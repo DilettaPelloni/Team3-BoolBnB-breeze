@@ -57,14 +57,14 @@ export default {
                 class="container-cards grid 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-col-1 gap-10"
             >
                 <div
-                    class="card flex flex-col self-end"
+                    class="card flex flex-col"
                     v-for="apartment in apartments"
                 >
                     <Link
                         :href="
                             route('gestione-appartamenti.show', apartment.id)
                         "
-                        class="flex flex-col"
+                        class="grow flex flex-col"
                     >
                         <!-- IMMAGINE -->
                         <img
@@ -74,21 +74,22 @@ export default {
                         />
                         <!-- CARD INFO -->
                         <div
-                            class="card-info px-4 flex flex-col justify-evenly h-44"
+                            class="card-info p-4 grow flex flex-col"
                         >
                             <span
                                 ><b>{{ apartment.title }}</b></span
                             >
-                            <div class="mt-2 grow flex items-center">
+                            <div class="mt-2 grow flex items-start">
                                 <font-awesome-icon
                                     :icon="['fas', 'location-dot']"
-                                    class="me-2"
+                                    class="me-2 mt-1 text-mainColor-300"
                                 />
                                 {{ apartment.address }}
                             </div>
                             <div class="mt-2">
                                 <font-awesome-icon
                                     :icon="['fas', 'maximize']"
+                                    class="me-2 text-mainColor-300"
                                 />
                                 {{ apartment.size }} m<sup>2</sup>
                             </div>
