@@ -39,7 +39,7 @@ export default {
                 <div class="absolute z-50 rounded-md shadow-lg w-48 origin-top-right right-0 text-right p-3 bg-white mt-3"
                     v-if="menuVisibility" id="loginMenu">
                     <!-- menu login -->
-                    <div v-if="canLogin">
+                    <div v-if="canLogin" class="text-center">
                         <Link v-if="$page.props.auth.user" :href="route('dashboard')"
                             class="font-semibold text-black focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
                         Dashboard

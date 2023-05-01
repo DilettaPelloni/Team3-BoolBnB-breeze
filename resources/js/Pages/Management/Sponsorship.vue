@@ -159,14 +159,14 @@ export default {
                         <li v-for="apartment in apartments" class="py-5 border-b item flex  flex-col sm:flex-row sm:justify-between sm:items-center justify-center items-start">
                             <!-- TITOLO E IMMAGINE -->
                             <div class="flex items-center">
-                                <img :src="apartment.full_cover_img_path" alt="apartment_image" class="image-preview">
+                                <img :src="apartment.full_cover_img_path" alt="apartment_image" class="image-preview rounded-md">
                                 <h4 class="ms-10">
                                     {{ apartment.title }}
                                 </h4>
                             </div>
 
                             <!-- BOTTONE -->
-                            <div class="flex flex-col justify-center items-center md:mt-0 mt-5">
+                            <div class="flex flex-col items-start sm:items-center md:mt-0 mt-5">
                                 <button
                                     class="rounded-full my-button"
                                     :class="{

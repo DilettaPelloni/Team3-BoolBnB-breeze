@@ -48,7 +48,7 @@ export default {
         <div class="container pb-[135px]">
             <Link
                 :href="route('gestione-appartamenti.create')"
-                class="btn-add mt-8 px-4 py-2 rounded-full button text-white"
+                class="btn-add rounded-full text-white"
             >
                 Aggiungi un appartamento
             </Link>
@@ -165,10 +165,6 @@ export default {
 
 <style scoped lang="scss">
 @import "../../../scss/app.scss";
-.button {
-    background-color: $main-color;
-}
-
 .border-color-pink {
     border: 3px solid $main-color;
 }
@@ -228,7 +224,7 @@ export default {
     padding: 11px 20px;
     border-radius: 50px;
     border: none;
-    background-color: #fe5b5f;
+    background-color: $main-color;
     color: #fff;
     font-family: "Figtree";
     font-size: 17px;
