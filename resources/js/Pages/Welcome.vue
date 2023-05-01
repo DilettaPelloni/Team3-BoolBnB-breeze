@@ -28,43 +28,51 @@ export default {
     <AppHeader :canLogin="canLogin" :canRegister="canRegister" />
     <Jumbotron />
     <div class="container-main pb-[95px]">
+
+        <div class="content pt-16 pb-10 text-center text-4xl font-bold text-mainColor-300">
+            <h2>Destinazioni suggerite:</h2>
+        </div><!-- CHIUSURA CONTENT -->
         <div
-            class="container-cards justify-items-center 2xl:mx-[160px] pt-[85px] md:mx-[100px] grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-col-1 gap-10"
-        >
-            <div
-                v-for="apartment in apartments"
-                class="card flex flex-col self-end"
+                class="container-cards justify-items-center 2xl:mx-[160px] md:mx-[100px] grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-col-1 gap-10"
             >
-                <div class="image w-full">
-                    <img
-                        :src="apartment.full_cover_img_path"
-                        alt="immagine casa"
-                        class="w-full h-20 object-cover rounded-t-2xl"
-                    />
-                </div>
+
                 <div
-                    class="card-info px-4 pt-4 flex flex-col justify-center h-40"
+                    v-for="apartment in apartments"
+                    class="card flex flex-col"
                 >
-                    <div>
-                        <span>
-                            <b>{{ apartment.title }}</b>
-                        </span>
+                    <div class="w-full">
+                        <img
+                            :src="apartment.full_cover_img_path"
+                            alt="immagine casa"
+                        />
                     </div>
-                    <div>tante belle info here</div>
-                    <div>
-                        tante belle altre info here
-                        <span> ⭐ 4,8 </span>
+                    <!-- CARD INFO -->
+                    <div
+                        class="card-info p-4 grow flex flex-col"
+                    >   
+                        <!-- TITOLO -->
+                        <div>
+                            <strong> {{ apartment.title }} </strong>
+                        </div>
+                        <!-- INDIRIZZO -->
+                        <div class="mt-2 grow flex items-start">
+                            <font-awesome-icon :icon="['fas', 'location-dot']" class="me-2 mt-1" />
+                            {{ apartment.address }}
+                        </div>
                     </div>
+                    <!-- BOTTONE -->
+                    <div class="text-center mb-5">
+                        <Link
+                            :href="route('guest_show', apartment.title_slug)"
+                            class="mt-8 px-4 py-2 rounded-full button text-white mb-[20px]"
+                        >
+                            Vedi appartamento
+                        </Link>
+                    </div>
+
                 </div>
-                <Link
-                    :href="route('guest_show', apartment.title_slug)"
-                    class="mt-8 px-4 py-2 rounded-full button text-white self-center mb-[20px]"
-                >
-                    Vedi appartamento
-                </Link>
-            </div>
-        </div>
-    </div>
+            </div><!-- CHIUSURA CARD CONTAINER -->
+    </div><!-- CHIUSURA CONTAINER -->
     <AppFooter />
 </template>
 
@@ -77,6 +85,10 @@ export default {
 .button:hover {
     background-color: #fd4e4e;
 }
+.content {
+    margin: 0 auto;
+    max-width: 1200px;
+}
 .container-main {
     background-color: #f1f1f1;
     .card {
@@ -87,10 +99,9 @@ export default {
         width: 274px;
 
         img {
-            aspect-ratio: 1/1;
             width: 100%;
+            aspect-ratio: 1/1;
             object-fit: cover;
-            height: 276px;
         }
     }
 }
