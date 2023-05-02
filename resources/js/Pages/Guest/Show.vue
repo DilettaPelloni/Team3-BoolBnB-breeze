@@ -51,7 +51,7 @@ export default {
         </title>
         <link rel="icon" href="/favicon.svg" />
     </Head>
-    <div class="main-container">
+    <div class="main-container w-[80%] lg:w-[65%]">
         <div class="container-title mb-[50px]">
             <h1 class="pb-2">
                 {{ apartment.title }}
@@ -71,9 +71,9 @@ export default {
                 class="w-full h-full object-cover max-h-[900px] object-center rounded-[7.5px]"
             />
         </div>
-        <div class="container-info-msg flex justify-between mt-20 mb-[65px]">
+        <div class="container-info-msg flex flex-col md:flex-row justify-between mt-20 mb-[65px]">
             <div
-                class="container-info flex flex-col justify-between border-b-2"
+                class="container-info flex flex-col justify-between border-b-2 w-[100%] md:w-[65%]"
             >
                 <div class="border-b-2 pb-5">
                     <h2 class="pb-2">
@@ -113,7 +113,7 @@ export default {
                     </div>
                 </div>
             </div>
-            <div class="container-msg">
+            <div class="container-msg w-[100%] md:w-[30%] mt-8 md:mt-0">
                 <h2>Manda un messaggio</h2>
                 <p class="text-sm pb-5">*tutti i campi sono obbligatori</p>
                 <!-- FORM  -->
@@ -206,16 +206,11 @@ export default {
 }
 
 .main-container {
-    width: 65%;
+    // width: 65%;
     margin: 60px auto;
 
-    .container-info {
-        width: 65%;
-    }
-
     .container-msg {
-        width: 30%;
-
+        
         input {
             width: 100%;
         }

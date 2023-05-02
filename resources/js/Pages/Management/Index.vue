@@ -51,12 +51,14 @@ export default {
 
     <AuthenticatedLayout>
         <div class="container pb-[135px]">
-            <Link
+            <div class="text-center md:text-start">
+                <Link
                 :href="route('gestione-appartamenti.create')"
                 class="btn-add rounded-full text-white"
             >
                 Aggiungi un appartamento
             </Link>
+            </div>
 
             <div
                 class="container-cards grid 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-col-1 gap-10"
