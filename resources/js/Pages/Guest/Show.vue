@@ -86,17 +86,19 @@ export default {
                 </div>
                 <div v-if="apartment.services.length > 0">
                     <h2 class="pt-5">Servizi inclusi</h2>
-                    <div v-for="service in apartment.services" class="py-3">
-                        <span
-                            ><font-awesome-icon
-                                :icon="['fas', service.icon]"
-                                style="
-                                    color: rgb(254 91 95 / 78%);
-                                    padding-right: 9px;
-                                    height: 25px;
-                                "
-                        /></span>
-                        <span>{{ service.name }}</span>
+                    <div class="grid grid-rows-5 grid-flow-col">
+                        <div v-for="service in apartment.services" class="py-3">
+                            <span
+                                ><font-awesome-icon
+                                    :icon="['fas', service.icon]"
+                                    style="
+                                        color: rgb(254 91 95 / 78%);
+                                        padding-right: 9px;
+                                        height: 25px;
+                                    "
+                            /></span>
+                            <span>{{ service.name }}</span>
+                        </div>
                     </div>
                 </div>
                 <div v-else>
@@ -159,14 +161,6 @@ export default {
                         required
                         v-model="newMessage.content"
                     ></textarea>
-                    <!-- <input
-                        required
-                        type="text"
-                        name="content"
-                        id="content"
-                        class="my-4"
-                        v-model="newMessage.content"
-                    /> -->
                     <div
                         v-if="newMessage.errors.content"
                         class="text-red-500 text-xs italic"
