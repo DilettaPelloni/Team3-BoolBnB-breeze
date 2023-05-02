@@ -45,7 +45,6 @@ class PageController extends Controller
 
     public function search()
     {
-        $apartments = Apartment::with('services')->get();
         $services = Service::all();
 
         return Inertia::render('Guest/Search', [

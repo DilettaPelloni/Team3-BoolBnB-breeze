@@ -60,11 +60,17 @@ class ApartmentSeeder extends Seeder
 
         //array per generare le foto
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             //creo una nuova istanza di Apartment
             $apartment = new Apartment();
 
-            $apartment->user_id = 1;
+            if($i < 16) {
+                $apartment->user_id = 1;
+            }
+            else {
+                $apartment->user_id = 2;
+            };
+        
 
             //prendo un elemento a caso di ciascun array per formare il titolo
             $title = '';
@@ -165,8 +171,6 @@ class ApartmentSeeder extends Seeder
 
             //salvo
             $apartment->save();
-
-            dd($apartment);
         }
     }
 }

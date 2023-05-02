@@ -281,7 +281,7 @@ export default {
         <!-- CONTAINER CARTE -->
         <div v-if="apartments != null"
             class="container-cards px-4 pt-6 mt-10 md:p-10 grid 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-col-1 gap-10 bg-[#f5f5f5]">
-            <div class="card flex flex-col self-end" v-for="apartment in apartments">
+            <div class="card flex flex-col" v-for="apartment in apartments">
                 <Link :href="route('guest_show', apartment.title_slug)" class="flex flex-col">
                 <!-- IMMAGINE -->
                 <img :src="apartment.full_cover_img_path" alt="immagine casa" />

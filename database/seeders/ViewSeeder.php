@@ -21,10 +21,13 @@ class ViewSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             $view = new View();
             //prendo un'id casuale fra gli appartamenti e lo assegno
-            $apartmentId = Apartment::inRandomOrder()->first()->id;
+            $apartmentId = Apartment::inRandomOrder()
+                ->where('user_id', 1)
+                ->first()
+                ->id;
             $view->apartment_id = $apartmentId;
             //genero un ip casuale
             $view->user_ip = $faker->ipv4();
