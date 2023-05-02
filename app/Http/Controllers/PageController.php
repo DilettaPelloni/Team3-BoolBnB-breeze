@@ -74,7 +74,7 @@ class PageController extends Controller
 
             
 
-            $apartments = Apartment::selectRaw('*, ( 6371 * acos( cos( radians(?) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude) ) ) ) AS distance, (apartment_sponsorship.end_date) AS sponsored ', [$lat, $lon, $lat])
+            $apartments = Apartment::selectRaw('apartments.*, ( 6371 * acos( cos( radians(?) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) + sin( radians(?) ) * sin( radians( latitude) ) ) ) AS distance, (apartment_sponsorship.end_date) AS sponsored, apartment_sponsorship.apartment_id, apartment_sponsorship.end_date', [$lat, $lon, $lat])
             ->leftJoin('apartment_sponsorship', function ($join) {
                 $today = new DateTime('now');
                 $join->on('apartments.id', '=', 'apartment_sponsorship.apartment_id')
@@ -106,7 +106,6 @@ class PageController extends Controller
         else {
             $filteredApartments = null;
         }
-
         $services = Service::all();
         
         return Inertia::render('Guest/Search', [
