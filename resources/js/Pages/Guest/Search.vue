@@ -169,7 +169,12 @@ export default {
 </script>
 
 <template>
-    <Head title="Appartamenti" />
+    <Head>
+        <title>
+            Ricerca Appartamenti - BoolBnB
+        </title>
+        <link rel="icon" href="/favicon.svg" />
+    </Head>
 
     <!-- HEADER -->
     <AppHeader :canLogin="canLogin" :canRegister="canRegister" />

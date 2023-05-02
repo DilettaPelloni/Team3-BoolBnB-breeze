@@ -60,7 +60,12 @@ export default {
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head>
+        <title>
+            Dashboard - BoolBnB
+        </title>
+        <link rel="icon" href="/favicon.svg" />
+    </Head>
 
     <AuthenticatedLayout>
         <template #header>

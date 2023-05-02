@@ -87,7 +87,12 @@ export default {
 </script>
 
 <template>
-    <Head :title="apartment.title" />
+    <Head>
+        <title>
+            {{ apartment.title }}
+        </title>
+        <link rel="icon" href="/favicon.svg" />
+    </Head>
     <AuthenticatedLayout>
         <form
             @submit.prevent="submit"

@@ -23,7 +23,14 @@ export default {
 </script>
 
 <template>
-    <Head title="Home" />
+    <Head>
+        <title>
+            Home - BoolBnB
+        </title>
+        <link rel="icon" href="/favicon.svg" />
+    </Head>
+
+    
 
     <AppHeader :canLogin="canLogin" :canRegister="canRegister" />
     <Jumbotron />

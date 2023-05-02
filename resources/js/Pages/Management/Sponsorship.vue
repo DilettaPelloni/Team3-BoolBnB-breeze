@@ -148,7 +148,10 @@ export default {
 
 <template>
     <Head>
-        <title>Sponsorships</title>
+        <title>
+            Sponsorship - BoolBnB
+        </title>
+        <link rel="icon" href="/favicon.svg" />
     </Head>
 
     <AuthenticatedLayout>

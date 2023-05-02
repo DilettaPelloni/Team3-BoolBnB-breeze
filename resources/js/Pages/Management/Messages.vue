@@ -21,7 +21,12 @@ export default {
 </script>
 
 <template>
-    <Head :title="Messaggi" />
+    <Head>
+        <title>
+            Messaggi - BoolBnB
+        </title>
+        <link rel="icon" href="/favicon.svg" />
+    </Head>
 
     <AuthenticatedLayout>
         <div class="main-container">

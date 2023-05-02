@@ -1,11 +1,13 @@
 <script>
 import { useForm } from "@inertiajs/vue3";
+import { Head } from "@inertiajs/vue3";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 
 export default {
     name: "Create",
     components: {
         AuthenticatedLayout,
+        Head,
     },
     props: {
         services: Array,
@@ -78,6 +80,12 @@ export default {
 </script>
 
 <template>
+    <Head>
+        <title>
+            Crea Appartamento - BoolBnB
+        </title>
+        <link rel="icon" href="/favicon.svg" />
+    </Head>
     <AuthenticatedLayout>
         <form
             @submit.prevent="submit"

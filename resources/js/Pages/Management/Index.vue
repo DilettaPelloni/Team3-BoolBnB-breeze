@@ -42,7 +42,12 @@ export default {
 </script>
 
 <template>
-    <Head title="Appartamenti" />
+    <Head>
+        <title>
+            Appartamenti - BoolBnB
+        </title>
+        <link rel="icon" href="/favicon.svg" />
+    </Head>
 
     <AuthenticatedLayout>
         <div class="container pb-[135px]">

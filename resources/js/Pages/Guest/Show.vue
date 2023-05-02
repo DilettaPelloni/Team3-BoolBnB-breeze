@@ -45,7 +45,12 @@ export default {
 <template>
     <AppHeader :canLogin="canLogin" :canRegister="canRegister" />
 
-    <Head :title="apartment.title" />
+    <Head>
+        <title>
+            {{ apartment.title }}
+        </title>
+        <link rel="icon" href="/favicon.svg" />
+    </Head>
     <div class="main-container">
         <div class="container-title mb-[50px]">
             <h1 class="pb-2">
