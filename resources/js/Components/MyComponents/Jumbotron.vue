@@ -167,7 +167,4 @@ button:active {
     border-color: $main-color;
 }
 
-// .indirizzi-suggeriti{
-//     top: 400px;
-// }
 </style>
