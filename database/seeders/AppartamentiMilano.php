@@ -21,7 +21,6 @@ class AppartamentiMilano extends Seeder
     public function run()
     {
         $handle = fopen(public_path('txt\Milan.txt'), "r") or die("Unable to open file!");
-        $array = [];
 
         while (!feof($handle)) {
             $line = fgets($handle);

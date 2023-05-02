@@ -281,18 +281,18 @@ export default {
         <!-- CONTAINER CARTE -->
         <div v-if="apartments != null"
             class="container-cards px-4 pt-6 mt-10 md:p-10 grid 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-col-1 gap-10 bg-[#f5f5f5]">
-            <div class="card flex flex-col self-end" v-for="apartment in apartments">
-                <Link :href="route('guest_show', apartment.title_slug)" class="flex flex-col">
+            <div class="card flex flex-col" v-for="apartment in apartments">
+                <Link :href="route('guest_show', apartment.title_slug)" class="flex flex-col grow">
                 <!-- IMMAGINE -->
                 <img :src="apartment.full_cover_img_path" alt="immagine casa" />
                 <!-- CARD INFO -->
-                <div class="card-info px-4 pt-4 flex flex-col justify-center pb-4 ">
+                <div class="card-info px-4 pt-4 flex flex-col pb-4 grow">
                     <span><b>{{ apartment.title }}</b></span>
                     <div class="mt-2 grow flex items-center">
                         <font-awesome-icon :icon="['fas', 'location-dot']" class="me-2 text-mainColor-300" />
                         {{ apartment.address }}
                     </div>
-                    <div class="my-3">
+                    <div class="my-3 grow">
                         <p>Stanze: {{ apartment.rooms }}</p>
                         <p>Posti letto: {{ apartment.beds }}</p>
                     </div>

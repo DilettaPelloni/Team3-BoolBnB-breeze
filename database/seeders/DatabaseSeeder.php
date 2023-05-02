@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             ApartmentSeeder::class,
+            AppartamentiMilano::class,
             ServiceSeeder::class,
             SponsorshipSeeder::class,
             MessageSeeder::class,
