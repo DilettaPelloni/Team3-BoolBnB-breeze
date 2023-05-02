@@ -85,7 +85,7 @@ export default {
             <source src="/img/sfondo.mp4" type="video/mp4" />
         </video>
         <!-- fine video -->
-        <h1 class="text-center text-white text-[53px]">
+        <h1 class="text-center text-white text-[40px] md:text-[53px]">
             Quale sarà la tua prossima meta?
         </h1>
         <h2 class="text-center text-white text-[20px]">
