@@ -157,6 +157,11 @@ export default {
         setTimeout(() => {
             if (this.apartments?.length > 0) {
                 this.createMap();
+                if(this.centerAddress != null) {
+                    this.addressInput = this.centerAddress.address.freeformAddress;
+                    this.searchForm.completeAddress = this.centerAddress;
+                    this.addresses.push(1);
+                }
             }
         }, 500);
     },

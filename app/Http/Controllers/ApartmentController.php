@@ -280,7 +280,10 @@ class ApartmentController extends Controller
     {
         $user_id = Auth::user()->id;
         $sponsorships = Sponsorship::all();
-        $apartments = Apartment::where('user_id',$user_id)->with('sponsorships')->get();
+        $apartments = Apartment::where('user_id',$user_id)
+            ->with('sponsorships')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         $activeSponsorships = DB::table('apartment_sponsorship')
                             ->join('apartments', 'apartment_sponsorship.apartment_id', 'apartments.id')

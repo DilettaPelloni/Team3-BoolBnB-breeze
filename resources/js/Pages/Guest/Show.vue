@@ -145,14 +145,23 @@ export default {
                     </div>
                     <!-- CONTENT  -->
                     <p><label for="content">Messaggio</label></p>
-                    <input
+                    <textarea
+                        name="content"
+                        id="content"
+                        cols="5"
+                        rows="10"
+                        class="my-4"
+                        required
+                        v-model="newMessage.content"
+                    ></textarea>
+                    <!-- <input
                         required
                         type="text"
                         name="content"
                         id="content"
                         class="my-4"
                         v-model="newMessage.content"
-                    />
+                    /> -->
                     <div
                         v-if="newMessage.errors.content"
                         class="text-red-500 text-xs italic"
@@ -232,6 +241,13 @@ span {
 
 input {
     border-radius: 50px;
+}
+
+textarea {
+    min-width: 100%;
+    max-height: 200px;
+    min-height: 100px;
+    border-radius: 25px;
 }
 
 /* bottone */
