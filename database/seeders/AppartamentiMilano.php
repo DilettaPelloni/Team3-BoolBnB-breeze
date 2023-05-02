@@ -27,7 +27,7 @@ class AppartamentiMilano extends Seeder
             $line = fgets($handle);
             $line = explode(":", $line);
 
-            $array[] = array(
+            $apartments[] = array(
                 "title" => $line[0],
                 "rooms" => $line[1],
                 "beds" => $line[2],
@@ -40,24 +40,44 @@ class AppartamentiMilano extends Seeder
                 "visible"=> $line[9],
             );
         }
-        dd($array[0]);
+
         fclose($handle);
 
-        foreach ($array as $apartment) {
+        $file = fopen(public_path('txt\description.txt'), "r") or die("Unable to open file!");
+        $descriptions = array();
+
+        while (!feof($file)) {
+            $descriptions[] = fgets($file);
+        }
+        fclose($file);
+
+        //componi un nuovo array che ha come oggetti il testo compreso tra una e l'altra virgoletta
+        $cleanDescriptions = array();
+        foreach ($descriptions as $key => $value) {
+            $cleanDescriptions[] = explode('""', $value);
+        }
+        //elimina le virgolette dagli array
+        foreach ($cleanDescriptions as $key => $value) {
+            foreach ($value as $key2 => $value2) {
+                $cleanDescriptions[$key][$key2] = str_replace('"', '', $value2);
+            }
+        }
+
+        foreach ($apartments as $apartment) {
             $newApartment = Apartment::create([
                 'user_id'=> 1,
                 'title'=> $apartment['title'],
                 'title_slug'=> Str::slug($apartment['title']),
-                'description'=> $apartment['description'],
+                'description'=> $cleanDescriptions[rand(0, (count($cleanDescriptions) - 1))][0],
                 'rooms'=> $apartment['rooms'],
                 'beds'=> $apartment['beds'],
                 'bathrooms'=> $apartment['bathrooms'],
                 'size'=> $apartment['size'],
                 'address'=> $apartment['address'],
                 'address_slug'=> Str::slug($apartment['address']),
-                'latitude'=> $apartment['latitude'],
-                'latitude'=> $apartment['latitude'],
-                'cover_img'=> $apartment['cover_img'],
+                'latitude'=> $apartment['lat'],
+                'longitude'=> $apartment['lon'],
+                'cover_img'=> $apartment['img'],
                 'visible'=> $apartment['visible']
             ]);
         }
