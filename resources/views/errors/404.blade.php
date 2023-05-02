@@ -7,6 +7,7 @@
     <title>Errore 404</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
+    <link rel="icon" href="/favicon.svg" />
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 </head>
 <body>
@@ -23,35 +24,32 @@
                     />
             </div>
             <div class="text">
-                <h1>OOPS...</h1>
-                        <h2>La pagina che stai cercando non è disponibile su questo sito<br>oppure non hai digitato l'URL correttamente.</h2>
-                        <a href="{{ route('welcome') }}"><button>Torna alla home</button></a>
+                <h1>
+                    OOPS...
+                </h1>
+                <h2>La pagina che stai cercando non è disponibile su questo sito<br>oppure non hai digitato l'URL correttamente.</h2>
+                <a href="{{ route('welcome') }}"><button>Torna alla home</button></a>
         
         
-                    </div>
+            </div>
         </div>
     
-    
-</div>
+    </div>
 </body>
 </html>
 
-<style scoped>
-    * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-    }
+<style scoped lang="scss">
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 .pink {
     color: #fe5b5f;
 }
 
 .container {
-    
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    padding-top: 100px;
 }
 
 .flex-container {
@@ -102,30 +100,28 @@ button:active {
 body {
     height: 100vh;
     background-color: #fbd2d840;
-    position: relative;
 }
 img {
     width: 565px;
 }
 
 @media (max-width: 768px) {
-  .flex-container {
-    flex-direction: column;
-    gap: 20px;
-  }
-  .text {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  button {
-    margin-top: 20px;
-  }
-  img {
-    width: 100%;
-    height: auto;
-  }
-  h1 {
-    font-size: 60px;}
+    .text {
+        text-align: center;
+    }
+    button {
+        margin-top: 20px;
+    }
+    img {
+        width: 100%;
+    }
+    h1 {
+        font-size: 60px;
+    }
+    .container{
+        width: 80%;
+        margin: 0 auto
+    }
 }
 </style>
 
