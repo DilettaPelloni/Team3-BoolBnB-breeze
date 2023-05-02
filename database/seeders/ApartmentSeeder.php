@@ -121,14 +121,38 @@ class ApartmentSeeder extends Seeder
             //m2
             $apartment->size = ($apartment->rooms * 14) + rand(5, 100);
 
-            //indirizzo
-            $address = $faker->address();
+            //indirizzo latitudine e longitudine
+            $handle = fopen(public_path('txt\cityclear.txt'), "r") or die("Unable to open file!");
+
+            while (!feof($handle)) {
+                $line = fgets($handle);
+                $line = explode(",", $line);
+                $line = str_replace("'", '', $line);
+                $line[0] = trim($line[0]);
+                $line[1] = trim($line[1]);
+                $line[2] = trim($line[2]);
+
+                $array[] = array(
+                    "city" => $line[0],
+                    "lat" => $line[1],
+                    "long" => $line[2]
+                );
+            }
+
+            fclose($handle);
+
+            $random = rand(0, (count($array) - 1));
+            $city = $array[$random]['city'];
+            $lat = $array[$random]['lat'];
+            $long = $array[$random]['long'];
+
+            $street = $faker->streetName();
+            $address = $street . ', ' . $city;
+
             $apartment->address = $address;
             $apartment->address_slug = Str::slug($address);
-
-            //latitudine e longitudine
-            $apartment->latitude = $faker->latitude($min = 35, $max = 47);
-            $apartment->longitude = $faker->longitude($min = 6, $max = 19);
+            $apartment->latitude = $lat;
+            $apartment->longitude = $long;
 
             //immagine
             $cover_imgs = scandir(resource_path('seederImg'));
@@ -141,6 +165,8 @@ class ApartmentSeeder extends Seeder
 
             //salvo
             $apartment->save();
+
+            dd($apartment);
         }
     }
 }

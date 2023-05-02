@@ -1,0 +1,20 @@
+Appartamento di nuova costruzione a Milano:4:2:1:90:Via Alfonso Capecelatro 6, Milano:45.46545:9.186516:apartments/milan01.jpg:1
+Attico in centro con vista Duomo:5:3:2:190:Via Cusago, Milano:45.457933:9.070445:apartments/milan02.jpg:1
+Tranquilla camera doppia nel cuore del Naviglio:2:1:1:45:Via Padova 10, Milano:45.487038:9.218156:apartments/milan03.jpg:1
+Loft a Milano a pochi passi dalla metro:6:4:2:120:Luigi Federico Menabrea 24, Milano:45.496808:9.185828:apartments/milan04.jpg:1
+Stanza singola a pochi minuti dal centro:1:1:1:30:via Francesco Redi 23, Milano:45.477176:9.213642:apartments/milan05.jpg:1
+Trilocale luminoso a due minuti dal castello Sforzesco:3:2:1:90:via Bullona 3, Milano:45.485518:9.161946:apartments/milan06.jpg:1
+Bilocale con soppalco a pochi passi dal parco del Sempione:2:1:1:60:via Giuseppe Bottelli 16, Milano:45.503621:9.209804:apartments/milan07.jpg:1
+Monolocale luminoso, zona San Siro:1:1:1:20:Viale Federico Caprilli, Milano:45.479365:9.136045:apartments/milan08.jpg:1
+Splendido appartamento a pochi passi dalla basilica di Sant'Ambrogio:4:2:2:110:via Uberto Visconti di Modrone 6, Milano:45.463759:9.199474:apartments/milan09.jpg:1
+B&B Casa di riposo a 15 minuti da Malpensa:2:2:1:50:via Gabriele Rossetti, Milano:45.473457:9.160824:apartments/milan10.jpg:1
+Appartamento in ticinese con jacuzzi:3:3:2:80:via Flavio Stilicone 33, Milano:45.464204:9.189982:apartments/milan11.jpg:1
+Stanza a Milano zona Navigli:1:1:2:80:via Cadore 24, Milano:45.458459:9.212799:apartments/milan12.jpg:1
+A casa di Dona, bellissima stanza vicino a tutti i servizi:2:2:1:90:via Elba, Milano:45.463966:9.157117:apartments/milan13.jpg:1
+Incantevole Loft a pochi minuti da piazza Duomo:6:3:2:90:Corso indipendenza 6, Milano:45.467495:9.211839:apartments/milan14.jpg:1
+Bilocale nel centro storico a Monza:2:1:1:50:via Zucchi 16, Monza:45.585998:9.273866:apartments/milan15.jpg:1
+Attico in pieno centro luminoso e con vasca idromassaggio:4:2:1:150:via Carlo Emanuele I 9, Monza:45.578638:9.253063:apartments/milan16.jpg:1
+Prestigioso appartamento con vista sul centro:5:3:2:120:via Luciano Manara 52, Monza:45.590192:9.255616:apartments/milan17.jpg:1
+Appartamento con terrazza all'ultimo piano e splendida vista su Bergamo:4:2:1:80:via Angela Poeta, Bergamo:45.715856:9.666096:apartments/milan18.jpg:1
+Bilocale in zona Valtesse con vista sul centro storico:2:2:1:40:via Pietro Ruggeri da Stabello, Bergamo:45.717332:9.662836:apartments/milan19.jpg:1
+Trilocale ben collegato al centro di Bergamo:3:2:1:60:via Fratelli Bandiera 15, Bergamo:45.676753:9.637499:apartments/milan20.jpg:1
