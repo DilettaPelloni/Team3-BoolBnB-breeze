@@ -63,14 +63,8 @@ class ApartmentSeeder extends Seeder
         for ($i = 0; $i < 100; $i++) {
             //creo una nuova istanza di Apartment
             $apartment = new Apartment();
-
-            if($i < 16) {
-                $apartment->user_id = 1;
-            }
-            else {
-                $apartment->user_id = 2;
-            };
-        
+            
+            $apartment->user_id = 2;
 
             //prendo un elemento a caso di ciascun array per formare il titolo
             $title = '';
