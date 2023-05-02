@@ -175,9 +175,9 @@ export default {
     <AppHeader :canLogin="canLogin" :canRegister="canRegister" />
 
     <!-- MAIN -->
-    <div class="container ">
+    <div class="container">
         <!-- SEARCH BOX -->
-        <div class="search-box text-center p-10">
+        <div class="search-box text-center">
             <h2 class="mb-4">
                 Inserisci una destinazione per cominciare la tua ricerca
             </h2>
@@ -185,7 +185,7 @@ export default {
                 <!-- INDIRIZZO -->
                 <input type="text" id="addressInput" name="addressInput" placeholder="Inserisci un indirizzo..."
                     v-model="addressInput" @input="getAutocompleteSearch()" class="me-3 rounded-full" />
-                <button type="submit" class="button px-4 py-2 text-white rounded-full">
+                <button type="submit" class="button px-4 py-2 text-white rounded-full mt-5 sm:mt-0">
                     Cerca
                 </button>
 
@@ -275,7 +275,7 @@ export default {
 
         <!-- CONTAINER CARTE -->
         <div v-if="apartments != null"
-            class="container-cards grid 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-col-1 gap-10 bg-[#f1f1f1]">
+            class="container-cards px-4 pt-6 mt-10 md:p-10 grid 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-col-1 gap-10 bg-[#f5f5f5]">
             <div class="card flex flex-col self-end" v-for="apartment in apartments">
                 <Link :href="route('guest_show', apartment.title_slug)" class="flex flex-col">
                 <!-- IMMAGINE -->
@@ -329,12 +329,10 @@ export default {
 }
 
 .container {
-    padding: 0 20px;
     min-height: calc(100vh - 355px - 50px);
 }
 
 .container-cards {
-    padding: 50px;
     border-radius: 7.5px;
 }
 
