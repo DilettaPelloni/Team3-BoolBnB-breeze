@@ -39,7 +39,7 @@ export default {
                         <p class="text-[30px] pb-[35px]">
                             +39 334 837 662842
                         </p>
-                        <a class="button" href="#">Chiama</a>
+                        <a class="button" href="tel:+39334837662842">Chiama</a>
                     </div>
                 </div>
                 <div class="linkUtili text-center 2xl:text-end lg:text-end md:text-center md:m-auto sm:text-center m-auto text-white">
