@@ -272,10 +272,11 @@ export default {
         </div><!-- CHIUSURA SEARCH BOX -->
 
         <!-- NESSUN RISULTATO -->
-        <div v-if="noResult">
-            <h3>
+        <div v-if="noResult" class="text-center mt-16 ">
+            <h3 class="text-2xl font-bold text-mainColor-300 ">
                 La ricerca non ha prodotto risultati
             </h3>
+            <img src="/img/search.png" alt="Nessun risultato" class="w-[300px] mt-3 inline-block">
         </div>
 
         <!-- CONTAINER CARTE -->
