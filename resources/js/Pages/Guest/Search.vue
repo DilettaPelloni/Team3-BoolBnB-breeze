@@ -189,7 +189,7 @@ export default {
             <form @submit.prevent="searchApartments" class="relative w-fit mx-auto ">
                 <!-- INDIRIZZO -->
                 <input type="text" id="addressInput" name="addressInput" placeholder="Inserisci un indirizzo..."
-                    v-model="addressInput" @input="getAutocompleteSearch()" class="me-3 rounded-full" />
+                    v-model="addressInput" @input="getAutocompleteSearch()" class="me-3 rounded-full" autocomplete="off"/>
                 <button type="submit" class="button px-4 py-2 text-white rounded-full mt-5 sm:mt-0">
                     Cerca
                 </button>

@@ -94,7 +94,7 @@ export default {
         <form @submit.prevent="searchApartments" class="flex flex-col items-stretch sm:block">
             <!-- INDIRIZZO -->
             <input type="text" id="addressInput" name="addressInput" placeholder="Inserisci un indirizzo..."
-                v-model="addressInput" @input="getAutocompleteSearch()" class="sm:me-3 rounded-full focus:ring-transparent" />
+                v-model="addressInput" @input="getAutocompleteSearch()" class="sm:me-3 rounded-full focus:ring-transparent" autocomplete="off"/>
             <button type="submit" class="button text-white">
                 Cerca la tua meta
             </button>
