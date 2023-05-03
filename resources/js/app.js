@@ -52,6 +52,8 @@ import {
     faPenToSquare,
     faEnvelope,
     faMessage,
+    faCalendar,
+    faClock,
 } from "@fortawesome/free-regular-svg-icons";
 
 import { faFacebookF, faInstagram } from "@fortawesome/free-brands-svg-icons";
@@ -96,6 +98,8 @@ library.add(
     faEye,
     faHouseChimney,
     faStopwatch,
+    faCalendar,
+    faClock,
 );
 
 const appName =

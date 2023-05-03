@@ -79,8 +79,8 @@ export default {
                         //verifico se è attiva
                         if (end_date > today) {
                             let year = end_date.getFullYear();
-                            let month = end_date.getMonth() + 1;
-                            let day = end_date.getDate();
+                            let month = (end_date.getMonth() + 1 < 10 ? '0' : '') + (end_date.getMonth() + 1);
+                            let day = (end_date.getDate() < 10 ? '0': '') + end_date.getDate();
                             endDate = day + '/' + month + '/' + year;
                         }
                     }
@@ -137,6 +137,30 @@ export default {
                 },
             });
         },//createActiveSponsorship
+        endHour(apartment) {
+            let endHour = '';
+            const today = new Date();
+            //se ci sono sponsorship sugli appartamenti
+            if (this.activeSponsorships.length > 0) {
+                //per ogni sponsorship
+                this.activeSponsorships.forEach((sponsorship) => {
+                    //vedo se è relativa all'appartamento che sto esaminando
+                    if (sponsorship.apartment_id == apartment.id) {
+                        let end_date = new Date(sponsorship.end_date);
+                        //verifico se è attiva
+                        if (end_date > today) {
+                            let hour = end_date.getHours();
+                            let minutes = end_date.getMinutes();
+                            if (minutes < 10) {
+                                minutes = '0' + minutes;
+                            }
+                            endHour = hour + ':' + minutes;
+                        }
+                    }
+                });
+            }
+            return endHour;
+        },//endHour
     },
     created() {
         let recaptchaScript = document.createElement('script');
@@ -171,7 +195,7 @@ export default {
                             <!-- BOTTONE -->
                             <div class="flex flex-col items-start sm:items-center md:mt-0 mt-5">
                                 <button
-                                    class="rounded-full my-button"
+                                    class="rounded-full my-button mb-3"
                                     :class="{
                                         disabled: !isSponsorized(apartment),
                                     }"
@@ -181,8 +205,12 @@ export default {
                                     {{ isSponsorized(apartment) ? 'Sponsorizza' : 'Sponsorizzazione attiva' }}
                                 </button>
                                 <p class="remaining-time" v-if="!isSponsorized(apartment)">
-                                    <font-awesome-icon :icon="['fas', 'stopwatch']" />
+                                    <font-awesome-icon :icon="['far', 'calendar']"/>
                                     {{ endDate(apartment) }}
+                                </p>
+                                <p class="remaining-time" v-if="!isSponsorized(apartment)">
+                                    <font-awesome-icon :icon="['far', 'clock']" />
+                                    {{ endHour(apartment) }}
                                 </p>
                             </div>
 
@@ -295,9 +323,7 @@ export default {
 
 .remaining-time {
     svg {
-        margin-top: 1rem;
         color: $main-color;
-        font-size: 1.5rem;
     }
 }
 
