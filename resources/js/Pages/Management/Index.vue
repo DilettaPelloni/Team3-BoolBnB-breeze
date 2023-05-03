@@ -145,12 +145,12 @@ export default {
                     />
                     <h3>Sei sicuro di voler eliminare questo appartamento?</h3>
                     <div
-                        class="form-button-container flex justify-between xl:gap-4 lg:gap-0 md:gap-0 sm:gap-0 xl:flex-row lg:flex-col md:flex-col sm:flex-col"
+                        class="form-button-container flex justify-between xl:gap-4 lg:gap-0 md:gap-0 sm:gap-0 md:flex-row flex-col"
                     >
                         <form @submit.prevent="deleteElement">
                             <button
                                 type="submit"
-                                class="mt-8 px-4 py-2 rounded-full button text-white border-color-pink"
+                                class="mt-8 sm:mr-4 px-4 py-2 rounded-full button text-white border-color-pink"
                             >
                                 Si, sono sicuro!
                             </button>
