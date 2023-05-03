@@ -59,9 +59,10 @@ export default {
                         <span>{{ apartment.bathrooms }} Bagni &bull; </span>
                         <span>{{ apartment.size }} M<sup>2</sup></span>
                     </div>
-                    <div v-if="apartment.services.length > 0">
-                        <h2 class="pt-5">Servizi inclusi</h2>
-                        <div v-for="service in apartment.services" class="py-3">
+                    <div v-if="apartment.services.length > 0" class="py-5">
+                        <h2 >Servizi inclusi</h2>
+                        <div class="grid grid-rows-3 grid-flow-col">
+                            <div v-for="service in apartment.services" class="py-3">
                             <span
                                 ><font-awesome-icon
                                     :icon="['fas', service.icon]"
@@ -73,11 +74,12 @@ export default {
                             /></span>
                             <span>{{ service.name }}</span>
                         </div>
+                        </div>
                     </div>
                     <div v-else>
                         <span>Nessun Servizio Aggiuntivo Disponibile</span>
                     </div>
-                    <div class="border-y-2 py-5">
+                    <div class="border-y-2 py-5 mb-10">
                         <div>
                             <h2>Descrizione Appartamento</h2>
                             <p class="pt-3 text-gray-600">

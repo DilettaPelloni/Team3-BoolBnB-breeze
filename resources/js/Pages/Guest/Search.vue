@@ -160,7 +160,7 @@ export default {
                 if(this.centerAddress != null) {
                     this.addressInput = this.centerAddress.address.freeformAddress;
                     this.searchForm.completeAddress = this.centerAddress;
-                    this.addresses.push(1);
+                    this.addresses.push(this.centerAddress);
                 }
             }
         }, 500);
@@ -279,9 +279,12 @@ export default {
             <img src="/img/search.png" alt="Nessun risultato" class="w-[300px] mt-3 inline-block">
         </div>
 
+        <h2 v-if="apartments != null" class="mt-10 px-3 text-mainColor-300 font-bold text-lg">
+            {{ apartments?.length }} risultati trovati
+        </h2>
         <!-- CONTAINER CARTE -->
         <div v-if="apartments != null"
-            class="container-cards px-4 pt-6 mt-10 md:p-10 grid 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-col-1 gap-10 bg-[#f5f5f5]">
+            class="container-cards px-4 pt-6 md:p-10 grid 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-col-1 gap-10 bg-[#f5f5f5]">
             <div class="card flex flex-col" v-for="apartment in apartments">
                 <Link :href="route('guest_show', apartment.title_slug)" class="flex flex-col grow">
                 <!-- IMMAGINE -->
