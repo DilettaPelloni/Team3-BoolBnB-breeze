@@ -37,7 +37,7 @@ class ApartmentController extends Controller
     {
         $user_id = Auth::user()->id;
 
-        $apartments = Apartment::where('user_id', $user_id)->get();
+        $apartments = Apartment::where('user_id', $user_id)->orderBy('apartments.created_at', 'desc')->get();
         return Inertia::render('Management/Index', [
             'apartments' => $apartments,
         ]);
