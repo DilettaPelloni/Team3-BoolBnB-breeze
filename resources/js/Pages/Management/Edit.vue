@@ -194,7 +194,7 @@ export default {
                 </div>
                 <input @input="newApartment.cover_img = $event.target.files[0]" type="file" name="cover_img"
                     id="cover_img" accept="image/*"
-                    class="py-2 px-4 mb-2 leading-5 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
+                    class="py-2 px-4 mb-2 leading-5 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-mainColor-300 focus:border-transparent"
                     placeholder="Inserisci l'immagine dell'appartamento" />
 
                 <!-- PER VEDERE PROGRESSO DI CARICAMENTO DEL FILE (E' TROPPO VELOCE PER VEDERE QUALCOSA) -->
@@ -319,5 +319,6 @@ text-area:focus {
 .prev-img {
     width: 400px;
     margin-bottom: 1rem;
+    border-radius: 7.5px;
 }
 </style>
