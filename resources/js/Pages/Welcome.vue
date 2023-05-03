@@ -36,8 +36,8 @@ export default {
     <Jumbotron />
     <div class="container-main pb-[95px]">
 
-        <div class="content pt-16 pb-10 text-center text-4xl font-bold text-mainColor-300">
-            <h2>Destinazioni suggerite:</h2>
+        <div class="content pt-16 pb-10 px-3 text-center text-4xl font-bold text-mainColor-300">
+            <h2>Destinazioni suggerite</h2>
         </div><!-- CHIUSURA CONTENT -->
         <div
                 class="container-cards justify-items-center 2xl:mx-[160px] md:mx-[100px] grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-col-1 gap-10"
