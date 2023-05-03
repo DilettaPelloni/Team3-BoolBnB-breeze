@@ -89,7 +89,7 @@ export default {
     <AuthenticatedLayout>
         <form
             @submit.prevent="submit"
-            class="pt-[100px] pb-[100px] pr-[100px] pl-[100px]"
+            class="p-5 md:p-[100px] min-w-550px"
         >
             <!-- ----------------------TITLE---------------------- -->
             <div class="mb-3">
@@ -362,9 +362,9 @@ export default {
                     class="grid 2xl:grid-cols-6 xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-30"
                     style="grid-row-gap: 20px"
                 >
-                    <template v-for="service in services">
+                    <div v-for="service in services">
                         <label :for="service.id" class="mr-2 align-middle">
-                            <span class="inline-block" style="width: 55px"
+                            <span class="inline-block w-[50px]"
                                 ><font-awesome-icon
                                     :icon="['fas', service.icon]"
                                     class="text-red-500 h-5 ml-1"
@@ -374,7 +374,7 @@ export default {
                                         height: 25px;
                                     "
                             /></span>
-                            <span class="font-bold">{{ service.name }}</span>
+                            <span class="font-bold text-sm md:text-base">{{ service.name }}</span>
                         </label>
                         <input
                             @click="pushService(service.id)"
@@ -382,10 +382,10 @@ export default {
                             :id="service.id"
                             :name="service.id"
                             :value="service.id"
-                            class="inline-flex mx-2 align-middle"
+                            class="inline-flex ms-1 md:mx-2 align-middle"
                             style="align-self: center"
                         />
-                    </template>
+                    </div>
                 </div>
                 <div
                     v-if="newApartment.errors.activeServices"

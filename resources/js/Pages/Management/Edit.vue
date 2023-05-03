@@ -250,7 +250,7 @@ export default {
                                     "
                                 />
                             </span>
-                            <span class="font-bold text-sm">{{ service.name }}</span>
+                            <span class="font-bold text-sm md:text-base">{{ service.name }}</span>
                         </label>
                         <input
                             @click="pushService(service.id)"
