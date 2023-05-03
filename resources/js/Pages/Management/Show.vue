@@ -43,12 +43,12 @@ export default {
                 <img
                     :src="apartment.full_cover_img_path"
                     alt="Cover Image Apartment"
-                    class="w-full h-full object-cover max-h-[900px] object-center"
+                    class="w-full h-full object-cover max-h-[900px] object-center rounded-[7.5px]"
                 />
             </div>
             <div class="container-info-msg flex justify-between mt-20">
                 <div
-                    class="container-info flex flex-col justify-between border-b-2"
+                    class="container-info flex flex-col justify-between"
                 >
                     <div class="border-b-2 pb-5">
                         <h2 class="pb-2">
@@ -89,7 +89,7 @@ export default {
                     </div>
                 </div>
             </div>
-            <TomTomMap :apartment="apartment" />
+            <TomTomMap :apartment="apartment" class="rounded-[7.5px]"/>
         </div>
     </AuthenticatedLayout>
 </template>
