@@ -233,7 +233,7 @@ export default {
                 <!-- STANZE -->
                 <div>
                     <label class="mb-2 me-3">Filtra per numero di stanze</label>
-                    <select class="rounded-full py-2 px-4" v-model="searchForm.filters.rooms" @change="searchApartments">
+                    <select class="rounded-full py-2 px-8 focus:ring-transparent" v-model="searchForm.filters.rooms" @change="searchApartments">
                         <option v-for="i in 10" :value="i">{{ i }}</option>
                     </select>
                 </div>
@@ -241,7 +241,7 @@ export default {
                 <!-- LETTI -->
                 <div>
                     <label class="mb-2 me-3">Filtra per numero di posti letto</label>
-                    <select class="rounded-full py-2 px-4 my-4" v-model="searchForm.filters.beds"
+                    <select class="rounded-full py-2 px-8 my-4 focus:ring-transparent" v-model="searchForm.filters.beds"
                         @change="searchApartments">
                         <option v-for="i in 10" :value="i">{{ i }}</option>
                     </select>
