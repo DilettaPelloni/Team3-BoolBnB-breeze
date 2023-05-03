@@ -12,6 +12,7 @@ use Carbon\Carbon;
 //Helpers
 use DateTime;
 use DateInterval;
+use DateTimeZone;
 
 use Illuminate\Support\Facades\DB; //per gestire il db
 
@@ -70,7 +71,7 @@ class PaymentController extends Controller
         $apartmentId = $data['selectedApartment'];
         $sponsorshipId = $data['selectedSponsor']['id'];
 
-        $start_date = new DateTime('now');
+        $start_date = new DateTime('now', new DateTimeZone('Europe/Vatican'));
 
         //calcolo la data di fine
         $duration = $data['selectedSponsor']['duration'];

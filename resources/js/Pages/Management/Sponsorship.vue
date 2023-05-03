@@ -149,11 +149,8 @@ export default {
                         let end_date = new Date(sponsorship.end_date);
                         //verifico se è attiva
                         if (end_date > today) {
-                            let hour = end_date.getHours();
-                            let minutes = end_date.getMinutes();
-                            if (minutes < 10) {
-                                minutes = '0' + minutes;
-                            }
+                            let hour = (end_date.getHours() < 10 ? '0':'') + end_date.getHours();
+                            let minutes = (end_date.getMinutes() < 10 ? '0' : '') + end_date.getMinutes();
                             endHour = hour + ':' + minutes;
                         }
                     }
