@@ -101,9 +101,9 @@ export default {
         </form>
         <!-- ELENCO INDIRIZZI SUGGERITI -->
         <div v-if="(addresses.length > 0) && (showAddresses)"
-            class="top-[450px] md:top-[430px] absolute z-10 bg-white w-[500px] rounded-b-lg shadow-lg">
-            <ul class="w-[500px]">
-                <li v-for="address in addresses" :key="address.id" class="border-b border-gray-200 w-[500px]">
+            class="top-[87%] md:top-[85%] absolute z-10 bg-white w-[200px] sm:w-[400px] md:w-[500px] rounded-lg shadow-lg overflow-hidden ">
+            <ul class="">
+                <li v-for="address in addresses" :key="address.id" class="border-b border-gray-200">
                     <p class="hover:bg-gray-100 p-3" @click="selectAddress(address)">
                         {{ address.address.freeformAddress }}
                     </p>
