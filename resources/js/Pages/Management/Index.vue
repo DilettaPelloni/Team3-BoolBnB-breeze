@@ -137,7 +137,7 @@ export default {
 
             <!-- MODALE -->
             <div class="modal-overlay" v-if="modalVisible">
-                <div class="modal mt-[80px]">
+                <div class="modal mt-[180px]">
                     <img
                         src="img/cancella.png"
                         alt="imgCancella"
@@ -201,6 +201,7 @@ export default {
     transform: translate(-50%, -50%);
     padding: 2rem;
     min-height: 250px;
+    min-width: 280px;
     text-align: center;
     border-radius: 15px;
     background-color: #fff;
