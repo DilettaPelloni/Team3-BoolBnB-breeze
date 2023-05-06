@@ -51,7 +51,7 @@ export default {
         </title>
         <link rel="icon" href="/favicon.svg" />
     </Head>
-    <div class="main-container w-[80%] lg:w-[65%]">
+    <div class="main-container my-[60px] mx-auto w-[80%] lg:w-[65%]">
         <div class="container-title mb-[50px]">
             <h1 class="pb-2">
                 {{ apartment.title }}
@@ -125,7 +125,7 @@ export default {
                         type="text"
                         name="sender_name"
                         id="sender_name"
-                        class="my-4"
+                        class="my-4 w-full rounded-full"
                         v-model="newMessage.sender_name"
                     />
                     <div
@@ -141,7 +141,7 @@ export default {
                         type="text"
                         name="sender_email"
                         id="sender_email"
-                        class="my-4"
+                        class="my-4 w-full rounded-full"
                         v-model="newMessage.sender_email"
                     />
                     <div
@@ -157,7 +157,7 @@ export default {
                         id="content"
                         cols="5"
                         rows="10"
-                        class="my-4"
+                        class="my-4 min-w-full min-h-[100px] max-h-[200px] rounded-[25px]"
                         required
                         v-model="newMessage.content"
                     ></textarea>
@@ -168,7 +168,7 @@ export default {
                         {{ newMessage.errors.content }}
                     </div>
                     <!-- BOTTONE -->
-                    <button type="submit" class="button px-4 py-2">
+                    <button type="submit" class="button mt-[40px] px-4 py-2 rounded-full text-white text-lg cursor-pointer bg-mainColor-300 hover:bg-[#df5759]">
                         Invia il messaggio
                     </button>
                     
@@ -177,50 +177,19 @@ export default {
         </div>
         <TomTomMap :apartment="apartment" />
         <!-- MODALE SUCCESSO MESSAGGIO -->
-        <div class="modal-overlay" v-show="modalVisible" @click="modalVisible = false">
-            <div class="modal mt-[80px]">
+        <div class="modal-overlay fixed top-0 bottom-0 right-0 left-0 bg-black/[0.7]" v-show="modalVisible" @click="modalVisible = false">
+            <div class="modal mt-[80px] flex flex-col justify-center items-center fixed top-[20%] left-[50%] translate-x-[-50%] translate-y-[-50%] p-8 min-h-[250px] text-center rounded-[15px] bg-white">
                 <!-- MESSAGGIO OK -->
-                <div class="messaggioInviato">
+                <div class="messaggioInviato flex flex-col justify-center items-center gap-[15px] py-[40px]">
                     <p>Messaggio inviato correttamente!</p>
-                    <img src="/img/mailSent.png"/>
+                    <img src="/img/mailSent.png" class="h-[100px] mt-8"/>
                 </div>
             </div>
         </div><!-- CHIUSURA MODALE SUCCESSO MESSAGGIO -->
     </div>
 </template>
 
-<style scoped lang="scss">
-@import "../../../scss/app.scss";
-
-.messaggioInviato {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    padding: 40px 0px;
-    img {
-        height: 100px;
-        margin-top: 2rem;
-    }
-}
-
-.main-container {
-    // width: 65%;
-    margin: 60px auto;
-
-    .container-msg {
-        
-        input {
-            width: 100%;
-        }
-
-        button {
-            background-color: $main-color;
-        }
-    }
-}
-
+<style scoped>
 h1 {
     font-size: 2rem;
 }
@@ -231,63 +200,5 @@ h2 {
 
 span {
     color: rgb(75, 85, 99);
-}
-
-input {
-    border-radius: 50px;
-}
-
-textarea {
-    min-width: 100%;
-    max-height: 200px;
-    min-height: 100px;
-    border-radius: 25px;
-}
-
-/* bottone */
-button {
-    padding: 11px 20px;
-    border-radius: 50px;
-    border: none;
-    background-color: #fe5b5f;
-    color: #fff;
-    font-family: "Figtree";
-    font-size: 17px;
-    cursor: pointer;
-    margin-top: 40px;
-}
-
-button:hover {
-    background-color: #df5759;
-}
-
-button:active {
-    background-color: #fc9aa1 !important;
-    box-shadow: 0 5px #dd5b5f;
-    transform: translateY(4px);
-}
-
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-}
-.modal {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 2rem;
-    min-height: 250px;
-    text-align: center;
-    border-radius: 15px;
-    background-color: #fff;
 }
 </style>
