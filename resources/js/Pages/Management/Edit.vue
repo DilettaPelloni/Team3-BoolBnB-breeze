@@ -190,7 +190,7 @@ export default {
                     copertina</label>
                 <!-- se l'appartamento ha un'immagine, la mostro in anteprima -->
                 <div v-if="apartment.cover_img != null">
-                    <img :src="apartment.full_cover_img_path" alt="anteprima immagine" class="prev-img">
+                    <img :src="apartment.full_cover_img_path" alt="anteprima immagine" class="w-[400px] mb-4 rounded-[7.5px]">
                 </div>
                 <input @input="newApartment.cover_img = $event.target.files[0]" type="file" name="cover_img"
                     id="cover_img" accept="image/*"
@@ -271,7 +271,7 @@ export default {
 
             <div class="text-center">
                 <button type="submit" :disabled="newApartment.processing"
-                    class="mt-8 px-4 py-2 rounded-full pink text-white">
+                    class="mt-8 px-4 py-2 rounded-full text-white bg-mainColor-300">
                     Modifica appartamento
                 </button>
             </div>
@@ -281,10 +281,6 @@ export default {
 
 <style scoped>
 @import '../../../scss/app.scss';
-
-.pink {
-    background-color: #fe5b5f;
-}
 
 [type="radio"]:checked {
     color: #fe5b5f;
@@ -314,11 +310,5 @@ text-area:focus {
 
 .focus\:ring-2:focus {
     --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) rgb(254 91 95);
-}
-
-.prev-img {
-    width: 400px;
-    margin-bottom: 1rem;
-    border-radius: 7.5px;
 }
 </style>
