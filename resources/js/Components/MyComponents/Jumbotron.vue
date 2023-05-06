@@ -79,9 +79,9 @@ export default {
 </script>
 
 <template>
-    <div class="container-jumbotron">
+    <div class="container-jumbotron h-[505px] w-full flex flex-col gap-[30px] justify-center items-center relative bg-no-repeat bg-cover">
         <!-- video -->
-        <video autoplay muted loop class="video-bg">
+        <video autoplay muted loop class="video-bg absolute top-0 left-0 min-w-full min-h-full z-[-9] object-cover">
             <source src="/img/sfondo.mp4" type="video/mp4" />
         </video>
         <!-- fine video -->
@@ -95,7 +95,7 @@ export default {
             <!-- INDIRIZZO -->
             <input type="text" id="addressInput" name="addressInput" placeholder="Inserisci un indirizzo..."
                 v-model="addressInput" @input="getAutocompleteSearch()" class="sm:me-3 rounded-full focus:ring-transparent"  autocomplete="off"/>
-            <button type="submit" class="button text-white">
+            <button type="submit" class="button text-white py-2 px-5 bg-mainColor-300 cursor-pointer mt-[40px] hover:bg-[#fd4e4e] rounded-full">
                 Cerca la tua meta
             </button>
         </form>
@@ -113,58 +113,8 @@ export default {
     </div>
 </template>
 
-<style lang="scss" scoped>
-@import '../../../scss/app.scss';
-
-.video-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    min-height: 100%;
-    z-index: -9;
-    object-fit: cover;
-}
-
+<style scoped>
 .container-jumbotron {
-    height: 505px;
-    width: 100%;
     background-position: 36% 67%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    gap: 30px;
-    align-items: center;
-    position: relative;
 }
-
-/* bottone */
-button {
-    padding: 8px 20px;
-    border-radius: 50px;
-    border: none;
-    background-color: #fe5b5f;
-    color: #fff;
-    font-family: "Figtree";
-    font-size: 17px;
-    cursor: pointer;
-    margin-top: 40px;
-}
-
-button:hover {
-    background-color: #fd4e4e;
-}
-
-button:active {
-    background-color: #fc9aa1 !important;
-    box-shadow: 0 5px #dd5b5f;
-    transform: translateY(4px);
-}
-
-#addressInput {
-    border-color: $main-color;
-}
-
 </style>
