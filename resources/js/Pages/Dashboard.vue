@@ -89,10 +89,5 @@ export default {
     </AuthenticatedLayout>
 </template>
 
-<style lang="scss">
-@import "../../scss/app.scss";
-
-.button {
-    background-color: $main-color;
-}
+<style>
 </style>
