@@ -34,9 +34,9 @@ export default {
 
     <AppHeader :canLogin="canLogin" :canRegister="canRegister" />
     <Jumbotron />
-    <div class="container-main pb-[95px]">
+    <div class="container-main pb-[95px] bg-[#f1f1f1]">
 
-        <div class="content pt-16 pb-10 px-3 text-center text-4xl font-bold text-mainColor-300">
+        <div class="content max-w-[1200px] my-0 mx-auto pt-16 pb-10 px-3 text-center text-4xl font-bold text-mainColor-300">
             <h2>Destinazioni suggerite</h2>
         </div><!-- CHIUSURA CONTENT -->
         <div
@@ -45,12 +45,13 @@ export default {
 
                 <div
                     v-for="apartment in apartments"
-                    class="card flex flex-col"
+                    class="card flex flex-col rounded-[15px] overflow-hidden w-[274px] bg-white hover:shadow-lg hover:scale-105"
                 >
                     <div class="w-full">
                         <img
                             :src="apartment.full_cover_img_path"
                             alt="immagine casa"
+                            class="w-full aspect-square object-cover"
                         />
                     </div>
                     <!-- CARD INFO -->
@@ -71,7 +72,7 @@ export default {
                     <div class="text-center mb-5">
                         <Link
                             :href="route('guest_show', apartment.title_slug)"
-                            class="mt-8 px-4 py-2 rounded-full button text-white mb-[20px]"
+                            class="mt-8 px-4 py-2 rounded-full button bg-mainColor-300 text-white mb-[20px]"
                         >
                             Vedi appartamento
                         </Link>
@@ -84,36 +85,11 @@ export default {
 </template>
 
 <style scoped lang="scss">
-@import "../../scss/app.scss";
-.button {
-    background-color: $main-color;
-}
-
 .button:hover {
     background-color: #fd4e4e;
 }
-.content {
-    margin: 0 auto;
-    max-width: 1200px;
+.card {
+    transition: all 0.3s ease-in-out;
 }
-.container-main {
-    background-color: #f1f1f1;
-    .card {
-        background-color: #ffffff;
-        border-radius: 15px;
-        overflow: hidden;
-        transition: all 0.3s ease-in-out;
-        width: 274px;
 
-        img {
-            width: 100%;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-        }
-    }
-}
-.card:hover {
-    @apply hover:shadow-lg;
-    @apply hover:shadow-lg hover:scale-105;
-}
 </style>
