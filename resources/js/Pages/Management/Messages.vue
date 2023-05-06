@@ -29,12 +29,12 @@ export default {
     </Head>
 
     <AuthenticatedLayout>
-        <div class="main-container">
+        <div class="main-container w-[65%] mt-[60px] mx-auto pb-[100px]">
 
-            <h1>I tuoi messaggi:</h1>
-            <ul>
-                <li v-for="message in messages">
-                    <div class="utente pb-[20px]">
+            <h1 class="pt-[50px] text-[25px]">I tuoi messaggi:</h1>
+            <ul class=" overflow-y-auto h-[60vh] my-[70px]" >
+                <li v-for="message in messages" class="pe-[50px]">
+                    <div class="utente py-[50px] border-b border-mainColor-300">
                         <div class="appartamento flex items-center">
                             <font-awesome-icon :icon="['fas', 'house-chimney']" style="
                                     color: rgb(254 91 95 / 78%);
@@ -70,36 +70,5 @@ export default {
     </AuthenticatedLayout>
 </template>
 
-<style scoped lang="scss">
-@import "../../../scss/app.scss";
-
-.main-container {
-    width: 65%;
-    margin: 60px auto 0px auto;
-    padding-bottom: 100px;
-}
-
-h1 {
-    font-size: 25px;
-    padding: 50px 0px 0px 0px;
-}
-
-h2 {
-    font-size: 35px;
-}
-
-.utente {
-    padding: 50px 0px;
-    border-bottom: 1px solid #fe5b5f;
-}
-
-ul {
-    overflow-y: auto;
-    height: 60vh;
-    margin: 70px 0px;
-}
-
-li {
-    padding-right: 50px;
-}
+<style scoped>
 </style>

@@ -26,7 +26,7 @@ export default {
         <link rel="icon" href="/favicon.svg" />
     </Head>
     <AuthenticatedLayout>
-        <div class="main-container">
+        <div class="main-container w-[65%] my-[60px] mx-auto">
             <div class="container-title mb-[50px]">
                 <h1 class="pb-2">
                     {{ apartment.title }}
@@ -95,13 +95,6 @@ export default {
 </template>
 
 <style scoped lang="scss">
-@import "../../../scss/app.scss";
-
-.main-container {
-    width: 65%;
-    margin: 60px auto;
-}
-
 h1 {
     font-size: 2rem;
 }
