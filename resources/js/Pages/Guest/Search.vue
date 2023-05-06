@@ -190,7 +190,7 @@ export default {
                 <!-- INDIRIZZO -->
                 <input type="text" id="addressInput" name="addressInput" placeholder="Inserisci un indirizzo..."
                     v-model="addressInput" @input="getAutocompleteSearch()" class="me-3 rounded-full focus:ring-transparent focus:border-mainColor-300" autocomplete="off"/>
-                <button type="submit" class="button px-4 py-2 text-white rounded-full mt-5 sm:mt-0">
+                <button type="submit" class="button bg-mainColor-300 px-4 py-2 text-white rounded-full mt-5 sm:mt-0 hover:bg-[#fd4e4e]">
                     Cerca
                 </button>
 
@@ -214,7 +214,7 @@ export default {
             </div>
 
             <!-- FILTRI -->
-            <button @click="toggleFilters" class="button p-2 mt-8 text-white rounded-full py-2 px-4">
+            <button @click="toggleFilters" class="button bg-mainColor-300 p-2 mt-8 text-white rounded-full py-2 px-4 hover:bg-[#fd4e4e]">
                 {{ filterButton }}
             </button>
 
@@ -284,11 +284,11 @@ export default {
         </h2>
         <!-- CONTAINER CARTE -->
         <div v-if="apartments != null"
-            class="container-cards px-4 pt-6 md:p-10 grid 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-col-1 gap-10 bg-[#f5f5f5]">
-            <div class="card flex flex-col" v-for="apartment in apartments">
+            class="container-cards rounded-[7.5px] px-4 pt-6 md:p-10 grid 2xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-col-1 gap-10 bg-[#f5f5f5]">
+            <div class="card flex flex-col bg-white rounded-[15px] overflow-hidden cursor-pointer transition-all duration-300 ease-in-out hover:shadow-lg hover:scale-105" v-for="apartment in apartments">
                 <Link :href="route('guest_show', apartment.title_slug)" class="flex flex-col grow">
                 <!-- IMMAGINE -->
-                <img :src="apartment.full_cover_img_path" alt="immagine casa" />
+                <img :src="apartment.full_cover_img_path" alt="immagine casa" class=" aspect-square w-full object-cover" />
                 <!-- CARD INFO -->
                 <div class="card-info px-4 pt-4 flex flex-col pb-4 grow">
                     <span><b>{{ apartment.title }}</b></span>
@@ -313,7 +313,7 @@ export default {
         <!-- MAPPA -->
         <div class="mt-20 mb-20 w-full" v-if="displayMap">
             <div>
-                <div id="map" class="h-96"></div>
+                <div id="map" class="h-96 rounded-[7.5px]"></div>
             </div>
         </div>
     </div><!-- CHIUSURA CONTAINER -->
@@ -323,53 +323,11 @@ export default {
 
 <style scoped lang="scss">
 @import "../../../scss/app.scss";
-.button {
-    background-color: $main-color;
-}
-
-.button:hover {
-    background-color: #fd4e4e;
-}
-
-.button:active {
-    background-color: #fc9aa1;
-    box-shadow: 0 5px #dd5b5f;
-    transform: translateY(4px);
-}
-
 .container {
     min-height: calc(100vh - 355px - 50px);
 }
-
-.container-cards {
-    border-radius: 7.5px;
-}
-
-.card {
-    background-color: white;
-    border-radius: 15px;
-    overflow: hidden;
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
-
-    img {
-        aspect-ratio: 1/1;
-        width: 100%;
-        object-fit: cover;
-    }
-}
-
 input,
 select {
     border-color: $main-color;
-}
-
-#map{
-    border-radius: 7.5px;
-}
-
-.card:hover {
-    @apply hover:shadow-lg;
-    @apply hover:shadow-lg hover:scale-105;
 }
 </style>
