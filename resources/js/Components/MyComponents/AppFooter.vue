@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-    <div class="footer">
+    <div class="footer pb-[40px] w-full bg-no-repeat bg-cover">
         <div class="container">
             <div class="flex-container flex flex-col text-center 2xl:justify-between xl:justify-between lg:justify-between md:justify-center sm:justify-center 2xl:flex-row xl:flex-row lg:flex-row md:flex-col sm:flex-col 2xl:text-left xl:text-left lg:text-left md:text-center sm:text-center">
                 <div class="logo">
@@ -39,7 +39,7 @@ export default {
                         <p class="text-[30px] pb-[35px]">
                             +39 334 837 662842
                         </p>
-                        <a class="button" href="tel:+39334837662842">Chiama</a>
+                        <a class="button py-[11px] px-[20px] rounded-full bg-mainColor-300 text-white text-lg cursor-pointer mt-[80px] hover:bg-[#fd4e4e]" href="tel:+39334837662842">Chiama</a>
                     </div>
                 </div>
                 <div class="linkUtili text-center 2xl:text-end lg:text-end md:text-center md:m-auto sm:text-center m-auto text-white">
@@ -48,16 +48,16 @@ export default {
                     </p>
                     <ul>
                         <li>
-                            <a class="link" href="#">Contattaci</a>
+                            <a class="link text-white hover:text-mainColor-300" href="#">Contattaci</a>
                         </li>
                         <li>
-                            <a class="link" href="#">Destinazioni</a>
+                            <a class="link text-white hover:text-mainColor-300" href="#">Destinazioni</a>
                         </li>
                         <li>
-                            <a class="link" href="#">Privacy Policy</a>
+                            <a class="link text-white hover:text-mainColor-300" href="#">Privacy Policy</a>
                         </li>
                         <li>
-                            <a class="link" href="#">Cookie Policy</a>
+                            <a class="link text-white hover:text-mainColor-300" href="#">Cookie Policy</a>
                         </li>
                     </ul>
                 </div>
@@ -66,42 +66,12 @@ export default {
     </div>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 .footer {
-    padding-bottom: 40px;
     background-image: url("img/mappa.jpg");
-    width: 100%;
     background-position: 41% 11%;
-    background-repeat: no-repeat;
-    background-size: cover;
 }
-.link:hover {
-    color: #fe5b5f;
-}
-
 .flex-container>* {
     flex: 1;
-}
-/* bottone */
-.button {
-    padding: 11px 20px;
-    border-radius: 50px;
-    border: none;
-    background-color: #fe5b5f;
-    color: #fff;
-    font-family: "Figtree";
-    font-size: 17px;
-    cursor: pointer;
-    margin-top: 80px;
-}
-
-.button:hover {
-    background-color: #fd4e4e;
-}
-
-.button:active {
-    background-color: #fc9aa1;
-    box-shadow: 0 5px #dd5b5f;
-    transform: translateY(4px);
 }
 </style>

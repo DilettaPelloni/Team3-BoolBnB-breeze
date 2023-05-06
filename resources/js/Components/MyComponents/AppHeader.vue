@@ -32,7 +32,7 @@ export default {
             </Link>
         </div>
         <div class="flex flex-col">
-            <div class="container-login ml-5 relative">
+            <div class="container-login ml-5 relative border border-[#c9c9c9] py-[4px] px-[14px] rounded-full">
                 <font-awesome-icon :icon="['fas', 'bars']" @click="toggleVisibilty" />
                 <font-awesome-icon :icon="['fas', 'circle-user']" style="color: rgb(254 91 95 / 78%); padding-left: 9px"
                     size="2xl" @click="toggleVisibilty" />
@@ -67,13 +67,6 @@ export default {
 #loginMenu a:hover {
     color: $main-color;
 }
-
-.container-login {
-    border: 1px solid #c9c9c9;
-    padding: 4px 14px;
-    border-radius: 57px;
-}
-
 .container-login:hover {
     box-shadow: 3px 3px 10px 0px rgba(117, 117, 117, 0.35);
 }
